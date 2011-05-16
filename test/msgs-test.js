@@ -3,8 +3,19 @@ var vows   = require('vows')
   , msgs   = require('../lib/msgs.js')
 
 vows.describe('msgs').addBatch({
+  'A createMessageFromFile call': {
+    'with test file': {
+      topic: function() {
+        msgs.createFromFile(__dirname + '/test.msg', this.callback)
+      }
+    , 'contains the properties and values': function(error, message) {
+        assert.deepEqual(message, { field1: null, anInt: null, CONSTANT1: 128, CONSTANT2: 'foo bar' })
+        assert.strictEqual(message.CONSTANT1, 128)
+      }
+    }
+  }
 
-  'A create message from string call': {
+, 'A createMessageFromString call': {
     'with constant': {
       topic: function() {
         msgs.createFromString('string data=foo', this.callback)
