@@ -8,5 +8,5 @@ subscriber.subscribe('chatter', function(message) {
 })
 
 var publisher = node.createPublisher()
-publisher.publish('chatter', 'hi!')
+publisher.publish('chatter', { data:'hi!', type:'std_msgs/String' })
 
