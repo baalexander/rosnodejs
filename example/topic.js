@@ -21,5 +21,6 @@ master.lookupNode('/test', 'talker', function(error, value) {
   console.log(value)
 })
 
-publisher.unregister('chatter')
-subscriber.unregister('chatter')
+//publisher.unregister('chatter')
+//subscriber.unregister('chatter')
+
