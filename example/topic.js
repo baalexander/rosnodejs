@@ -10,7 +10,7 @@ subscriber.subscribe('chatter', function(error, message) {
 })
 
 var publisher = node.createPublisher(topic)
-ros.messages.createFromPackage('std_msgs', 'String', function(error, message) {
+ros.messages.createFromType('std_msgs/String', function(error, message) {
   message.data = 'hi!'
   console.log(message)
   publisher.publish(message)
