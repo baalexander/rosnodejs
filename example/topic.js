@@ -1,9 +1,7 @@
 var ros    = require('../lib/ros')
-var msgs   = require('../lib/msgs')
 
-msgs.createFromPackage('std_msgs', 'String', function(){})
 
-/*var master = ros.getMaster()
+var master = ros.getMaster()
 var node   = ros.createNode('talker')
 
 var subscriber = node.createSubscriber()
@@ -22,7 +20,7 @@ master.getSystemState('/test', function(error, value) {
 master.lookupNode('/test', 'talker', function(error, value) {
   console.log('LOOKUP NODE:')
   console.log(value)
-})*/
+})
 
 //publisher.unregister('chatter')
 //subscriber.unregister('chatter')

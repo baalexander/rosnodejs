@@ -1,12 +1,12 @@
-var vows   = require('vows')
-  , assert = require('assert')
-  , msgs   = require('../lib/msgs.js')
+var vows     = require('vows')
+  , assert   = require('assert')
+  , messages = require('../lib/messages')
 
-vows.describe('msgs').addBatch({
+vows.describe('messages').addBatch({
   'A createFromPackage call': {
     'with std_msgs/String package': {
       topic: function() {
-        msgs.createFromPackage('std_msgs', 'String', this.callback)
+        messages.createFromPackage('std_msgs', 'String', this.callback)
       }
     , 'contains the property': function(error, message) {
         assert.deepEqual(message, { data: null })
@@ -17,7 +17,7 @@ vows.describe('msgs').addBatch({
 , 'A createFromFile call': {
     'with test file': {
       topic: function() {
-        msgs.createFromFile(__dirname + '/test.msg', this.callback)
+        messages.createFromFile(__dirname + '/test.msg', this.callback)
       }
     , 'contains the properties and values': function(error, message) {
         assert.deepEqual(message, { field1: null, anInt: null, CONSTANT1: 128, CONSTANT2: 'foo bar' })
@@ -29,7 +29,7 @@ vows.describe('msgs').addBatch({
 , 'A createFromString call': {
     'with constant': {
       topic: function() {
-        msgs.createFromString('string data=foo', this.callback)
+        messages.createFromString('string data=foo', this.callback)
       }
     , 'contains the property and value': function(error, message) {
         assert.deepEqual(message, { data: 'foo' })
@@ -37,7 +37,7 @@ vows.describe('msgs').addBatch({
     }
   , 'with field': {
       topic: function() {
-        msgs.createFromString('string data', this.callback)
+        messages.createFromString('string data', this.callback)
       }
     , 'contains the property': function(error, message) {
         assert.deepEqual(message, { data: null })
@@ -45,7 +45,7 @@ vows.describe('msgs').addBatch({
     }
   , 'with multiple fields': {
       topic: function() {
-        msgs.createFromString('string data\nstring data2', this.callback)
+        messages.createFromString('string data\nstring data2', this.callback)
       }
     , 'contains the properties': function(error, message) {
         assert.deepEqual(message, { data: null, data2: null })
