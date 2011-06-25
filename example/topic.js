@@ -1,16 +1,20 @@
 var ros    = require('../lib/ros')
 
-
 var master = ros.getMaster()
 var node   = ros.createNode('talker')
 
-var subscriber = node.createSubscriber()
+var topic = { name: 'chatter', type: 'std_msgs/String' }
+var subscriber = node.createSubscriber(topic)
 subscriber.subscribe('chatter', function(error, message) {
-
+  console.log(message)
 })
 
-var publisher = node.createPublisher()
-publisher.publish('chatter', 'hi!')
+var publisher = node.createPublisher(topic)
+ros.messages.createFromPackage('std_msgs', 'String', function(error, message) {
+  message.data = 'hi!'
+  console.log(message)
+  publisher.publish(message)
+})
 
 master.getSystemState('/test', function(error, value) {
   console.log('SYSTEM STATE:')
@@ -22,6 +26,6 @@ master.lookupNode('/test', 'talker', function(error, value) {
   console.log(value)
 })
 
-//publisher.unregister('chatter')
-//subscriber.unregister('chatter')
+//publisher.unregister(topic)
+//subscriber.unregister(topic)
 
