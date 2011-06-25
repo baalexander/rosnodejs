@@ -3,7 +3,18 @@ var vows   = require('vows')
   , msgs   = require('../lib/msgs.js')
 
 vows.describe('msgs').addBatch({
-  'A createMessageFromFile call': {
+  'A createFromPackage call': {
+    'with std_msgs/String package': {
+      topic: function() {
+        msgs.createFromPackage('std_msgs', 'String', this.callback)
+      }
+    , 'contains the property': function(error, message) {
+        assert.deepEqual(message, { data: null })
+      }
+    }
+  }
+
+, 'A createFromFile call': {
     'with test file': {
       topic: function() {
         msgs.createFromFile(__dirname + '/test.msg', this.callback)
@@ -15,7 +26,7 @@ vows.describe('msgs').addBatch({
     }
   }
 
-, 'A createMessageFromString call': {
+, 'A createFromString call': {
     'with constant': {
       topic: function() {
         msgs.createFromString('string data=foo', this.callback)
