@@ -9,7 +9,7 @@ subscriber.subscribe('chatter', function(error, message) {
   console.log(message)
 })
 
-var publisher = node.createPublisher(topic)
+/*var publisher = node.createPublisher(topic)
 ros.messages.createFromType('std_msgs/String', function(error, message) {
   message.data = 'hi!'
   console.log(message)
@@ -24,7 +24,7 @@ master.getSystemState('/test', function(error, value) {
 master.lookupNode('/test', 'talker', function(error, value) {
   console.log('LOOKUP NODE:')
   console.log(value)
-})
+})*/
 
 //publisher.unregister(topic)
 //subscriber.unregister(topic)
