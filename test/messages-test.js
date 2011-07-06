@@ -9,12 +9,25 @@ vows.describe('messages').addBatch({
         messages.createFromType('std_msgs/String', this.callback)
       }
     , 'contains the properties': function(error, message) {
-        assert.deepEqual(message, { message_type: 'std_msgs/String', data: null })
+        assert.deepEqual(message,
+          { data: null
+          , specification:
+            { type:      'std_msgs/String'
+            , md5sum:    '992ce8a1687cec8c8bd883ec73ca41d1'
+            , fields:    [
+              { type: 'string'
+              , name: 'data'
+              }
+            ]
+            , constants: []
+            }
+          }
+        )
       }
     }
   }
 
-, 'A createFromFile call': {
+/*, 'A createFromFile call': {
     'with test file': {
       topic: function() {
         messages.createFromFile(__dirname + '/test.msg', this.callback)
@@ -52,7 +65,7 @@ vows.describe('messages').addBatch({
       }
     }
 
-  }
+  }*/
 
 }).export(module)
 
