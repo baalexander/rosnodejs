@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="./underscore.js"></script>
+    <script src="./backbone.js"></script>
+    <script src="./ros.js"></script>
+    <script>
+      ros.createNode({ name: 'chatter' }, function(error, node) {
+        node.createPublisher({ topic: 'talk' }, function(error, publisher) {
+          node.createPublisher({ topic: 'talker' }, function(error, publisher2) {
+
+            node.removePublisher(publisher2)
+          })
+        })
+      })
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
