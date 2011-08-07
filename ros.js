@@ -16,6 +16,8 @@
     ros = root.ros = {}
   }
 
+  ros.baseUrl = ''
+
   // Ros.Nodes
   // ---------
 
@@ -44,7 +46,7 @@
   ros.Node = Backbone.Model.extend({
 
     idAttribute: 'name'
-  , urlRoot    : 'http://localhost:3000/nodes'
+  , urlRoot    : ros.baseUrl + '/nodes'
 
   , initialize: function(attributes, options) {
       if (!this.publishers) {
@@ -86,7 +88,7 @@
     idAttribute : 'topic'
 
   , initialize: function(attributes) {
-      this.urlRoot = 'http://localhost:3000/nodes/' + this.get('nodeId') + '/publishers'
+      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/publishers'
     }
 
   , publish: function(message) {
@@ -95,3 +97,4 @@
   })
 
 }).call(this)
+
