@@ -15,7 +15,19 @@ ros.Node.prototype.sync = function(method, model, options) {
 
 ros.Publisher.prototype.save = function(attributes, options) {
   console.log('ROSNODEJS PUBLISHER SAVE')
-  master.registerPublisher(this.get('nodeId'), { getUri: function() { return { host: 'localhost', port: '9090' }; } }, this.get('topic'), function(error, value) {
+  // STOPPED
+  // Things to work on:
+  // + this.get is failing
+  // + Set the ID attribute for publisher on topic attribute save
+  // + Store the URI of the node in the node
+  // + Figure out way for publisher to know the node's URI
+  // + Create a base ros.Message model
+  //     Give Message a prototype field for type
+  // + Have topic take ros.Message as a property
+  //     Update Master to use topic's message type
+  // + Make the URI host configurable
+  // + Check for an available port in node
+  master.registerPublisher(this.get('nodeId'), 'http://localhost:9090', this.get('topic'), function(error, value) {
     console.log('REGISTER PUBLISHER  RESPONSE FROM MASTER')
     if (error !== null) {
       options.error(error)

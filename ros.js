@@ -102,7 +102,8 @@
   // -------------
 
   ros.Publisher = Backbone.Model.extend({
-    idAttribute : 'topic'
+    id: 'talk'
+    //idAttribute : topic.get('name')
 
   , initialize: function(attributes) {
       this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/publishers'
