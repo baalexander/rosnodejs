@@ -5,12 +5,10 @@
 
   var root = this
 
-  var server = false
   var ros = null
   if (typeof exports !== 'undefined') {
     Backbone = require('backbone')
     ros = exports
-    server = true
   }
   else {
     ros = root.ros = {}
