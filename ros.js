@@ -18,6 +18,25 @@
 
   ros.baseUrl = ''
 
+  // Ros.Message
+  // -----------
+
+  ros.Message = Backbone.Model.extend({
+    idAttribute: 'type'
+  }
+  , {
+    // Type is a class property so ros.Message (or a derivative) can be passed
+    // on its own and the type attribute inferred
+    type: null
+  })
+
+  // Ros.Topic
+  // -----------
+
+  ros.Topic = Backbone.Model.extend({
+    idAttribute: 'name'
+  })
+
   // Ros.Nodes
   // ---------
 
