@@ -48,16 +48,6 @@ app.put('/nodes/:nodeId', function(req, res){
 // Publishers
 // ----------
 
-app.post('/nodes/:nodeId/publishers', function(req, res) {
-  console.log('PUBLISHERS POST')
-  var nodeId = req.params.nodeId
-  var node = ros.nodes.get(nodeId)
-  node.createPublisher(req.body, function(error, publisher) {
-    
-  })
-  res.end()
-})
-
 app.get('/nodes/:nodeId/publishers/:publisherId?', function(req, res) {
   console.log('PUBLISHERS GET')
   var nodeId = req.params.nodeId

@@ -8,7 +8,7 @@
     <script src="./std_msgs.js"></script>
     <script>
       ros.createNode({ name: 'chatter' }, function(error, node) {
-        var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String })
+        var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
         node.createPublisher({ topic: talkTopic }, function(error, publisher) {
           var message = new stdMsgs.String({ data: 'hello' })
           // publisher.publish(message)
