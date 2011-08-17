@@ -104,16 +104,17 @@
   ros.Publisher = Backbone.Model.extend({
 
     initialize: function(attributes) {
+      var topic = null
       if (attributes.topic !== undefined) {
         // If passed in object is not a Topic instance, creates Topic from
         // object attributes
-        if (attributes.topic.get === undefined) {
-          var topic = new ros.Topic(attributes.topic)
+        if (!(attributes.topic instanceof ros.Topic)) {
+          topic = new ros.Topic(attributes.topic)
           this.set({ topic: topic })
         }
 
         // Sets the Publisher ID to the topic's name
-        var topic = this.get('topic')
+        topic = this.get('topic')
         this.id = topic.get('name')
       }
 
