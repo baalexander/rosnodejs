@@ -16,7 +16,7 @@ ros.Node.prototype.sync = function(method, model, options) {
 ros.Publisher.prototype.save = function(attributes, options) {
   console.log('ROSNODEJS PUBLISHER SAVE')
   master.registerPublisher(this.get('nodeId'), 'http://localhost:9090', this.get('topic'), function(error, value) {
-    console.log('REGISTER PUBLISHER  RESPONSE FROM MASTER')
+    console.log('REGISTER PUBLISHER RESPONSE FROM MASTER')
     if (error !== null) {
       options.error(error)
     }

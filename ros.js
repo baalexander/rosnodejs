@@ -23,9 +23,10 @@
     idAttribute: 'type'
   }
   , {
-    // Type is a class property so ros.Message (or a derivative) can be passed
-    // on its own and the type attribute inferred
+    // Class properties so ros.Message (or a derivative) can be passed on its
+    // own and the attributes inferred
     type: null
+  , md5sum: null
   })
 
   // Ros.Topic

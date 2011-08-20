@@ -11,7 +11,7 @@
         var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
         node.createPublisher({ topic: talkTopic }, function(error, publisher) {
           var message = new stdMsgs.String({ data: 'hello' })
-          // publisher.publish(message)
+          publisher.publish(message)
         })
       })
     </script>
