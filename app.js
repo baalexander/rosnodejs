@@ -88,6 +88,49 @@ app.del('/nodes/:nodeId/publishers/:publisherId', function(req, res) {
   res.end()
 })
 
+// Subscribers
+// ----------
+
+app.get('/nodes/:nodeId/subscribers/:subscriberId?', function(req, res) {
+  console.log('SUBSCRIBERS GET')
+  var nodeId = req.params.nodeId
+  var node = ros.nodes.get(nodeId)
+  var subscriberId = req.params.publisherId
+  if (subscriberId === undefined) {
+    res.send(node.get('subscribers'))
+  }
+  else {
+    res.send(node.get('subscribers').get(subscriberId))
+  }
+})
+
+app.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
+  console.log('SUBSCRIBERS PUT')
+  var nodeId = req.params.nodeId
+  var node = ros.nodes.get(nodeId)
+  var subscriberId = req.params.subscriberId
+  var subscriber = node.subscribers.get(subscriberId)
+  if (subscriber === undefined) {
+    node.createSubscriber(req.body, function(error, subscriber) {
+      res.end()
+    })
+  }
+  else {
+    subscriber.set(req.body)
+    res.end()
+  }
+})
+
+app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
+  console.log('SUBSCRIBERS DELETE')
+  var nodeId = req.params.nodeId
+  var node = ros.nodes.get(nodeId)
+  var subscriberId = req.params.subscriberId
+  var subscriber = node.subscribers.get(subscriberId)
+  node.removeSubscriber(subscriber)
+  res.end()
+})
+
 app.listen(3000);
-console.log('Express server listening on port 3000');
+console.log('Server listening on port 3000');
 

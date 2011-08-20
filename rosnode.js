@@ -31,6 +31,24 @@ ros.Publisher.prototype.sync = function(method, model, options) {
   options.success()
 }
 
+ros.Subscriber.prototype.save = function(attributes, options) {
+  console.log('ROSNODEJS SUBSCRIBER SAVE')
+  master.registerSubscriber(this.get('nodeId'), 'http://localhost:9090', this.get('topic'), function(error, value) {
+    console.log('REGISTER SUBSCRIBER RESPONSE FROM MASTER')
+    if (error !== null) {
+      options.error(error)
+    }
+    else {
+      options.success()
+    }
+  })
+}
+
+ros.Subscriber.prototype.sync = function(method, model, options) {
+  console.log('ROSNODEJS SUBSCRIBER SYNC')
+  options.success()
+}
+
 function createSlaveServer(uri) {
   var server = xmlrpc.createServer(uri)
 

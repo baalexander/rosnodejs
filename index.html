@@ -7,11 +7,24 @@
     <script src="./ros.js"></script>
     <script src="./std_msgs.js"></script>
     <script>
+/*
       ros.createNode({ name: 'chatter' }, function(error, node) {
         var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
         node.createPublisher({ topic: talkTopic }, function(error, publisher) {
           var message = new stdMsgs.String({ data: 'hello' })
           publisher.publish(message)
+        })
+      })
+*/
+      ros.createNode({ name: 'chatter' }, function(error, node) {
+        var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
+        node.createSubscriber({ topic: talkTopic }, function(error, subscriber) {
+          subscriber.subscribe(function(error, message) {
+            console.log('SUBSCRIBE RESPONSE')
+            console.log('ERROR: ' + error)
+            console.log('MESSAGE: ' + message)
+            console.log('END SUBSCRIBE RESPONSE')
+          })
         })
       })
     </script>

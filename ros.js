@@ -68,13 +68,19 @@
 
   , initialize: function(attributes, options) {
       if (!this.publishers) {
-        var publishers = new this.Publishers()
-        this.publishers = publishers
+        this.publishers = new this.Publishers()
+      }
+      if (!this.subscribers) {
+        this.subscribers = new this.Subscribers()
       }
     }
 
   , Publishers: Backbone.Collection.extend({
       model: ros.Publisher
+    })
+
+  , Subscribers : Backbone.Collection.extend({
+      model: ros.Subscriber
     })
 
   , createPublisher: function(attributes, callback) {
@@ -96,6 +102,27 @@
   , removePublisher: function(publisher) {
       this.publishers.remove(publisher)
       publisher.destroy()
+    }
+
+  , createSubscriber: function(attributes, callback) {
+      var that = this
+      attributes.nodeId = this.id
+      var subscriber = new ros.Subscriber(attributes)
+      subscriber.save(null, {
+        success: function(data) {
+          that.subscribers.add(subscriber)
+          callback(null, subscriber)
+        }
+      , error: function(jqXHR, textStatus, errorThrown) {
+          callback(errorThrown)
+        }
+      })
+      return subscriber
+    }
+
+  , removeSubscriber: function(subscriber) {
+      this.subscribers.remove(subscriber)
+      subscriber.destroy()
     }
   })
 
@@ -124,6 +151,34 @@
 
   , publish: function(message) {
       console.log('publish')
+    }
+  })
+
+  // Ros.Subscriber
+  // -------------
+
+  ros.Subscriber = Backbone.Model.extend({
+
+    initialize: function(attributes) {
+      var topic = null
+      if (attributes.topic !== undefined) {
+        // If passed in object is not a Topic instance, creates Topic from
+        // object attributes
+        if (!(attributes.topic instanceof ros.Topic)) {
+          topic = new ros.Topic(attributes.topic)
+          this.set({ topic: topic })
+        }
+
+        // Sets the Subscriber ID to the topic's name
+        topic = this.get('topic')
+        this.id = topic.get('name')
+      }
+
+      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
+    }
+
+  , subscribe: function(callback) {
+      console.log('subscribe')
     }
   })
 
