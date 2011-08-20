@@ -72,6 +72,7 @@
       }
       if (!this.subscribers) {
         this.subscribers = new this.Subscribers()
+        console.log(this)
       }
     }
 
