@@ -1,5 +1,5 @@
 var express  = require('express')
-//  , socketio = require('socket.io')
+  , socketio = require('socket.io')
   , ros      = require('./rosnode')
 
 var app = express.createServer()
@@ -140,22 +140,17 @@ app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
 app.listen(3000);
 console.log('Server listening on port 3000');
 
-/*
 var io = socketio.listen(app)
   , nicknames = {};
 
 io.sockets.on('connection', function (socket) {
-  socket.on('user message', function (msg) {
-    socket.broadcast.emit('user message', socket.nickname, msg);
+  console.log('SOCKETIO CONNECTION')
+  socket.on('message', function (msg) {
+    console.log('SOCKETIO MESSAGE')
   });
 
   socket.on('disconnect', function () {
-    if (!socket.nickname) return;
-
-    delete nicknames[socket.nickname];
-    socket.broadcast.emit('announcement', socket.nickname + ' disconnected');
-    socket.broadcast.emit('nicknames', nicknames);
+    console.log('SOCKETIO DISCONNECT')
   });
 });
-*/
 

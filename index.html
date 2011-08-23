@@ -6,6 +6,7 @@
     <script src="./backbone.js"></script>
     <script src="./ros.js"></script>
     <script src="./std_msgs.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
 /*
       ros.createNode({ name: 'chatter' }, function(error, node) {
@@ -16,6 +17,7 @@
         })
       })
 */
+      var socket = io.connect('http://localhost:3000');
       ros.createNode({ name: 'chatter' }, function(error, node) {
         var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
         node.createSubscriber({ topic: talkTopic }, function(error, subscriber) {
