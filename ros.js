@@ -178,6 +178,12 @@
       this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
     }
 
+    // Need way to send/receive to/from server
+    // 1) ros could take a socket.io variable?
+    //   ros.io?
+    // 2) a third-party (index.html, app.js) could inform the model
+    // 3) Override Sync?
+    // Likely a combination of (1) and (3)
   , subscribe: function(callback) {
       this.bind('message', function(message) {
         console.log('SUBSCRIBER SUBSCRIBE')

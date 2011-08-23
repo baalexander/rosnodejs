@@ -136,11 +136,6 @@ ros.Subscriber.prototype.publisherUpdate = function(publishers, callback) {
         //  var Message = require(type[0])
         //  var message = new Message[type[1]]
         // Populate message using message.setFromData(data)
-        // that.trigger('message', message)
-        // and/or
-        // subscriber.subscribe(callback) {
-        //   this.bind('message', callback)
-        // }
         var topic = that.get('topic')
         var messageType = topic.get('type')
         console.log(topic)
