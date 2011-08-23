@@ -1,5 +1,6 @@
-var express = require('express')
-  , ros = require('./rosnode')
+var express  = require('express')
+//  , socketio = require('socket.io')
+  , ros      = require('./rosnode')
 
 var app = express.createServer()
 
@@ -112,6 +113,10 @@ app.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
   var subscriber = node.subscribers.get(subscriberId)
   if (subscriber === undefined) {
     node.createSubscriber(req.body, function(error, subscriber) {
+      subscriber.subscribe(function(error, message) {
+        console.log('SUBSCRIBERS PUT SUBSCRIBE')
+        console.log(message)
+      })
       res.end()
     })
   }
@@ -131,6 +136,26 @@ app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
   res.end()
 })
 
+
 app.listen(3000);
 console.log('Server listening on port 3000');
+
+/*
+var io = socketio.listen(app)
+  , nicknames = {};
+
+io.sockets.on('connection', function (socket) {
+  socket.on('user message', function (msg) {
+    socket.broadcast.emit('user message', socket.nickname, msg);
+  });
+
+  socket.on('disconnect', function () {
+    if (!socket.nickname) return;
+
+    delete nicknames[socket.nickname];
+    socket.broadcast.emit('announcement', socket.nickname + ' disconnected');
+    socket.broadcast.emit('nicknames', nicknames);
+  });
+});
+*/
 

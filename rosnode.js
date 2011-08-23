@@ -40,7 +40,6 @@ ros.Node.prototype.createSlaveServer = function(uri) {
     console.log(topicName)
     var subscriber = that.subscribers.get(topicName)
     console.log(subscriber)
-    //var subscriber = subscriberForTopic({ name: topicName})
     subscriber.publisherUpdate(publishers, function (error) {
       callback(error)
     })
@@ -132,9 +131,24 @@ ros.Subscriber.prototype.publisherUpdate = function(publishers, callback) {
 
       var socket = net.createConnection(port, host) 
       socket.on('data', function(data) {
+        // Create Message from Topic type
+        //  Knows to check for stdMsgs.js based on name?
+        //  var Message = require(type[0])
+        //  var message = new Message[type[1]]
+        // Populate message using message.setFromData(data)
+        // that.trigger('message', message)
+        // and/or
+        // subscriber.subscribe(callback) {
+        //   this.bind('message', callback)
+        // }
+        var topic = that.get('topic')
+        var messageType = topic.get('type')
+        console.log(topic)
+        console.log(messageType)
         console.log(data.length)
         console.log(data)
-        console.log('RESPONSE: ' + data);
+        console.log('RESPONSE: ' + data)
+        that.trigger('message', data)
       })
 
       socket.end(buffer)

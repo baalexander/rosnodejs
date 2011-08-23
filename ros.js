@@ -179,7 +179,11 @@
     }
 
   , subscribe: function(callback) {
-      console.log('subscribe')
+      this.bind('message', function(message) {
+        console.log('SUBSCRIBER SUBSCRIBE')
+        console.log(message)
+        callback(null, message)
+      })
     }
   })
 
