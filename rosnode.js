@@ -143,7 +143,7 @@ ros.Subscriber.prototype.publisherUpdate = function(publishers, callback) {
         console.log(data.length)
         console.log(data)
         console.log('RESPONSE: ' + data)
-        that.trigger('message', data)
+        that.trigger('message', '' + data)
       })
 
       socket.end(buffer)

@@ -16,8 +16,8 @@
           publisher.publish(message)
         })
       })
-*/
-      var socket = io.connect('http://localhost:3000');
+      */
+      ros.io = io
       ros.createNode({ name: 'chatter' }, function(error, node) {
         var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
         node.createSubscriber({ topic: talkTopic }, function(error, subscriber) {

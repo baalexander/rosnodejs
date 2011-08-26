@@ -3,11 +3,15 @@
   // Ros Module
   // ---------
 
-  var root = this
+  var root   = this
+    , server = false
+    , ros    = null
 
-  var ros = null
   if (typeof exports !== 'undefined') {
+    server = true
     Backbone = require('backbone')
+    // io = require('socket.io')
+    // io.listen(3001)
     ros = exports
   }
   else {
@@ -161,6 +165,8 @@
   ros.Subscriber = Backbone.Model.extend({
 
     initialize: function(attributes) {
+      var that = this
+
       var topic = null
       if (attributes.topic !== undefined) {
         // If passed in object is not a Topic instance, creates Topic from
@@ -173,21 +179,37 @@
         // Sets the Subscriber ID to the topic's name
         topic = this.get('topic')
         this.id = topic.get('name')
+
+        var namespacedTopic = '/' + topic.get('name')
+        console.log(ros.io)
+        if (server) {
+          that.bind('message', function(message) {
+            that.socket.emit('message', message)
+          })
+          ros.io.of(namespacedTopic).on('connection', function(socket) {
+            console.log('IO CONNECTION')
+            that.socket = socket
+          })
+        }
+        else {
+          var socket = ros.io.connect(namespacedTopic)
+          socket.on('connect', function() {
+            console.log('IO CONNECT')
+            that.socket = socket
+            socket.on('message', function(message) {
+              that.trigger('message', message)
+            })
+          })
+        }
       }
 
       this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
     }
 
-    // Need way to send/receive to/from server
-    // 1) ros could take a socket.io variable?
-    //   ros.io?
-    // 2) a third-party (index.html, app.js) could inform the model
-    // 3) Override Sync?
-    // Likely a combination of (1) and (3)
   , subscribe: function(callback) {
+      var that = this
       this.bind('message', function(message) {
         console.log('SUBSCRIBER SUBSCRIBE')
-        console.log(message)
         callback(null, message)
       })
     }

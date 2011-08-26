@@ -136,21 +136,8 @@ app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
   res.end()
 })
 
-
 app.listen(3000);
-console.log('Server listening on port 3000');
+ros.io = socketio.listen(app)
 
-var io = socketio.listen(app)
-  , nicknames = {};
-
-io.sockets.on('connection', function (socket) {
-  console.log('SOCKETIO CONNECTION')
-  socket.on('message', function (msg) {
-    console.log('SOCKETIO MESSAGE')
-  });
-
-  socket.on('disconnect', function () {
-    console.log('SOCKETIO DISCONNECT')
-  });
-});
+console.log('Server listening on port 3000')
 
