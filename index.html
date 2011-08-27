@@ -8,18 +8,11 @@
     <script src="./std_msgs.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-/*
-      ros.createNode({ name: 'chatter' }, function(error, node) {
-        var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
-        node.createPublisher({ topic: talkTopic }, function(error, publisher) {
-          var message = new stdMsgs.String({ data: 'hello' })
-          publisher.publish(message)
-        })
-      })
-      */
       ros.io = io
       ros.createNode({ name: 'chatter' }, function(error, node) {
         var talkTopic = new ros.Topic({ name: 'talk', type: stdMsgs.String.type })
+
+        // Creates a subscriber and subscribes to topic
         node.createSubscriber({ topic: talkTopic }, function(error, subscriber) {
           subscriber.subscribe(function(error, message) {
             console.log('SUBSCRIBE RESPONSE')
@@ -27,6 +20,19 @@
             console.log('MESSAGE: ' + message)
             console.log('END SUBSCRIBE RESPONSE')
           })
+        })
+
+        // Creates a publisher and publishes topic
+        node.createPublisher({ topic: talkTopic }, function(error, publisher) {
+          var message = new stdMsgs.String({ data: 'hello' })
+
+          // Pause to let the socket connect
+          setTimeout(function() {
+            publisher.publish(message, function(error) {
+              console.log(error)
+              console.log('Could not publish.')
+            })
+          }, 1000)
         })
       })
     </script>

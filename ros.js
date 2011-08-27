@@ -76,7 +76,6 @@
       }
       if (!this.subscribers) {
         this.subscribers = new this.Subscribers()
-        console.log(this)
       }
     }
 
@@ -101,7 +100,6 @@
           callback(errorThrown)
         }
       })
-      return publisher
     }
 
   , removePublisher: function(publisher) {
@@ -122,7 +120,6 @@
           callback(errorThrown)
         }
       })
-      return subscriber
     }
 
   , removeSubscriber: function(subscriber) {
@@ -137,10 +134,14 @@
   ros.Publisher = Backbone.Model.extend({
 
     initialize: function(attributes) {
-      var topic = null
+      var that = this
+
+      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/publishers'
+
       if (attributes.topic !== undefined) {
         // If passed in object is not a Topic instance, creates Topic from
         // object attributes
+        var topic = null
         if (!(attributes.topic instanceof ros.Topic)) {
           topic = new ros.Topic(attributes.topic)
           this.set({ topic: topic })
@@ -149,13 +150,37 @@
         // Sets the Publisher ID to the topic's name
         topic = this.get('topic')
         this.id = topic.get('name')
+
+        // Publishes messages to the server
+        if (!server) {
+          var namespacedTopic = '/' + topic.get('name')
+          var socket = ros.io.connect(namespacedTopic)
+          socket.on('connect', function() {
+            console.log('PUBLISHER IO CONNECT')
+            that.socket = socket
+          })
+        }
       }
 
-      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/publishers'
     }
 
-  , publish: function(message) {
+  , publish: function(message, callback) {
       console.log('publish')
+      // Publishes message to subscribers
+      if (server) {
+        console.log('SERVER PUBLISH')
+        console.log(message)
+      }
+      // Publishes message to the server
+      else {
+        if (this.socket === undefined) {
+          var error = new Error('Socket not connected to server')
+          callback(error)
+        }
+        else {
+          this.socket.emit('message', message)
+        }
+      }
     }
   })
 
@@ -187,7 +212,7 @@
           var namespacedTopic = '/' + topic.get('name')
           var socket = ros.io.connect(namespacedTopic)
           socket.on('connect', function() {
-            console.log('IO CONNECT')
+            console.log('SUBSCRIBER IO CONNECT')
             that.socket = socket
             socket.on('message', function(message) {
               that.trigger('message', message)

@@ -8,7 +8,6 @@ var ros = require('./ros')
 
 ros.Node.prototype.save = function(attributes, options) {
   console.log('ROSNODEJS NODE SAVE')
-  console.log(this)
   this.server = this.createSlaveServer({ host: 'localhost', port: 9090 })
   options.success()
 }
@@ -20,14 +19,12 @@ ros.Node.prototype.sync = function(method, model, options) {
 
 ros.Node.prototype.createSlaveServer = function(uri) {
   console.log('CREATE SLAVE SERVER')
-  console.log(this)
   var that = this
 
   var server = xmlrpc.createServer(uri)
 
   server.on('publisherUpdate', function(error, params, callback) {
     console.log('SLAVE PUBLISHER UPDATE CALLED')
-    console.log(that)
     var callerId   = params[0]
     var topicName  = params[1]
     var publishers = params[2]
@@ -39,7 +36,6 @@ ros.Node.prototype.createSlaveServer = function(uri) {
     }
     console.log(topicName)
     var subscriber = that.subscribers.get(topicName)
-    console.log(subscriber)
     subscriber.publisherUpdate(publishers, function (error) {
       callback(error)
     })
@@ -220,11 +216,6 @@ function createSlaveServerOLD(uri) {
     }
     console.log(topicName)
     var subscriber = ros.subscribers.get(topicName)
-    console.log(subscriber)
-    //var subscriber = subscriberForTopic({ name: topicName})
-    //subscriber.publisherUpdate(publishers, function (error) {
-    //  callback(error)
-    //})
   })
   server.on('requestTopic', function(error, params, callback) {
     var callerId  = params[0]
