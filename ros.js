@@ -1,18 +1,18 @@
 (function() {
 
-  // Ros Module
-  // ---------
 
-  var root   = this
-    , server = false
-    , ros    = null
+/////////////////////////////////////////////////////////////////////////////
+// ros
+/////////////////////////////////////////////////////////////////////////////
+
+  var root     = this
+    , server   = false
+    , ros      = null
 
   if (typeof exports !== 'undefined') {
-    server = true
+    server   = true
+    ros      = exports
     Backbone = require('backbone')
-    // io = require('socket.io')
-    // io.listen(3001)
-    ros = exports
   }
   else {
     ros = root.ros = {}
@@ -20,8 +20,10 @@
 
   ros.baseUrl = ''
 
-  // Ros.Message
-  // -----------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Message
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Message = Backbone.Model.extend({
     idAttribute: 'type'
@@ -33,15 +35,19 @@
   , md5sum: null
   })
 
-  // Ros.Topic
-  // -----------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Topic
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Topic = Backbone.Model.extend({
     idAttribute: 'name'
   })
 
-  // Ros.Nodes
-  // ---------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Nodes
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Nodes = Backbone.Collection.extend({
     model: ros.Node
@@ -50,6 +56,7 @@
 
   ros.createNode = function(attributes, callback) {
     var that = this
+
     var node = new ros.Node(attributes)
     node.save(null, {
       success: function(data) {
@@ -62,8 +69,10 @@
     })
   }
 
-  // Ros.Node
-  // ---------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Node
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Node = Backbone.Model.extend({
 
@@ -90,12 +99,11 @@
   , createPublisher: function(attributes, callback) {
       var that = this
       attributes.nodeId = this.id
+
       var publisher = new ros.Publisher(attributes)
-      console.log('create publisher')
       publisher.save(null, {
         success: function(data) {
           that.publishers.add(publisher)
-          console.log(that.publishers)
           callback(null, publisher)
         }
       , error: function(jqXHR, textStatus, errorThrown) {
@@ -112,6 +120,7 @@
   , createSubscriber: function(attributes, callback) {
       var that = this
       attributes.nodeId = this.id
+
       var subscriber = new ros.Subscriber(attributes)
       subscriber.save(null, {
         success: function(data) {
@@ -130,8 +139,10 @@
     }
   })
 
-  // Ros.Publisher
-  // -------------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Publisher
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Publisher = Backbone.Model.extend({
 
@@ -158,7 +169,6 @@
           var namespacedTopic = '/' + topic.get('name')
           var socket = ros.io.connect(namespacedTopic)
           socket.on('connect', function() {
-            console.log('PUBLISHER IO CONNECT')
             that.socket = socket
           })
         }
@@ -167,34 +177,30 @@
     }
 
   , publish: function(message, callback) {
-      console.log('publish')
-      // Publishes message to subscribers
-      if (server) {
-        console.log('SERVER PUBLISH')
-        console.log(message)
+      if (this.socket === undefined) {
+        var error = new Error('Socket not connected to server')
+        callback(error)
       }
-      // Publishes message to the server
       else {
-        if (this.socket === undefined) {
-          var error = new Error('Socket not connected to server')
-          callback(error)
-        }
-        else {
-          this.socket.emit('message', message)
-        }
+        this.socket.emit('message', message)
       }
     }
   })
 
-  // Ros.Subscriber
-  // -------------
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Subscriber
+/////////////////////////////////////////////////////////////////////////////
 
   ros.Subscriber = Backbone.Model.extend({
 
     initialize: function(attributes) {
       var that = this
 
-      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
+      this.urlRoot = ros.baseUrl
+        + '/nodes/'
+        + this.get('nodeId')
+        + '/subscribers'
 
       if (attributes.topic !== undefined) {
         // If passed in object is not a Topic instance, creates Topic from
@@ -214,7 +220,6 @@
           var namespacedTopic = '/' + topic.get('name')
           var socket = ros.io.connect(namespacedTopic)
           socket.on('connect', function() {
-            console.log('SUBSCRIBER IO CONNECT')
             that.socket = socket
             socket.on('message', function(message) {
               that.trigger('message', message)
@@ -226,7 +231,6 @@
 
   , subscribe: function(callback) {
       this.bind('message', function(message) {
-        console.log('SUBSCRIBER SUBSCRIBE')
         callback(null, message)
       })
     }
