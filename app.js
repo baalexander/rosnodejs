@@ -111,15 +111,24 @@ app.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
   var node = ros.nodes.get(nodeId)
   var subscriberId = req.params.subscriberId
   var subscriber = node.subscribers.get(subscriberId)
+
+  // Subscriber is being created
   if (subscriber === undefined) {
     node.createSubscriber(req.body, function(error, subscriber) {
-      subscriber.subscribe(function(error, message) {
-        console.log('SUBSCRIBERS PUT SUBSCRIBE')
-        console.log(message)
+      // Sends published messages to client over web sockets
+      var topic = subscriber.get('topic').get('name')
+      var namespacedTopic = '/' + topic
+      io.of(namespacedTopic).on('connection', function(socket) {
+        subscriber.subscribe(function(error, message) {
+          console.log('SUBSCRIBERS PUT SUBSCRIBE')
+          console.log(message)
+          socket.emit('message', message)
+        })
       })
       res.end()
     })
   }
+  // Subscriber is being updated
   else {
     subscriber.set(req.body)
     res.end()
@@ -137,7 +146,7 @@ app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
 })
 
 app.listen(3000);
-ros.io = socketio.listen(app)
+var io = socketio.listen(app)
 
 console.log('Server listening on port 3000')
 

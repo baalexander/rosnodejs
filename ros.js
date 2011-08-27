@@ -167,10 +167,12 @@
     initialize: function(attributes) {
       var that = this
 
-      var topic = null
+      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
+
       if (attributes.topic !== undefined) {
         // If passed in object is not a Topic instance, creates Topic from
         // object attributes
+        var topic = null
         if (!(attributes.topic instanceof ros.Topic)) {
           topic = new ros.Topic(attributes.topic)
           this.set({ topic: topic })
@@ -180,18 +182,9 @@
         topic = this.get('topic')
         this.id = topic.get('name')
 
-        var namespacedTopic = '/' + topic.get('name')
-        console.log(ros.io)
-        if (server) {
-          that.bind('message', function(message) {
-            that.socket.emit('message', message)
-          })
-          ros.io.of(namespacedTopic).on('connection', function(socket) {
-            console.log('IO CONNECTION')
-            that.socket = socket
-          })
-        }
-        else {
+        // Listens for messages published from the server
+        if (!server) {
+          var namespacedTopic = '/' + topic.get('name')
           var socket = ros.io.connect(namespacedTopic)
           socket.on('connect', function() {
             console.log('IO CONNECT')
@@ -202,12 +195,9 @@
           })
         }
       }
-
-      this.urlRoot = ros.baseUrl + '/nodes/' + this.get('nodeId') + '/subscribers'
     }
 
   , subscribe: function(callback) {
-      var that = this
       this.bind('message', function(message) {
         console.log('SUBSCRIBER SUBSCRIBE')
         callback(null, message)
