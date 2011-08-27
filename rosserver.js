@@ -73,7 +73,6 @@ rosserver.put('/nodes/:nodeId/publishers/:publisherId', function(req, res){
       var topic = publisher.get('topic').get('name')
       var namespacedTopic = '/' + topic
       io.of(namespacedTopic).on('connection', function(socket) {
-        console.log('~!!! CONNECTION !!!~')
         socket.on('message', function(message) {
           console.log('PUBLISHERS PUT PUBLISH')
           console.log(message)

@@ -91,9 +91,11 @@
       var that = this
       attributes.nodeId = this.id
       var publisher = new ros.Publisher(attributes)
+      console.log('create publisher')
       publisher.save(null, {
         success: function(data) {
           that.publishers.add(publisher)
+          console.log(that.publishers)
           callback(null, publisher)
         }
       , error: function(jqXHR, textStatus, errorThrown) {

@@ -6,6 +6,11 @@ var ros = require('./ros')
   , url    = require('url')
   , ctype  = require('ctype')
 
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Node
+/////////////////////////////////////////////////////////////////////////////
+
 ros.Node.prototype.save = function(attributes, options) {
   console.log('ROSNODEJS NODE SAVE')
   this.server = this.createSlaveServer({ host: 'localhost', port: 9090 })
@@ -41,16 +46,53 @@ ros.Node.prototype.createSlaveServer = function(uri) {
     })
   })
 
+  server.on('requestTopic', function(error, params, callback) {
+    console.log('SLAVE REQUEST TOPIC CALLED')
+    var callerId  = params[0]
+    var topicName = params[1]
+    var protocols = params[2]
+    console.log(callerId)
+    console.log(topicName)
+    console.log(protocols)
+
+    if (topicName.length > 0 && topicName.charAt(0) === '/') {
+      topicName = topicName.substr(1, topicName.length - 1)
+    }
+    console.log(topicName)
+    console.log(that.publishers)
+    var publisher = that.publishers.get(topicName)
+    console.log(publisher)
+    publisher.selectProtocol(protocols, function (error, protocolParams) {
+      callback(error, protocolParams)
+    })
+  })
 }
 
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Publisher
+/////////////////////////////////////////////////////////////////////////////
+
 ros.Publisher.prototype.save = function(attributes, options) {
+  var that = this
   console.log('ROSNODEJS PUBLISHER SAVE')
   master.registerPublisher(this.get('nodeId'), 'http://localhost:9090', this.get('topic'), function(error, value) {
     console.log('REGISTER PUBLISHER RESPONSE FROM MASTER')
     if (error !== null) {
+      console.log('!!!ERROR')
+      console.log(error)
       options.error(error)
     }
     else {
+      console.log('POSSIBLE SUCCESS')
+      this.server = net.createServer(function(socket) {
+        console.log('!!!SUCCESS')
+        that.socket = socket
+        socket.on('close', function() {
+          console.log('CLOSE')
+        })
+      })
+      server.listen(10000, 'localhost')
       options.success()
     }
   })
@@ -60,6 +102,25 @@ ros.Publisher.prototype.sync = function(method, model, options) {
   console.log('ROSNODEJS PUBLISHER SYNC')
   options.success()
 }
+
+ros.Publisher.prototype.publish = function(message, callback) {
+  console.log('ROSNODE SERVER PUBLISH')
+  console.log(message)
+  console.log(this.socket)
+  if (this.socket) {
+    this.socket.write(message)
+  }
+}
+
+ros.Publisher.prototype.selectProtocol = function(protocols, callback) {
+  console.log('ROSNODEJS PUBLISHER SELECT PROTOCOL')
+  callback(null, [1, 'ready on localhost:10000', ['TCPROS', 'localhost', 10000]])
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+// ros.Subscriber
+/////////////////////////////////////////////////////////////////////////////
 
 ros.Subscriber.prototype.save = function(attributes, options) {
   console.log('ROSNODEJS SUBSCRIBER SAVE')
