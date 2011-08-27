@@ -2,14 +2,14 @@ var express  = require('express')
   , socketio = require('socket.io')
   , ros      = require('./rosnode')
 
-var app = express.createServer()
+var rosserver = express.createServer()
 
-app.configure(function() {
-  app.use(express.methodOverride())
-  app.use(express.bodyParser())
+rosserver.configure(function() {
+  rosserver.use(express.methodOverride())
+  rosserver.use(express.bodyParser())
 })
 
-app.use(express.static(__dirname + '/'))
+rosserver.use(express.static(__dirname + '/'))
 
 // Nodes
 // -----
@@ -18,7 +18,7 @@ var registerPublisher = function(publisher, publishers, options) {
   console.log('REGISTER PUBLISHER')
 }
 
-app.get('/nodes/:nodeId?', function(req, res) {
+rosserver.get('/nodes/:nodeId?', function(req, res) {
   console.log('NODE GET')
   var nodeId = req.params.nodeId
   if (nodeId === undefined) {
@@ -30,7 +30,7 @@ app.get('/nodes/:nodeId?', function(req, res) {
   }
 })
 
-app.put('/nodes/:nodeId', function(req, res){
+rosserver.put('/nodes/:nodeId', function(req, res){
   console.log('NODE PUT')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -49,7 +49,7 @@ app.put('/nodes/:nodeId', function(req, res){
 // Publishers
 // ----------
 
-app.get('/nodes/:nodeId/publishers/:publisherId?', function(req, res) {
+rosserver.get('/nodes/:nodeId/publishers/:publisherId?', function(req, res) {
   console.log('PUBLISHERS GET')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -62,7 +62,7 @@ app.get('/nodes/:nodeId/publishers/:publisherId?', function(req, res) {
   }
 })
 
-app.put('/nodes/:nodeId/publishers/:publisherId', function(req, res){
+rosserver.put('/nodes/:nodeId/publishers/:publisherId', function(req, res){
   console.log('PUBLISHERS PUT')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -79,7 +79,7 @@ app.put('/nodes/:nodeId/publishers/:publisherId', function(req, res){
   }
 })
 
-app.del('/nodes/:nodeId/publishers/:publisherId', function(req, res) {
+rosserver.del('/nodes/:nodeId/publishers/:publisherId', function(req, res) {
   console.log('PUBLISHERS DELETE')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -92,7 +92,7 @@ app.del('/nodes/:nodeId/publishers/:publisherId', function(req, res) {
 // Subscribers
 // ----------
 
-app.get('/nodes/:nodeId/subscribers/:subscriberId?', function(req, res) {
+rosserver.get('/nodes/:nodeId/subscribers/:subscriberId?', function(req, res) {
   console.log('SUBSCRIBERS GET')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -105,7 +105,7 @@ app.get('/nodes/:nodeId/subscribers/:subscriberId?', function(req, res) {
   }
 })
 
-app.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
+rosserver.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
   console.log('SUBSCRIBERS PUT')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -135,7 +135,7 @@ app.put('/nodes/:nodeId/subscribers/:subscriberId', function(req, res){
   }
 })
 
-app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
+rosserver.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
   console.log('SUBSCRIBERS DELETE')
   var nodeId = req.params.nodeId
   var node = ros.nodes.get(nodeId)
@@ -145,8 +145,8 @@ app.del('/nodes/:nodeId/subscribers/:subscriberId', function(req, res) {
   res.end()
 })
 
-app.listen(3000);
-var io = socketio.listen(app)
+rosserver.listen(3000);
+var io = socketio.listen(rosserver)
 
-console.log('Server listening on port 3000')
+console.log('rosserver listening on port 3000')
 
