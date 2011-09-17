@@ -1,0 +1,31 @@
+{ "name" : "rosnodejs"
+, "description" : "A JavaScript client library for ROS."
+, "keywords" : [ "ros", "robot", "robotics" ]
+, "version" : "0.0.1"
+, "preferGlobal" : true
+, "homepage" : "https://github.com/baalexander/rosnodejs"
+, "author" : "Brandon Alexander <baalexander@gmail.com> (https://github.com/baalexander)"
+, "repository" :
+  { "type" : "git"
+  , "url"  : "git://github.com/baalexander/rosnodejs.git"
+  }
+, "bugs" : { "web" : "https://github.com/baalexander/rosnodejs/issues" }
+, "directories" : { "lib" : "./lib" }
+, "main" : "./lib/rosnode.js"
+, "dependencies" :
+  { "portscanner" : "0.1.0"
+  , "xmlrpc"      : "0.8.1"
+  , "backbone"    : "0.5.3"
+  , "underscore"  : "1.1.7"
+  , "ctype"       : "0.1.0"
+  , "express"     : "2.4.6"
+  , "socket.io"   : "0.8.4"
+  }
+, "engines" : { "node" : ">=0.4", "npm" : ">=1.0.0" }
+, "licenses" :
+  [ { "type" : "MIT"
+    , "url" : "https://github.com/baalexander/rosnodejs/raw/master/LICENSE"
+    }
+  ]
+}
+
