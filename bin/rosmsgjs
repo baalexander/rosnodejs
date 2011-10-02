@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var fs        = require('fs')
+  , generator = require('../lib/messages/generator')
+
+var args = process.argv
+if (args.length < 4) {
+  console.error('Command is `rosmsgjs generate <message type>`')
+}
+else {
+  var packageName = args[3]
+  generator.createFromPackage(packageName, function(error, messages) {
+    if (error) {
+      console.error(error)
+    }
+    else {
+      generator.template(packageName, messages, function(error, output) {
+        if (error) {
+          console.error(error)
+        }
+        else {
+          fs.writeFile(packageName + '.js', output, function(error) {
+            if (error) {
+              console.error(error)
+            }
+          })
+        }
+      })
+    }
+  })
+}
+
