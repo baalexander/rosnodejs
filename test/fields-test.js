@@ -1,4 +1,64 @@
-var fields = require('../lib/messages/fields')
+var ctype = require('ctype')
+  , fields = require('../lib/messages/fields')
+
+describe('Check type', function() {
+  it('should identify primitive types', function() {
+    expect(fields.isPrimitiveType('bool')).toEqual(true)
+    expect(fields.isPrimitiveType('int8')).toEqual(true)
+    expect(fields.isPrimitiveType('uint8')).toEqual(true)
+    expect(fields.isPrimitiveType('int16')).toEqual(true)
+    expect(fields.isPrimitiveType('uint16')).toEqual(true)
+    expect(fields.isPrimitiveType('int32')).toEqual(true)
+    expect(fields.isPrimitiveType('uint32')).toEqual(true)
+    expect(fields.isPrimitiveType('float32')).toEqual(true)
+    expect(fields.isPrimitiveType('float64')).toEqual(true)
+    expect(fields.isPrimitiveType('string')).toEqual(true)
+
+    // Arrays are not primitives
+    expect(fields.isPrimitiveType('bool[]')).toEqual(false)
+    expect(fields.isPrimitiveType('float32[]')).toEqual(false)
+    expect(fields.isPrimitiveType('float64[]')).toEqual(false)
+    expect(fields.isPrimitiveType('std_msgs/String[]')).toEqual(false)
+
+    // Message Types are not primitives
+    expect(fields.isPrimitiveType('std_msgs/String')).toEqual(false)
+    expect(fields.isPrimitiveType('Header')).toEqual(false)
+    expect(fields.isPrimitiveType('geometry_msgs/Twist')).toEqual(false)
+    expect(fields.isPrimitiveType('Point32')).toEqual(false)
+    expect(fields.isPrimitiveType('String')).toEqual(false)
+  })
+
+  it('should identify arrays', function() {
+    expect(fields.isArray('bool[]')).toEqual(true)
+    expect(fields.isArray('int8[]')).toEqual(true)
+    expect(fields.isArray('float32[]')).toEqual(true)
+    expect(fields.isArray('std_msgs/String[]')).toEqual(true)
+    expect(fields.isArray('geometry_msgs/Twist[]')).toEqual(true)
+    expect(fields.isArray('Point32[]')).toEqual(true)
+
+    expect(fields.isArray('bool')).toEqual(false)
+    expect(fields.isArray('float32')).toEqual(false)
+    expect(fields.isArray('std_msgs/String')).toEqual(false)
+    expect(fields.isArray('Header')).toEqual(false)
+    expect(fields.isArray('Point32')).toEqual(false)
+  })
+
+  it('should identify message types', function() {
+    expect(fields.isMessageType('std_msgs/String')).toEqual(true)
+    expect(fields.isMessageType('geometry_msgs/String')).toEqual(true)
+    expect(fields.isMessageType('String')).toEqual(true)
+    expect(fields.isMessageType('Header')).toEqual(true)
+    expect(fields.isMessageType('Point32')).toEqual(true)
+
+    expect(fields.isMessageType('bool')).toEqual(false)
+    expect(fields.isMessageType('float32')).toEqual(false)
+    expect(fields.isMessageType('string')).toEqual(false)
+    expect(fields.isMessageType('bool[]')).toEqual(false)
+    expect(fields.isMessageType('float32[]')).toEqual(false)
+    expect(fields.isMessageType('std_msgs/String[]')).toEqual(false)
+    expect(fields.isMessageType('Point32[]')).toEqual(false)
+  })
+})
 
 describe('Parse fields', function() {
   it('should work with bools', function() {
@@ -198,5 +258,53 @@ describe('Get field size', function() {
 
   })
 
+})
+
+describe('Read field from buffer', function() {
+  it('should return correctly for primitive types', function() {
+    var buffer = null
+      , bufferOffset = 0
+      , fieldValue = null
+
+    buffer = new Buffer(1)
+    ctype.wuint8(7, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('bool', buffer, bufferOffset)
+    expect(fieldValue).toEqual(7)
+
+    buffer = new Buffer(1)
+    bufferOffset = 0
+    ctype.wsint8(-7, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('int8', buffer, bufferOffset)
+    expect(fieldValue).toEqual(-7)
+
+    buffer = new Buffer(4)
+    bufferOffset = 1
+    ctype.wsint16(-300, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('int16', buffer, bufferOffset)
+    expect(fieldValue).toEqual(-300)
+
+    buffer = new Buffer(6)
+    bufferOffset = 2
+    ctype.wuint32(3100, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('uint32', buffer, bufferOffset)
+    expect(fieldValue).toEqual(3100)
+
+    buffer = new Buffer(4)
+    bufferOffset = 0
+    ctype.wfloat(1.2, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('float32', buffer, bufferOffset)
+    expect(fieldValue).toEqual(1.2)
+
+    buffer = new Buffer(9)
+    bufferOffset = 1
+    ctype.wdouble(-231.22, 'little', buffer, bufferOffset)
+    fieldValue = fields.readFieldFromBuffer('float64', buffer, bufferOffset)
+    expect(fieldValue).toEqual(-231.22)
+
+    // STOPPED
+    // Fix Float32.
+    // Test with String and others.
+    // Test exceptions for 64-bit int.
+  })
 })
 
