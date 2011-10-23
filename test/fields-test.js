@@ -18,6 +18,7 @@ describe('Check type', function() {
     expect(fields.isPrimitiveType('bool[]')).toEqual(false)
     expect(fields.isPrimitiveType('float32[]')).toEqual(false)
     expect(fields.isPrimitiveType('float64[]')).toEqual(false)
+    expect(fields.isPrimitiveType('float64[36]')).toEqual(false)
     expect(fields.isPrimitiveType('std_msgs/String[]')).toEqual(false)
 
     // Message Types are not primitives
@@ -32,6 +33,7 @@ describe('Check type', function() {
     expect(fields.isArray('bool[]')).toEqual(true)
     expect(fields.isArray('int8[]')).toEqual(true)
     expect(fields.isArray('float32[]')).toEqual(true)
+    expect(fields.isArray('float64[36]')).toEqual(true)
     expect(fields.isArray('std_msgs/String[]')).toEqual(true)
     expect(fields.isArray('geometry_msgs/Twist[]')).toEqual(true)
     expect(fields.isArray('Point32[]')).toEqual(true)
@@ -55,6 +57,7 @@ describe('Check type', function() {
     expect(fields.isMessageType('string')).toEqual(false)
     expect(fields.isMessageType('bool[]')).toEqual(false)
     expect(fields.isMessageType('float32[]')).toEqual(false)
+    expect(fields.isMessageType('float64[36]')).toEqual(false)
     expect(fields.isMessageType('std_msgs/String[]')).toEqual(false)
     expect(fields.isMessageType('Point32[]')).toEqual(false)
   })
