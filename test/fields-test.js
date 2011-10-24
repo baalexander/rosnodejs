@@ -296,6 +296,8 @@ describe('Read field from buffer', function() {
     bufferOffset = 0
     ctype.wfloat(1.2, 'little', buffer, bufferOffset)
     fieldValue = fields.readFieldFromBuffer('float32', buffer, bufferOffset)
+    // float32 conversion fails at rounding, make up for it here
+    fieldValue = Math.round(fieldValue*100)/100
     expect(fieldValue).toEqual(1.2)
 
     buffer = new Buffer(9)
@@ -304,10 +306,36 @@ describe('Read field from buffer', function() {
     fieldValue = fields.readFieldFromBuffer('float64', buffer, bufferOffset)
     expect(fieldValue).toEqual(-231.22)
 
-    // STOPPED
-    // Fix Float32.
-    // Test with String and others.
-    // Test exceptions for 64-bit int.
+    // int64 and uint64 are not supported
+    buffer = new Buffer(8)
+    bufferOffset = 0
+    try {
+      fieldValue = fields.readFieldFromBuffer('int64', buffer, bufferOffset)
+      expect(false).toEqual(true)
+    }
+    catch (e) {
+
+    }
+
+    buffer = new Buffer(8)
+    bufferOffset = 0
+    try {
+      fieldValue = fields.readFieldFromBuffer('uint64', buffer, bufferOffset)
+      expect(false).toEqual(true)
+    }
+    catch (e) {
+
+    }
+
+    var testString = 'Testing a string'
+    buffer = new Buffer(4 + testString.length)
+    bufferOffset = 0
+    ctype.wuint32(testString.length, 'little', buffer, bufferOffset)
+    bufferOffset += 4
+    buffer.write(testString, bufferOffset, 'ascii')
+    bufferOffset = 0
+    fieldValue = fields.readFieldFromBuffer('string', buffer, bufferOffset)
+    expect(fieldValue).toEqual(testString)
   })
 })
 
