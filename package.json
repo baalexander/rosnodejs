@@ -13,8 +13,8 @@
 , "directories" : { "lib" : "./lib" }
 , "main" : "./lib/rosnode.js"
 , "dependencies" :
-  { "portscanner" : "0.1.0"
-  , "xmlrpc"      : "0.8.1"
+  { "portscanner" : "0.1.1"
+  , "xmlrpc"      : "0.8.2"
   , "backbone"    : "0.5.3"
   , "underscore"  : "1.1.7"
   , "ctype"       : "0.1.0"
