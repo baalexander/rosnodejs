@@ -1,5 +1,5 @@
 var ctype = require('ctype')
-  , fields = require('../lib/messages/fields')
+  , fields = require('../../lib/rosnodejs/messages/fields')
 
 describe('Check type', function() {
   it('should identify primitive types', function() {
