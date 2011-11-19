@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var fs        = require('fs')
-  , generator = require('../lib/messages/generator')
+  , generator = require('../../lib/rosmsgjs/generator')
 
 var args = process.argv
 if (args.length < 4) {

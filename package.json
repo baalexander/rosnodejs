@@ -1,6 +1,6 @@
 { "name" : "rosnodejs"
 , "description" : "A JavaScript client library for ROS."
-, "keywords" : [ "ros", "robot", "robotics" ]
+, "keywords" : [ "ros", "rosnode", "rosnodejs", "robot", "robotics" ]
 , "version" : "0.0.1"
 , "preferGlobal" : true
 , "homepage" : "https://github.com/baalexander/rosnodejs"
@@ -9,12 +9,12 @@
   { "type" : "git"
   , "url"  : "git://github.com/baalexander/rosnodejs.git"
   }
-, "bugs" : { "web" : "https://github.com/baalexander/rosnodejs/issues" }
+, "bugs" : { "url" : "https://github.com/baalexander/rosnodejs/issues" }
 , "directories" : { "lib" : "./lib" }
-, "main" : "./lib/rosnode.js"
+, "main" : "./lib/rosnodejs/rosnode.js"
 , "dependencies" :
   { "portscanner" : "0.1.1"
-  , "xmlrpc"      : "0.8.2"
+  , "xmlrpc"      : "0.9.0"
   , "backbone"    : "0.5.3"
   , "underscore"  : "1.1.7"
   , "ctype"       : "0.1.0"
