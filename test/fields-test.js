@@ -1,5 +1,5 @@
 var ctype = require('ctype')
-  , fields = require('../../lib/rosnodejs/fields')
+  , fields = require('../lib/fields')
 
 describe('Check type', function() {
   it('should identify primitive types', function() {
