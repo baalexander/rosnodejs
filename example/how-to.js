@@ -1,6 +1,6 @@
-var should = require('should')
-
-var ros           = require('../lib/rosnode')
+var exec          = require('child_process').exec
+  , should        = require('should')
+  , ros           = require('../lib/rosnode')
   , std_msgs      = require('./std_msgs')
   , geometry_msgs = require('./geometry_msgs')
 
@@ -99,8 +99,8 @@ describe('How to use rosnodejs', function() {
     // Master keeps track of what topic every node is publishing or subscribing
     // to and helps them communicate with one another.
 
-    // The 'talker' node will be the node publishing messages.
-    ros.createNode({ name: 'keyboard_node' }, function(error, node) {
+    // The 'keyboard' node will be the node publishing messages.
+    ros.createNode({ name: 'keyboard' }, function(error, node) {
 
       // This node will tell a robot to move forward by publishing the
       // directions.
@@ -159,7 +159,96 @@ describe('How to use rosnodejs', function() {
   })
 
   it('to listen to other nodes', function(done) {
-    done()
+    // ROS uses a publish/subscribe method for nodes, where a node will publish
+    // messages on a topic and other nodes can subscribe to that topic to
+    // receive the messages. A node that subscribes to a topic is knowns as a
+    // subscriber.
+    //
+    // One big advantage of the publish/subscribe method for ROS nodes is the
+    // subscriber nodes do not need to care where the messages originated. For
+    // example, a node may subscribe to the sensor_msgs/Range message type of
+    // topic 'distance_data' to determine if the robot is approaching a wall.
+    // The node publishing messages to the 'distance_data' topic could be using
+    // an IR sensor or an ultrasound sensor, but the subscribing node does not
+    // care, it just needs the distance.
+    //
+    // In rosnodejs, a node creates a subscriber for each topic it wants to
+    // listen to.
+
+    // The 'motor' node will be subscribing to movement direction messages.
+    // While the messages will be generic directions, the 'motor' node will
+    // interpret the directions and decide how to move the robots motors.
+    ros.createNode({ name: 'motor' }, function(error, node) {
+
+      // A subscriber requires two pieces of information to register itself with
+      // ROS Master:
+      //  * The topic the subscriber is interested in (a string value).
+      //  * And the message type of the messages being subscribed to.
+      var subscriberParams = {
+        // 'cmd_vel' is a common topic used for giving directions to a robot.
+        topic:   'cmd_vel'
+        // A common message type for movement directions is geometry_msgs/Twist.
+      , Message: geometry_msgs.Twist
+      }
+
+      // The node registers itself as a subscriber for the 'cmd_vel' topic,
+      // letting ROS master and other nodes know it is interested in messages of
+      // the geometry_msgs/Twist type.
+      node.createSubscriber(subscriberParams, function(error, subscriber) {
+
+        // When messages are published for the 'cmd_vel' topic, the callback for
+        // subscribe() will be called with the message object. This callback
+        // will be called every time a message is published.
+        subscriber.subscribe(function(error, message) {
+
+          message.get('type').should.equal('geometry_msgs/Twist')
+
+          // The geometry_msgs/Twist message type has two fields that are
+          // message types too: linear and angular.
+          // The linear field contains linear movement directions for the robot.
+          var linear = message.get('linear')
+          linear.get('type').should.equal('geometry_msgs/Vector3')
+          // A value of 1.0 for linear's x implies the robot should move forward
+          // at a speed of 1.
+          linear.get('x').should.equal(1.0)
+          linear.get('y').should.equal(0.0)
+          linear.get('z').should.equal(0.0)
+
+          // The angular field contains rotational movement directions for the
+          // robot.
+          var angular = message.get('angular')
+          angular.get('type').should.equal('geometry_msgs/Vector3')
+          angular.get('x').should.equal(0.0)
+          angular.get('y').should.equal(0.0)
+          angular.get('z').should.equal(0.0)
+
+          // Now that a message is received, it is up to the node on what
+          // actions to take based on the message data. This 'motor' node could
+          // read the message's linear.x value of 1.0 and decide to make the
+          // robot move forward.
+          //
+          // More concretely, if an Arduino was controlling the motors, the
+          // Arduino could be connected to the computer running ROS listening
+          // for serial commands.  This 'motor' node could then output whatever
+          // command the Arduino was expecting to move forward.
+
+          done(error)
+        })
+      })
+
+      // ROS comes with several command-line tools like rosmsg and rostopic.
+      // Rostopic can be used to debug messages by publishing or subscribing to
+      // topics. Rostopic is used here to publish a geometry_msgs/Twist message
+      // over the topic 'cmd_vel' in order to test the subscribing node.
+      var publishCommand = 'rostopic'
+        + ' pub'
+        + ' /cmd_vel'
+        + ' geometry_msgs/Twist'
+        + " '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'"
+      var child = exec(publishCommand, function(error, stdout, stderr) {
+        should.not.exist(error)
+      })
+    })
   })
 
 })

@@ -1,5 +1,4 @@
 var should = require('should')
-  , ctype  = require('ctype')
   , fields = require('../lib/fields')
 
 // STOPPED
@@ -8,51 +7,49 @@ var should = require('should')
 // Move Mocha to a local install
 // Create a Makefile
 
-suite('Check type', function() {
-  test('should identify primitive types', function() {
+describe('Check type', function() {
+  it('should identify primitive types', function() {
     fields.isPrimitiveType('bool').should.be.true
     fields.isPrimitiveType('int8').should.be.true
     fields.isPrimitiveType('uint8').should.be.true
     fields.isPrimitiveType('int16').should.be.true
-    // expect(fields.isPrimitiveType('uint16')).toEqual(true)
-    // expect(fields.isPrimitiveType('int32')).toEqual(true)
-    // expect(fields.isPrimitiveType('uint32')).toEqual(true)
-    // expect(fields.isPrimitiveType('float32')).toEqual(true)
-    // expect(fields.isPrimitiveType('float64')).toEqual(true)
-    // expect(fields.isPrimitiveType('string')).toEqual(true)
+    fields.isPrimitiveType('uint16').should.be.true
+    fields.isPrimitiveType('int32').should.be.true
+    fields.isPrimitiveType('uint32').should.be.true
+    fields.isPrimitiveType('float32').should.be.true
+    fields.isPrimitiveType('float64').should.be.true
+    fields.isPrimitiveType('string').should.be.true
 
-    // // Arrays are not primitives
-    // expect(fields.isPrimitiveType('bool[]')).toEqual(false)
-    // expect(fields.isPrimitiveType('float32[]')).toEqual(false)
-    // expect(fields.isPrimitiveType('float64[]')).toEqual(false)
-    // expect(fields.isPrimitiveType('float64[36]')).toEqual(false)
-    // expect(fields.isPrimitiveType('std_msgs/String[]')).toEqual(false)
+    // Arrays are not primitives
+    fields.isPrimitiveType('bool[]').should.be.false
+    fields.isPrimitiveType('float32[]').should.be.false
+    fields.isPrimitiveType('float64[]').should.be.false
+    fields.isPrimitiveType('float64[36]').should.be.false
+    fields.isPrimitiveType('std_msgs/String[]').should.be.false
 
-    // // Message Types are not primitives
-    // expect(fields.isPrimitiveType('std_msgs/String')).toEqual(false)
-    // expect(fields.isPrimitiveType('Header')).toEqual(false)
-    // expect(fields.isPrimitiveType('geometry_msgs/Twist')).toEqual(false)
-    // expect(fields.isPrimitiveType('Point32')).toEqual(false)
-    // expect(fields.isPrimitiveType('String')).toEqual(false)
+    // Message Types are not primitives
+    fields.isPrimitiveType('std_msgs/String').should.be.false
+    fields.isPrimitiveType('Header').should.be.false
+    fields.isPrimitiveType('geometry_msgs/Twist').should.be.false
+    fields.isPrimitiveType('Point32').should.be.false
+    fields.isPrimitiveType('String').should.be.false
   })
 
-  test('should identify arrays', function() {
+  it('should identify arrays', function() {
     fields.isArray('bool[]').should.be.true
+    fields.isArray('int8[]').should.be.true
+    fields.isArray('float32[]').should.be.true
+    fields.isArray('float64[36]').should.be.true
+    fields.isArray('std_msgs/String[]').should.be.true
+    fields.isArray('geometry_msgs/Twist[]').should.be.true
+    fields.isArray('Point32[]').should.be.true
+
+    fields.isArray('bool').should.be.false
+    fields.isArray('float32').should.be.false
+    fields.isArray('std_msgs/String').should.be.false
+    fields.isArray('Header').should.be.false
+    fields.isArray('Point32').should.be.false
   })
-
-//     expect(fields.isArray('int8[]')).toEqual(true)
-//     expect(fields.isArray('float32[]')).toEqual(true)
-//     expect(fields.isArray('float64[36]')).toEqual(true)
-//     expect(fields.isArray('std_msgs/String[]')).toEqual(true)
-//     expect(fields.isArray('geometry_msgs/Twist[]')).toEqual(true)
-//     expect(fields.isArray('Point32[]')).toEqual(true)
-
-//     expect(fields.isArray('bool')).toEqual(false)
-//     expect(fields.isArray('float32')).toEqual(false)
-//     expect(fields.isArray('std_msgs/String')).toEqual(false)
-//     expect(fields.isArray('Header')).toEqual(false)
-//     expect(fields.isArray('Point32')).toEqual(false)
-//   })
 
 //   it('should identify message types', function() {
 //     expect(fields.isMessageType('std_msgs/String')).toEqual(true)
