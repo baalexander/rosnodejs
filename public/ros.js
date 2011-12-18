@@ -129,13 +129,11 @@
         // On success, adds the publisher to the node's list and returns the
         // publisher in the callback.
         success: function(data) {
-          console.log('PUBLISHER SUCCESS')
           that.publishers.add(publisher)
           callback(null, publisher)
         }
         // Returns any error from registering the publisher.
       , error: function(jqXHR, textStatus, errorThrown) {
-          console.log('PUBLISHER ERROR')
           callback(errorThrown)
         }
       })
@@ -165,14 +163,11 @@
         // On success, adds the subscriber to the node's list and returns the
         // subscriber in the callback.
         success: function(data) {
-          console.log('SUBSCRIBER SUCCESS')
           that.subscribers.add(subscriber)
           callback(null, subscriber)
         }
         // Returns any error from registering the subscriber.
       , error: function(jqXHR, textStatus, errorThrown) {
-          console.log('SUBSCRIBER ERROR')
-          console.log(errorThrown)
           callback(errorThrown)
         }
       })
@@ -237,7 +232,6 @@
         callback(error)
       }
       else {
-        console.log(message)
         this.socket.emit('message', message)
       }
     }
