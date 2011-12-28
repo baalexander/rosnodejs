@@ -233,6 +233,7 @@
       }
       else {
         this.socket.emit('message', message)
+        callback()
       }
     }
   })
