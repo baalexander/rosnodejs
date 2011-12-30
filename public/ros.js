@@ -28,6 +28,7 @@
   }
   else {
     ros = root.ros = {}
+    ros.io = root.io
   }
 
   // The base URL to send REST requests to. The default is root.
