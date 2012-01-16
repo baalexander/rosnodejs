@@ -1,0 +1,116 @@
+body {
+    background: #f1f1f1;
+    padding-top: 50px;  
+/*    font-family: 'Basic', "Helvetica Neue", Helvetica, Arial, sans-serif;
+*/}
+
+/* .topbar-inner, .topbar .fill {
+    background-color: #404040;
+     background-image: none;
+}*/
+
+.topbar .brand {
+    font-size: 24px;
+    padding: 10px 20px 12px;
+    color: #df8615;
+}
+
+.nav-icon {
+    padding:0 8px;
+}
+
+/*h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inika', serif;
+}*/
+
+h1 {
+    font-size: 36px;
+    line-height: 42px;
+/*    border-bottom: 2px solid #df8615;
+*/}
+
+h1.brand {
+  font-size: 42px;
+  line-height: 42px;
+  color: #df8615;
+  background: none;
+}
+
+h1 small {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 small {
+  font-size: 24px;
+}
+
+h3, h4, h5, h6 {
+  line-height: 36px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h3 small {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h4 small {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+h1 .brand {
+    color: #df8615;
+}
+
+article {
+    padding-top: 60px;
+}
+
+article#home {
+    padding: 25px 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 21px;
+}
+
+footer {
+    border-top: 2px solid #df8615;
+}
+
+.footer {
+    padding: 30px 0;
+    background: #ddd;
+    min-width: 940px;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+/* 
+make dropdown thing actually work
+find good code color scheme
+tiny icons for top nav - fix highlight
+change nav images to be part of css #details
+nav highlights - text, image, no backgrounds. light grey then white
+*/
