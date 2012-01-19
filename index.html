@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="container">
-      <!-- Navigation -->
+
       <nav class="topbar" data-dropdown="dropdown" data-scrollspy="scrollspy">
         <div class="topbar-inner">
           <div class="container">
@@ -21,7 +21,6 @@
             <ul class="nav">
               <li><a href="#details"><img class="nav-icon" src="images/gears-light-small.png"/>Details</a></li>
               <li><a href="#install"><img class="nav-icon" src="images/disc-light-small.png"/>Install</a></li>
-              <!-- <li><a href="#examples">Example Code</a></li> -->
               <li class="dropdown" data-scrollspy="scrollspy">
                 <a href="#" class="dropdown-toggle"><img class="nav-icon" src="images/wrench-light-small.png"/>How to</a>
                 <ul class="dropdown-menu"> 
@@ -35,7 +34,7 @@
           </div>
         </div>
       </nav>
-      <!-- Home -->
+
       <article id="home">
         <div class="row show-grid">
           <div class="span16">
@@ -44,32 +43,63 @@
             </p>
           </div>
         </div>
-          <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
-            <div class="row show-grid">
-              <div class="span12 offset2">
-                <p>A few lines on what rosnodejs is. Should assume very little prior knowledge. This should advertise the framework. A few lines on what rosnodejs is. Should assume very little prior knowledge. This should advertise the framework.</p>         
-              </div>
-            </div>
-      </article>
-      <!-- Details -->
-      <article id="details">
-        <h1>Details</h1>
+        <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
         <div class="row show-grid">
-          <div class="span5 offset1">
-            <h2>What is ROS?</h2>
-            <p>This paragraph is about ROS. A few paragraphs explaining what rosnodejs. Should explain ROS first. Then rosnodejs. Then the benefits of using JavaScript for robots.</p>
+          <div class="span12 offset2">
+            <p>Rosnodejs is a node.js module that let's you use JavaScript to
+            interact with the <a
+              href="http://www.ros.org/wiki/ROS/Introduction">Robot Operating
+              System</a>, an open-source robot framework used by many of the top
+            universities and research programs around the world.</p>
+            <p>Perform a range of robotic tasks, from controlling the motors on
+            an Arduino to reading Kinect sensor data to accessing cutting edge
+            robotic algorithms using JavaScript and node.js.</p>
+            <p>The goal is to make the field of robotics more accessible to the
+            countless intelligent web developers out there.</p>
           </div>
-          <div class="span5">
-            <h2>And rosnodejs?</h2>
-            <p>This paragraph is about rosnodejs. A few paragraphs explaining what rosnodejs. Should explain ROS first. Then rosnodejs. Then the benefits of using JavaScript for robots.</p>
-          </div>
-          <div class="span5">
-            <h2>Why JavaScript?</h2>
-            <p>This paragraph explains the benefits of using Javascript. A few paragraphs explaining what rosnodejs. Should explain ROS first. Then rosnodejs. Then the benefits of using JavaScript for robots.</p>
+        </div>
+        <div class="row">
+          <h2>Where to go from here?</h2>
+          <div class="row show-grid">
+            <div class="span6 offset1">
+              <h3>Learn about robots</h3>
+              <p>Read a quick introduction on how to get a robot as well as what's
+              involved in programming robots today. Covers the Robot Operating
+              System in more detail too.</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div>
+            <div class="span6">
+              <h3>Learn about rosnodejs</h3>
+              <p>If you understand ROS already, read how rosnodejs fits into the
+              picture. Includes code samples and details on using rosnodejs for
+              telepresence.</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div>
           </div>
         </div>
       </article>
-      <!-- Installation instructions -->
+
+      <article id="robot_introdution">
+        <h1>New to robots?</h1>
+        <p>Good!</p>
+        <p>Getting involved in robots can be intimidating. But if you're sick of
+        the 2D world of web development and want to make something tangible,
+        this is the place to start.</p>
+        <p>There's two things you'll probably want to know when starting in
+        robotics: How to make or buy a robot and How to program it.</p>
+        <h3>How to make or buy a robot</h3>
+        <p>Something something</p>
+        <h3>How to program it</h3>
+        <p>Something something</p>
+      </article>
+
+      <article id="rosnodejs_introdution">
+        <h1>How does rosnodejs work?</h1>
+        <p>Give overview of what rosnodejs is, then mention links to installing
+        and example code. Also talk about advantages of rosnodejs for ROS.
+        Include telepresence discussion. Also mention how code samples work.</p>
+      </article>
+
       <article id="install">
         <h1>Install</h1>
         <div class="row show-grid">
@@ -78,7 +108,7 @@
           </div>
         </div>
       </article>
-      <!-- Example code/Tests -->
+
       <article id="how-to-program">
         <section class="suite">
           <h1>How to use rosnodejs</h1>
@@ -331,6 +361,7 @@
           </div>
         </section>
       </article>
+
       <article id="how-to-web-server">
         <h1>Turn your robot into a web server</h1>
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
@@ -338,7 +369,8 @@
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-      </article>
+        </article>
+
       <article id="how-to-web-app">
         <h1>Create a web app to control your robot</h1>
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
@@ -348,7 +380,9 @@
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
         <p>I need to get the content for this. Will be code samples like the other how tos.</p>
       </article>
-    </div>  
+
+    </div>
+
     <footer class="footer">
       <div class="container">
         <p>
@@ -356,5 +390,6 @@
         </p>
       </div>
     </footer>
+
   </body>
 </html>
