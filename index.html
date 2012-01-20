@@ -7,8 +7,6 @@
     <script src="javascript/bootstrap-scrollspy.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Inika:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Basic' rel='stylesheet' type='text/css'>
     <title>rosnodejs - Program robots with JavaScript</title>
   </head>
   <body>
@@ -86,9 +84,36 @@
         the 2D world of web development and want to make something tangible,
         this is the place to start.</p>
         <p>There's two things you'll probably want to know when starting in
-        robotics: How to make or buy a robot and How to program it.</p>
-        <h3>How to make or buy a robot</h3>
-        <p>Something something</p>
+        robotics: How to get a robot and how to program it.</p>
+        <h3>How to get a robot</h3>
+        <p>Many of the tutorials from <a
+          href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
+        or a <a
+          href="https://www.google.com/search?q=how+to+build+a+robot">quick
+          Google search</a>
+        provide excellent step-by-step instructions on creating a basic moving
+        robot that can do something simple, like avoid a wall.</p>
+        <p>Unfortunately, most of these robots are not powerful enough to run
+        many of the latest robot algorithms, like processing Kinect data or
+        mapping the environment. A computer is usually needed for these tasks.
+        This performance requirement leaves a couple options: building a basic
+        robot from one of the tutorials (ideally containing an <a
+          href="http://arduino.cc">Arduino microcontroller</a>) and connecting a
+        computer to it or buying a robot platform.</p>
+        <p>Since the Robot Operating System (ROS) &mdash; discussed in the next
+        section &mdash; supports <a
+          href="http://www.ros.org/wiki/rosserial_arduino">interfacing with the
+          Arduino</a>, a cheaper Arduino-based robot could be connected to a
+        computer and offload the computing to the ROS platform.</p>
+        <p>For those not interested in mucking around with circuits and
+        hardware, the <a href="http://www.turtlebot.com/">TurtleBot</a> makes
+        for a complete robot platform ready to program. It's basically a Roomba,
+        Kinect, and computer nicely packaged together. The advantage of using a
+        standardized robot platform is the community support. For example,
+        rosnodejs has been tested on the TurtleBot platform.</p>
+        <p>The key decision you need to make is build or buy a robot. Just
+        remember that if your goal is to run something like ROS and rosnodejs,
+        you'll need a computer for the robot.</p>
         <h3>How to program it</h3>
         <p>Something something</p>
       </article>
