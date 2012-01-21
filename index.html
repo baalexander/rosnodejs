@@ -50,8 +50,8 @@
               System</a>, an open-source robot framework used by many of the top
             universities and research programs around the world.</p>
             <p>Perform a range of robotic tasks, from controlling the motors on
-            an Arduino to reading Kinect sensor data to accessing cutting edge
-            robotic algorithms using JavaScript and node.js.</p>
+            an Arduino to processing Kinect sensor data using JavaScript and
+            node.js.</p>
             <p>The goal is to make the field of robotics more accessible to the
             countless intelligent web developers out there.</p>
           </div>
@@ -61,9 +61,8 @@
           <div class="row show-grid">
             <div class="span6 offset1">
               <h3>Learn about robots</h3>
-              <p>Read a quick introduction on how to get a robot as well as what's
-              involved in programming robots today. Covers the Robot Operating
-              System in more detail too.</p>
+              <p>Read a quick introduction on how to get a robot as well as
+              what's involved in programming robots today.</p>
               <p><a class="btn" href="#">View details »</a></p>
             </div>
             <div class="span6">
@@ -83,28 +82,28 @@
         <p>Getting involved in robots can be intimidating. But if you're sick of
         the 2D world of web development and want to make something tangible,
         this is the place to start.</p>
-        <p>There's two things you'll probably want to know when starting in
+        <p>There are two things you'll probably want to know when starting in
         robotics: How to get a robot and how to program it.</p>
         <h3>How to get a robot</h3>
         <p>Many of the tutorials from <a
           href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
         or a <a
-          href="https://www.google.com/search?q=how+to+build+a+robot">quick
+          href="https://www.google.com/search?q=how+to+build+a+robot">
           Google search</a>
         provide excellent step-by-step instructions on creating a basic moving
         robot that can do something simple, like avoid a wall.</p>
         <p>Unfortunately, most of these robots are not powerful enough to run
-        many of the latest robot algorithms, like processing Kinect data or
-        mapping the environment. A computer is usually needed for these tasks.
-        This performance requirement leaves a couple options: building a basic
-        robot from one of the tutorials (ideally containing an <a
-          href="http://arduino.cc">Arduino microcontroller</a>) and connecting a
-        computer to it or buying a robot platform.</p>
+        the latest robot algorithms, like processing Kinect data to map the
+        environment. A computer is usually needed for these tasks.  This
+        performance requirement leaves a couple options: building a basic robot
+        from one of the tutorials and connecting a computer to it or buying a
+        robot platform.</p>
         <p>Since the Robot Operating System (ROS) &mdash; discussed in the next
         section &mdash; supports <a
           href="http://www.ros.org/wiki/rosserial_arduino">interfacing with the
-          Arduino</a>, a cheaper Arduino-based robot could be connected to a
-        computer and offload the computing to the ROS platform.</p>
+          Arduino</a>, a cheaper <a href="http://arduino.cc">Arduino
+          microcontroller</a> robot could be connected to a computer and offload
+        the computing to the ROS platform.</p>
         <p>For those not interested in mucking around with circuits and
         hardware, the <a href="http://www.turtlebot.com/">TurtleBot</a> makes
         for a complete robot platform ready to program. It's basically a Roomba,
@@ -115,7 +114,8 @@
         remember that if your goal is to run something like ROS and rosnodejs,
         you'll need a computer for the robot.</p>
         <h3>How to program it</h3>
-        <p>Something something</p>
+        <p>Introduce ROS. Talk about the graph and how sweet it is. Point to
+        turotials.</p>
       </article>
 
       <article id="rosnodejs_introdution">
@@ -129,7 +129,21 @@
         <h1>Install</h1>
         <div class="row show-grid">
           <div class="span12 offset2">
-            <p>Explain how to install ros, rosnodejs, rosmsgjs, and rosserverjs.</p>
+            <p>Before rosnodejs can be installed, node.js and ROS need to be set
+            up on the machine first.</p>
+            <ul>
+              <li><a href="http://nodejs.org/#download">Install Node.js and NPM</a>
+              (0.6+ and 1.0+)</li>
+              <li><a href="http://www.ros.org/wiki/ROS/Installation">Install
+                ROS</a> (Electric Emys+)</li>
+            </ul>
+            <p>Rosnodejs is an NPM module. Simply create a directory for the
+            project (which will act as a <a
+              href="http://www.ros.org/wiki/Packages">ROS package</a>) and
+            install rosnodejs with <code>npm install rosnodejs</code> in that
+            directory.</p>
+            <p>ROS nodes can then be created as node.js modules, using
+            <code>var ros = require('rosnodejs')</code>.</p>
           </div>
         </div>
       </article>
