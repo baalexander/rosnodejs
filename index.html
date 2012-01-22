@@ -3,10 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascript/bootstrap-dropdown.js"></script>
-    <script src="javascript/bootstrap-scrollspy.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="./js/bootstrap-dropdown.js"></script>
+    <script src="./js/bootstrap-scrollspy.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/zenburn.css" />
     <title>rosnodejs - Program robots with JavaScript</title>
   </head>
   <body>
@@ -191,7 +196,7 @@
               <div class="span12 offset2">
                 <dl>
                   <dt>to create a node</dt>
-                  <dd><pre><code>
+                  <dd><pre><code class="javascript">
         // The Robot Operating System is a graph of nodes. Each node is programmed
         // to perform a task. For example, a node may transmit sensor data from a
         // Kinect (publish a message) while another node listens for Kinect sensor
