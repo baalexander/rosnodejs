@@ -114,8 +114,44 @@
         remember that if your goal is to run something like ROS and rosnodejs,
         you'll need a computer for the robot.</p>
         <h3>How to program it</h3>
-        <p>Introduce ROS. Talk about the graph and how sweet it is. Point to
-        turotials.</p>
+        <p>One of the top frameworks to program robots with today is the <a
+          href="http://ros.org">Robot Operating System</a> (ROS). The beauty of
+        ROS lies in its decoupled architecture. Everything is a node and nodes
+        communicate by publishing and subscribing to messages.</p>
+        <p>An example should clarify:</p>
+        <p>Let's say there's a node dedicated to processing Kinect sensor data.
+        The node publishes a message type containing image and depth
+        information. Another node would listen for this message type and
+        interpret the 3D data. The interpreting node could notice there's a wall
+        coming up and publish a direction message type saying move back.
+        Finally, there's a node &mdash; perhaps running on an Arduino &mdash;
+        subscribing to direction message types. The node receives the message
+        with directions to move back and rotates its motors backwards.</p>
+        <p>The decoupling design has a couple distinct advantages.</p>
+        <p>One advantage is that any part of the robot can be replaced. For
+        example, a Kinect sensor may be replaced with a newer sensor. As long as
+        this sensor publishes the same message type, none of the other nodes
+        will notice a difference.</p>
+        <p>Another important advantage of decoupling and open-source is that
+        anyone can contribute a node or a package of nodes. A team at one
+        company may actively be working on nodes related to the Kinect while
+        another team at a university is creating a stack for the Arduino.
+        There's hundreds of packages in the ROS ecosystem that will perform many
+        robotic operations for you. And most of these packages are open-source
+        for you to contribute back to.</p>
+        <p>Now, how to get started?</p>
+        <p>The <a href="http://ros.org">documentation on ros.org</a> is actually
+        quite extensive, up-to-date, and usually written with few assumptions of
+        prior experience.</p>
+        <p>The <a href="http://www.ros.org/wiki/ROS/Tutorials">Beginner Level
+          Tutorials</a> are an exceptional source, walking you through
+        everything from installing ROS to making your first package and node.
+        These tutorials are the best way to get started.</p>
+        <p>If you follow the tutorials, you'll notice the code samples are in
+        Python or C++. That's because there's a ROS client library for Python
+        and a client library for C++. A client library is a set of libraries for
+        a language that enables use of that language to interact with ROS.
+        Rosnodejs is a client library for JavaScript.</p>
       </article>
 
       <article id="rosnodejs_introdution">
