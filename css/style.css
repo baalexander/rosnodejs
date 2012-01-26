@@ -1,14 +1,18 @@
+/* 
+make dropdown thing actually work
+find good code color scheme
+tiny icons for top nav - fix highlight
+change nav images to be part of css #details
+nav highlights - text, image, no backgrounds. light grey then white
+*/
+
+
 body {
     background: #f1f1f1;
     padding-top: 50px;  
-/*    font-family: 'Basic', "Helvetica Neue", Helvetica, Arial, sans-serif;
-*/}
+}
 
-/* .topbar-inner, .topbar .fill {
-    background-color: #404040;
-     background-image: none;
-}*/
-
+/* Navigation */
 .topbar .brand {
     font-size: 24px;
     padding: 10px 20px 12px;
@@ -19,15 +23,41 @@ body {
     padding:0 8px;
 }
 
-/*h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inika', serif;
-}*/
+/*
+.topbar h3 a:hover, .topbar .brand:hover, .topbar ul .active > a {
+  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  text-decoration: none;
+}
 
+.topbar div > ul .active > a, .nav .active > a {
+  background-color: #222;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.topbar div > ul .menu-dropdown .active a,
+.nav .menu-dropdown .active a,
+.topbar div > ul .dropdown-menu .active a,
+.nav .dropdown-menu .active a {
+  color: #ffffff;
+}
+
+.tabs .active > a, .tabs .active > a:hover {
+    color: #808080;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+*/
+
+
+/* Headers */
 h1 {
     font-size: 36px;
     line-height: 42px;
-/*    border-bottom: 2px solid #df8615;
-*/}
+}
 
 h1.brand {
   font-size: 42px;
@@ -80,12 +110,10 @@ h1 .brand {
     color: #df8615;
 }
 
+
+/* Structure */
 article {
     padding-top: 60px;
-}
-
-article#home {
-    padding: 25px 0;
 }
 
 p {
@@ -107,6 +135,20 @@ footer p {
     font-size: 12px;
 }
 
+
+/* Links */
+a {
+    color: #df8615;
+    text-decoration: none;
+}
+
+a:hover, a:visited {
+    color: #808080;
+    text-decoration: none;
+}
+
+
+/* Code */
 pre {
   padding: 0;
 }
@@ -117,10 +159,3 @@ pre code {
   font-size: 14px;
 }
 
-/* 
-make dropdown thing actually work
-find good code color scheme
-tiny icons for top nav - fix highlight
-change nav images to be part of css #details
-nav highlights - text, image, no backgrounds. light grey then white
-*/

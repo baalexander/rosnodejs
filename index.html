@@ -22,7 +22,8 @@
           <div class="container">
             <a class="brand" href="#home">rosnodejs</a>
             <ul class="nav">
-              <li><a href="#details"><img class="nav-icon" src="images/gears-light-small.png"/>Details</a></li>
+              <li><a href="#robot_introduction"><img class="nav-icon" src="images/robot-light-small.png"/>Intro to Robotics</a></li>
+              <li><a href="#rosnodejs_introduction"><img class="nav-icon" src="images/js-light-small.png"/>JS Basics</a></li>
               <li><a href="#install"><img class="nav-icon" src="images/disc-light-small.png"/>Install</a></li>
               <li class="dropdown" data-scrollspy="scrollspy">
                 <a href="#" class="dropdown-toggle"><img class="nav-icon" src="images/wrench-light-small.png"/>How to</a>
@@ -49,7 +50,7 @@
         <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
         <div class="row show-grid">
           <div class="span12 offset2">
-            <p>Rosnodejs is a node.js module that let's you use JavaScript to
+            <p>Rosnodejs is a node.js module that lets you use JavaScript to
             interact with the <a
               href="http://www.ros.org/wiki/ROS/Introduction">Robot Operating
               System</a>, an open-source robot framework used by many of the top
@@ -64,139 +65,147 @@
         <div class="row">
           <h2>Where to go from here?</h2>
           <div class="row show-grid">
-            <div class="span6 offset1">
+            <div class="span6 offset2">
               <h3>Learn about robots</h3>
               <p>Read a quick introduction on how to get a robot as well as
               what's involved in programming robots today.</p>
-              <p><a class="btn" href="#">View details »</a></p>
+              <p><a class="btn" href="#robot_introduction">More on robots »</a></p>
             </div>
-            <div class="span6">
+            <div class="span6 offset1">
               <h3>Learn about rosnodejs</h3>
               <p>If you understand ROS already, read how rosnodejs fits into the
               picture. Includes code samples and details on using rosnodejs for
               telepresence.</p>
-              <p><a class="btn" href="#">View details »</a></p>
+              <p><a class="btn" href="#rosnodejs_introduction">More on rosnodejs »</a></p>
             </div>
           </div>
         </div>
       </article>
 
-      <article id="robot_introdution">
-        <h1>New to robots?</h1>
-        <p>Good!</p>
-        <p>Getting involved in robots can be intimidating. But if you're sick of
-        the 2D world of web development and want to make something tangible,
-        this is the place to start.</p>
-        <p>There are two things you'll probably want to know when starting in
-        robotics: How to get a robot and how to program it.</p>
-        <h3>How to get a robot</h3>
-        <p>Many of the tutorials from <a
-          href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
-        or a <a
-          href="https://www.google.com/search?q=how+to+build+a+robot">
-          Google search</a>
-        provide excellent step-by-step instructions on creating a basic moving
-        robot that can do something simple, like avoid a wall.</p>
-        <p>Unfortunately, most of these robots are not powerful enough to run
-        the latest robot algorithms, like processing Kinect data to map the
-        environment. A computer is usually needed for these tasks.  This
-        performance requirement leaves a couple options: building a basic robot
-        from one of the tutorials and connecting a computer to it or buying a
-        robot platform.</p>
-        <p>Since the Robot Operating System (ROS) &mdash; discussed in the next
-        section &mdash; supports <a
-          href="http://www.ros.org/wiki/rosserial_arduino">interfacing with the
-          Arduino</a>, a cheaper <a href="http://arduino.cc">Arduino
-          microcontroller</a> robot could be connected to a computer and offload
-        the computing to the ROS platform.</p>
-        <p>For those not interested in mucking around with circuits and
-        hardware, the <a href="http://www.turtlebot.com/">TurtleBot</a> makes
-        for a complete robot platform ready to program. It's basically a Roomba,
-        Kinect, and computer nicely packaged together. The advantage of using a
-        standardized robot platform is the community support. For example,
-        rosnodejs has been tested on the TurtleBot platform.</p>
-        <p>The key decision you need to make is build or buy a robot. Just
-        remember that if your goal is to run something like ROS and rosnodejs,
-        you'll need a computer for the robot.</p>
-        <h3>How to program it</h3>
-        <p>One of the top frameworks to program robots with today is the <a
-          href="http://ros.org">Robot Operating System</a> (ROS). The beauty of
-        ROS lies in its decoupled architecture. Everything is a node and nodes
-        communicate by publishing and subscribing to messages.</p>
-        <p>An example should clarify:</p>
-        <p>Let's say there's a node dedicated to processing Kinect sensor data.
-        The node publishes a message type containing image and depth
-        information. Another node would listen for this message type and
-        interpret the 3D data. The interpreting node could notice there's a wall
-        coming up and publish a direction message type saying move back.
-        Finally, there's a node &mdash; perhaps running on an Arduino &mdash;
-        subscribing to direction message types. The node receives the message
-        with directions to move back and rotates its motors backwards.</p>
-        <p>The decoupling design has a couple distinct advantages.</p>
-        <p>One advantage is that any part of the robot can be replaced. For
-        example, a Kinect sensor may be replaced with a newer sensor. As long as
-        this sensor publishes the same message type, none of the other nodes
-        will notice a difference.</p>
-        <p>Another important advantage of decoupling and open-source is that
-        anyone can contribute a node or a package of nodes. A team at one
-        company may actively be working on nodes related to the Kinect while
-        another team at a university is creating a stack for the Arduino.
-        There's hundreds of packages in the ROS ecosystem that will perform many
-        robotic operations for you. And most of these packages are open-source
-        for you to contribute back to.</p>
-        <p>Now, how to get started?</p>
-        <p>The <a href="http://ros.org">documentation on ros.org</a> is actually
-        quite extensive, up-to-date, and usually written with few assumptions of
-        prior experience.</p>
-        <p>The <a href="http://www.ros.org/wiki/ROS/Tutorials">Beginner Level
-          Tutorials</a> are an exceptional source, walking you through
-        everything from installing ROS to making your first package and node.
-        These tutorials are the best way to get started.</p>
-        <p>If you follow the tutorials, you'll notice the code samples are in
-        Python or C++. That's because there's a ROS client library for Python
-        and a client library for C++. A client library is a set of libraries for
-        a language that enables use of that language to interact with ROS.
-        Rosnodejs is a client library for JavaScript.</p>
+      <article id="robot_introduction">
+        <h1>New to robotics?</h1>
+        <div class="row">
+          <div class="span12 offset2">
+            <p>Good!</p>
+            <p>Getting involved in robots can be intimidating. But if you're sick of
+            the 2D world of web development and want to make something tangible,
+            this is the place to start.</p>
+            <p>There are two things you'll probably want to know when starting in
+            robotics: How to get a robot and how to program it.</p>
+            <h3>How to get a robot</h3>
+            <p>Many of the tutorials from <a
+              href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
+            or a <a
+              href="https://www.google.com/search?q=how+to+build+a+robot">
+              Google search</a>
+            provide excellent step-by-step instructions on creating a basic moving
+            robot that can do something simple, like avoid a wall.</p>
+            <p>Unfortunately, most of these robots are not powerful enough to run
+            the latest robot algorithms, like processing Kinect data to map the
+            environment. A computer is usually needed for these tasks. This
+            performance requirement leaves a couple options: building a basic robot
+            from one of the tutorials and connecting a computer to it or buying a
+            robot platform.</p>
+            <p>Since the Robot Operating System (ROS) &mdash; discussed in the next
+            section &mdash; supports <a
+              href="http://www.ros.org/wiki/rosserial_arduino">interfacing with the
+              Arduino</a>, a cheaper <a href="http://arduino.cc">Arduino
+              microcontroller</a> robot could be connected to a computer and offload
+            the computing to the ROS platform.</p>
+            <p>For those not interested in mucking around with circuits and
+            hardware, the <a href="http://www.turtlebot.com/">TurtleBot</a> makes
+            for a complete robot platform, ready to program. It's basically a Roomba,
+            Kinect, and computer nicely packaged together. The advantage of using a
+            standardized robot platform is the community support. For example,
+            rosnodejs has been tested on the TurtleBot platform.</p>
+            <p>The key decision you need to make is build or buy a robot. Just
+            remember that if your goal is to run something like ROS and rosnodejs,
+            you'll need a computer for the robot.</p>
+            <h3>How to program it</h3>
+            <p>One of the top frameworks to program robots with today is the <a
+              href="http://ros.org">Robot Operating System</a> (ROS). The beauty of
+            ROS lies in its decoupled architecture. Everything is a node and nodes
+            communicate by publishing and subscribing to messages.</p>
+            <p>An example should clarify:<br />
+            Let's say there's a node dedicated to processing Kinect sensor data.
+            The node publishes a message type containing image and depth
+            information. Another node would listen for this message type and
+            interpret the 3D data. The interpreting node could notice there's a wall
+            coming up and publish a direction message type saying move back.
+            Finally, there's a node &mdash; perhaps running on an Arduino &mdash;
+            subscribing to direction message types. The node receives the message
+            with directions to move back and rotates its motors backwards.</p>
+            <p>The decoupling design has a couple distinct advantages. One advantage 
+            is that any part of the robot can be replaced. For example, a Kinect 
+            sensor may be replaced with a newer sensor. As long as this sensor 
+            publishes the same message type, none of the other nodes will notice 
+            a difference.</p>
+            <p>Another important advantage of decoupling and open-source is that
+            anyone can contribute a node or a package of nodes. A team at one
+            company may actively be working on nodes related to the Kinect, while
+            another team at a university is creating a stack for the Arduino.
+            There are hundreds of packages in the ROS ecosystem that will perform many
+            robotic operations for you. And most of these packages are open-source
+            for you to contribute back to.</p>
+            <p>Now, how to get started?</p>
+            <p>The <a href="http://ros.org">documentation on ros.org</a> is actually
+            quite extensive, up-to-date, and usually written with few assumptions of
+            prior experience.</p>
+            <p>The <a href="http://www.ros.org/wiki/ROS/Tutorials">Beginner Level
+            Tutorials</a> are an exceptional source, walking you through
+            everything from installing ROS to making your first package and node.
+            These tutorials are the best way to get started.</p>
+            <p>If you follow the tutorials, you'll notice the code samples are in
+            Python or C++. That's because there are ROS client libraries ROS for Python
+            and C++. A client library is a set of libraries for a language that 
+            enables use of that language to interact with ROS. Rosnodejs is a client 
+            library for JavaScript.</p>
+          </div>
+        </div>
       </article>
 
-      <article id="rosnodejs_introdution">
-      <h1>How does rosnodejs work?</h1>
-        <p>Rosnodejs is a JavaScript <a
-          href="http://www.ros.org/wiki/Client%20Libraries">client library</a>
-        for ROS, which means you can make a Node.js module that interacts with
-        ROS. Rosnodejs is an <a href="http://npmjs.org">NPM module</a> and can
-        be installed and required like any other NPM module.</p>
-        <p>Why use rosnodejs over the excellent Python and C++ client libraries?</p>
-        <p>A few reasons include:</p>
-        <ul>
-          <li>HTTP/TCP/UDP performance. Node.js has strong support for built-in
-          support for HTTP, TCP, and UDP, the basic transport layers used by the
-          Robot Operating System.</li>
-          <li>The rapidly growing Node.js ecosystem. Many libraries like
-          Socket.IO have strong first party support for Node.js</li>
-          <li>Familiarity. Robots are hard enough, write code in what you
-          know.</li>
-        </ul>
-        <p>The big reason to use rosnodejs, however, is when using the web
-        browser. While rosnodejs runs natively on the robot using Node.js, all
-        the core ROS constructs like Node, Publisher, and Subscriber can run
-        natively in the browser. Yep, being cross platform means you can write
-        your ROS code to run in the browser just as easily as running natively
-        on the robot itself. No plug-ins required.</p>
-        <h3>Related projects</h3>
-        <p>A couple of projects are available for different uses of rosnodejs.</p>
-        <p><a href="https://github.com/baalexander/rosmsgjs">rosmsgjs</a> -
-        Generates a file representing all the message definitions for a package.
-        These message types extend Backbone.js models for easier integration in
-        web apps.</p>
-        <p><a href="https://github.com/baalexander/rosserverjs">rosserverjs</a>
-        - Turns your robot into a web server. Provides an Express server to
-        build whatever web app desired. Serves the necessary message definition
-        files as well as the cross platform rosnodejs library.</p>
-        <p>The <a href="#how-to">How To sections</a> provide code examples on
-        using rosnodejs natively on the robot, generating JavaScript files for
-        the message definitions, turning your robot into a web server, and
-        running ROS code in the browser.</p>
+      <article id="rosnodejs_introduction">
+        <div class="row show-grid">
+          <div class="span12 offset2">
+            <h1>How does rosnodejs work?</h1>
+              <p>Rosnodejs is a JavaScript <a
+                href="http://www.ros.org/wiki/Client%20Libraries">client library</a>
+              for ROS, which means you can make a Node.js module that interacts with
+              ROS. Rosnodejs is an <a href="http://npmjs.org">NPM module</a> and can
+              be installed and required like any other NPM module.</p>
+              <p>Why use rosnodejs over the excellent Python and C++ client libraries?</p>
+              <p>A few reasons include:</p>
+              <ul>
+                <li>HTTP/TCP/UDP performance. Node.js has strong support for built-in
+                support for HTTP, TCP, and UDP, the basic transport layers used by the
+                Robot Operating System.</li>
+                <li>The rapidly growing Node.js ecosystem. Many libraries like
+                Socket.IO have strong first party support for Node.js</li>
+                <li>Familiarity. Robots are hard enough, write code in what you
+                know.</li>
+              </ul>
+              <p>The big reason to use rosnodejs, however, is when using the web
+              browser. While rosnodejs runs natively on the robot using Node.js, all
+              the core ROS constructs like Node, Publisher, and Subscriber can run
+              natively in the browser. Yep, being cross platform means you can write
+              your ROS code to run in the browser just as easily as running natively
+              on the robot itself. No plug-ins required.</p>
+              <h3>Related projects</h3>
+              <p>A couple of projects are available for different uses of rosnodejs.</p>
+              <p><a href="https://github.com/baalexander/rosmsgjs">rosmsgjs</a> -
+              Generates a file representing all the message definitions for a package.
+              These message types extend Backbone.js models for easier integration in
+              web apps.</p>
+              <p><a href="https://github.com/baalexander/rosserverjs">rosserverjs</a>
+              - Turns your robot into a web server. Provides an Express server to
+              build whatever web app desired. Serves the necessary message definition
+              files as well as the cross platform rosnodejs library.</p>
+              <p>The <a href="#how-to">How To sections</a> provide code examples on
+              using rosnodejs natively on the robot, generating JavaScript files for
+              the message definitions, turning your robot into a web server, and
+              running ROS code in the browser.</p>
+          </div>
+        </div>
       </article>
 
       <article id="install">
@@ -476,22 +485,34 @@ ros.createNode({ name: 'motor' }, function(error, node) {
       </article>
 
       <article id="how-to-web-server">
-        <h1>Turn your robot into a web server</h1>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        </article>
+        <section class="suite">
+          <h1>Turn your robot into a web server</h1>
+            <div class="row show-grid">
+              <div class="span12 offset2">
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+              </div>
+            </div>
+         </section> 
+      </article>
 
       <article id="how-to-web-app">
-        <h1>Create a web app to control your robot</h1>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-        <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+        <section class="suite">
+          <h1>Create a web app to control your robot</h1>
+            <div class="row show-grid">
+              <div class="span12 offset2">
+                <p>I need to get the content for this. Will be code samples like the other how tos. I need to get the content for this. Will be code samples like the other how tos. I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+                <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+              </div>
+            </div>
+        </section> 
       </article>
 
     </div>
