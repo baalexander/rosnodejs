@@ -160,10 +160,43 @@
       </article>
 
       <article id="rosnodejs_introdution">
-        <h1>How does rosnodejs work?</h1>
-        <p>Give overview of what rosnodejs is, then mention links to installing
-        and example code. Also talk about advantages of rosnodejs for ROS.
-        Include telepresence discussion. Also mention how code samples work.</p>
+      <h1>How does rosnodejs work?</h1>
+        <p>Rosnodejs is a JavaScript <a
+          href="http://www.ros.org/wiki/Client%20Libraries">client library</a>
+        for ROS, which means you can make a Node.js module that interacts with
+        ROS. Rosnodejs is an <a href="http://npmjs.org">NPM module</a> and can
+        be installed and required like any other NPM module.</p>
+        <p>Why use rosnodejs over the excellent Python and C++ client libraries?</p>
+        <p>A few reasons include:</p>
+        <ul>
+          <li>HTTP/TCP/UDP performance. Node.js has strong support for built-in
+          support for HTTP, TCP, and UDP, the basic transport layers used by the
+          Robot Operating System.</li>
+          <li>The rapidly growing Node.js ecosystem. Many libraries like
+          Socket.IO have strong first party support for Node.js</li>
+          <li>Familiarity. Robots are hard enough, write code in what you
+          know.</li>
+        </ul>
+        <p>The big reason to use rosnodejs, however, is when using the web
+        browser. While rosnodejs runs natively on the robot using Node.js, all
+        the core ROS constructs like Node, Publisher, and Subscriber can run
+        natively in the browser. Yep, being cross platform means you can write
+        your ROS code to run in the browser just as easily as running natively
+        on the robot itself. No plug-ins required.</p>
+        <h3>Related projects</h3>
+        <p>A couple of projects are available for different uses of rosnodejs.</p>
+        <p><a href="https://github.com/baalexander/rosmsgjs">rosmsgjs</a> -
+        Generates a file representing all the message definitions for a package.
+        These message types extend Backbone.js models for easier integration in
+        web apps.</p>
+        <p><a href="https://github.com/baalexander/rosserverjs">rosserverjs</a>
+        - Turns your robot into a web server. Provides an Express server to
+        build whatever web app desired. Serves the necessary message definition
+        files as well as the cross platform rosnodejs library.</p>
+        <p>The <a href="#how-to">How To sections</a> provide code examples on
+        using rosnodejs natively on the robot, generating JavaScript files for
+        the message definitions, turning your robot into a web server, and
+        running ROS code in the browser.</p>
       </article>
 
       <article id="install">
