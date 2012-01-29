@@ -29,16 +29,15 @@
         </li>
         <li>
           <a href="#rosnodejs_introduction"><img class="nav-icon"
-            src="images/js-light-small.png"/>JS Basics</a>
-        </li>
-        <li>
-          <a href="#install"><img class="nav-icon"
-            src="images/disc-light-small.png"/>Install</a>
+            src="images/js-light-small.png"/>About Rosnodejs</a>
         </li>
         <li class="dropdown" data-scrollspy="scrollspy">
           <a href="#" class="dropdown-toggle"><img class="nav-icon"
             src="images/wrench-light-small.png"/>How to</a>
           <ul class="dropdown-menu"> 
+            <li>
+              <a href="#install">Install</a>
+            </li>
             <li>
               <a href="#how-to-program">Program your robot with JavaScript</a>
             </li>
@@ -315,7 +314,15 @@
   <section class="suite">
     <h1>How to use rosnodejs</h1>
     <dl>
-    <dt>to create a node</dt>
+    <dt>create a package</dt>
+    <dd><pre><code class="javascript">
+// After installing ROS, creating a new rosnodejs project is similar to creating
+// any new ROS package.
+
+// For more information:
+//  * ROS packages - http://www.ros.org/wiki/ROS/Tutorials/CreatingPackage
+    </code></pre></dd>
+    <dt>create a node</dt>
     <dd><pre><code class="javascript">
 // The Robot Operating System is a graph of nodes. Each node is programmed
 // to perform a task. For example, a node may transmit sensor data from a
@@ -348,7 +355,7 @@ node.subscribers.length.should.equal(0)
 
 done(error)
 })</code></pre></dd>
-    <dt>to create a message</dt>
+    <dt>create a message</dt>
     <dd><pre><code>
 // The message is one of the fundamental medium for nodes to communicate
 // with each other in ROS.
@@ -392,7 +399,7 @@ message.get('type').should.equal('std_msgs/String')
 // The MD5 sum is the hash of the message fields to verify with other nodes
 // that this is the correction version of the message type.
 message.get('md5sum').should.equal('992ce8a1687cec8c8bd883ec73ca41d1')</code></pre></dd>
-    <dt>to talk to other nodes</dt>
+    <dt>talk to other nodes</dt>
     <dd><pre><code>
 // A node talks to other nodes by publishing messages for a topic. The nodes
 // interested in the messages subscribe to the same topic. A node that
@@ -464,7 +471,7 @@ done(error)
 })
 })
 })</code></pre></dd>
-    <dt>to listen to other nodes</dt>
+    <dt>listen to other nodes</dt>
     <dd><pre><code>
 // ROS uses a publish/subscribe method for nodes, where a node will publish
 // messages on a topic and other nodes can subscribe to that topic to
