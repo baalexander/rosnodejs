@@ -129,13 +129,21 @@
       publisher.save(null, {
         // On success, adds the publisher to the node's list and returns the
         // publisher in the callback.
-        success: function(data) {
+        success: function(model, response) {
           that.publishers.add(publisher)
           callback(null, publisher)
         }
         // Returns any error from registering the publisher.
-      , error: function(jqXHR, textStatus, errorThrown) {
-          callback(errorThrown)
+      , error: function(model, response) {
+          var error = null
+          try {
+            var errorValues = JSON.parse(response.responseText)
+            error = new Error(errorValues.message);
+          }
+          catch (e) {
+            error = new Error('Failed to create publisher.')
+          }
+          callback(error)
         }
       })
     }
