@@ -85,7 +85,7 @@
   <div class="row">
     <h2>Where to go from here?</h2>
     <div class="row show-grid">
-      <div class="span6">
+      <div class="span-one-third">
         <h3>Learn about robots</h3>
         <p>
           Read a quick introduction on how to get a robot as well as what's
@@ -95,12 +95,21 @@
           <a class="btn" href="#">View details »</a>
         </p>
       </div>
-      <div class="span6">
+      <div class="span-one-third">
         <h3>Learn about rosnodejs</h3>
         <p>
           If you understand ROS already, read how rosnodejs fits into the
-          picture.  Includes code samples and details on using rosnodejs for
-          telepresence.
+          picture.
+        </p>
+        <p>
+          <a class="btn" href="#">View details »</a>
+      </p>
+      </div>
+      <div class="span-one-third">
+        <h3>Learn how to use</h3>
+        <p>
+          See code examples on creating a rosnodejs project, turning your robot
+          into a web server, and creating a telepresence web app.
         </p>
         <p>
           <a class="btn" href="#">View details »</a>
@@ -111,10 +120,7 @@
 </article>
 
 <article id="robot_introdution">
-  <h1>New to robots?</h1>
-  <p>
-    Good!
-  </p>
+  <h1>Introduction to Robotics</h1>
   <p>
     Getting involved in robots can be intimidating. But if you're sick of the 2D
     world of web development and want to make something tangible, this is the
@@ -221,7 +227,7 @@
 </article>
 
 <article id="rosnodejs_introdution">
-  <h1>How does rosnodejs work?</h1>
+  <h1>About rosnodejs</h1>
   <p>
     Rosnodejs is a JavaScript <a
       href="http://www.ros.org/wiki/Client%20Libraries">client library</a> for
@@ -281,33 +287,31 @@
 </article>
 
 <article id="install">
-  <h1>Install</h1>
-  <div class="row show-grid">
-    <p>
-      Before rosnodejs can be installed, node.js and ROS need to be set
-      up on the machine first.
-    </p>
-    <ul>
-      <li>
-        <a href="http://nodejs.org/#download">Install Node.js and NPM</a> (0.6+
-        and 1.0+)
-      </li>
-      <li>
-        <a href="http://www.ros.org/wiki/ROS/Installation">Install ROS</a>
-        (Electric Emys+)
-      </li>
-    </ul>
-    <p>
-      Rosnodejs is an NPM module. Simply create a directory for the project
-      (which will act as a <a href="http://www.ros.org/wiki/Packages">ROS
-        package</a>) and install rosnodejs with <code>npm install
-        rosnodejs</code> in that directory.
-    </p>
-    <p>
-      ROS nodes can then be created as node.js modules, using <code>var ros =
-        require('rosnodejs')</code>.
-    </p>
-  </div>
+  <h1>How to install</h1>
+  <p>
+    Before rosnodejs can be installed, node.js and ROS need to be set
+    up on the machine first.
+  </p>
+  <ul>
+    <li>
+      <a href="http://nodejs.org/#download">Install Node.js and NPM</a> (0.6+
+      and 1.0+)
+    </li>
+    <li>
+      <a href="http://www.ros.org/wiki/ROS/Installation">Install ROS</a>
+      (Electric Emys+)
+    </li>
+  </ul>
+  <p>
+    Rosnodejs is an NPM module. Simply create a directory for the project
+    (which will act as a <a href="http://www.ros.org/wiki/Packages">ROS
+      package</a>) and install rosnodejs with <code>npm install
+      rosnodejs</code> in that directory.
+  </p>
+  <p>
+    ROS nodes can then be created as node.js modules, using <code>var ros =
+      require('rosnodejs')</code>.
+  </p>
 </article>
 
 <article id="how-to-program">
@@ -568,22 +572,29 @@ should.not.exist(error)
 </article>
 
 <article id="how-to-web-server">
-  <h1>Turn your robot into a web server</h1>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  </article>
+  <section class="suite">
+    <h1>How to turn your robot into a web server</h1>
+    <dl>
+    <dt>create a package</dt>
+    <dd><pre><code class="javascript">
+// After installing ROS, creating a new rosnodejs project is similar to creating
+// any new ROS package.
+    </code></pre></dd>
+    </dl>
+  </section>
+</article>
 
 <article id="how-to-web-app">
-  <h1>Create a web app to control your robot</h1>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
-  <p>I need to get the content for this. Will be code samples like the other how tos.</p>
+  <section class="suite">
+    <h1>How to create a telepresence web app</h1>
+    <dl>
+    <dt>create a package</dt>
+    <dd><pre><code class="javascript">
+// After installing ROS, creating a new rosnodejs project is similar to creating
+// any new ROS package.
+    </code></pre></dd>
+    </dl>
+  </section>
 </article>
 
 </div>
