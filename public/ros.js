@@ -171,13 +171,21 @@
       subscriber.save(null, {
         // On success, adds the subscriber to the node's list and returns the
         // subscriber in the callback.
-        success: function(data) {
+        success: function(model, response) {
           that.subscribers.add(subscriber)
           callback(null, subscriber)
         }
         // Returns any error from registering the subscriber.
-      , error: function(jqXHR, textStatus, errorThrown) {
-          callback(errorThrown)
+      , error: function(model, response) {
+          var error = null
+          try {
+            var errorValues = JSON.parse(response.responseText)
+            error = new Error(errorValues.message);
+          }
+          catch (e) {
+            error = new Error('Failed to create subscriber.')
+          }
+          callback(error)
         }
       })
     }
