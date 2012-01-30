@@ -1,6 +1,5 @@
 /* 
 make dropdown thing actually work
-find good code color scheme
 tiny icons for top nav - fix highlight
 change nav images to be part of css #details
 nav highlights - text, image, no backgrounds. light grey then white
@@ -23,35 +22,6 @@ body {
     padding:0 8px;
 }
 
-/*
-.topbar h3 a:hover, .topbar .brand:hover, .topbar ul .active > a {
-  background-color: #333;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.topbar div > ul .active > a, .nav .active > a {
-  background-color: #222;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.topbar div > ul .menu-dropdown .active a,
-.nav .menu-dropdown .active a,
-.topbar div > ul .dropdown-menu .active a,
-.nav .dropdown-menu .active a {
-  color: #ffffff;
-}
-
-.tabs .active > a, .tabs .active > a:hover {
-    color: #808080;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
-    cursor: default;
-}
-*/
-
 
 /* Headers */
 h1 {
@@ -72,7 +42,7 @@ h1 small {
 
 h2 {
   font-size: 30px;
-  line-height: 36px;
+  line-height: 42px;
 }
 h2 small {
   font-size: 24px;
