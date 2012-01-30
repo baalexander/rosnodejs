@@ -24,6 +24,7 @@
 , "devDependencies" : {
     "mocha"  : "0.5.x"
   , "should" : "0.3.x"
+  , "rimraf" : "2.0.x"
   }
 , "engines" : {
     "node" : ">=0.6", "npm" : ">=1.0.0"

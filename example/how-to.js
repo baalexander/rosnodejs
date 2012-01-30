@@ -1,12 +1,53 @@
 var exec          = require('child_process').exec
+  , fs            = require('fs')
   , should        = require('should')
+  , rimraf        = require('rimraf')
   , ros           = require('../lib/rosnode')
   , std_msgs      = require('./std_msgs')
   , geometry_msgs = require('./geometry_msgs')
 
 describe('How to use rosnodejs', function() {
 
-  it('to create a node', function(done) {
+  it('create a package', function(done) {
+    // Software in ROS is organized in packages. A package can be a collection
+    // of ROS nodes, data files, even third-party libraries. There are hundreds
+    // of packages people have provided for ROS, ranging from object
+    // recognition to localization.
+    //
+    // After installing ROS, creating a new rosnodejs project is similar to
+    // creating any new ROS package. ROS provides the `roscreate-pkg` command
+    // to begin.
+    //
+    // For more information:
+    //  * Create a package - http://www.ros.org/wiki/ROS/Tutorials/CreatingPackage
+    //  * List of packages - http://www.ros.org/browse/list.php
+
+    // Create a ROS package named "how_to".
+    var createPackage = 'roscreate-pkg how_to'
+    var child = exec(createPackage, function(error, stdout, stderr) {
+      should.not.exist(error)
+
+      // The manifest.xml file is a specification file for the package,
+      // describing compilation tools, dependencies, authors, and more.
+      path.exists(__dirname + '/how_to/manifest.xml', function (exists) {
+        exists.should.be.true
+
+        // The JavaScript ROS nodes should go in a "lib" or "js" directory in
+        // the package. For example, ./how_to/js/listener.js could contain a
+        // ROS node named listener.
+
+        // Rosnodejs can be included like any NPM module with:
+        // `npm install rosnodejs`.
+
+        // Clean up package. Rimraf is an rm -rf module for node.
+        rimraf(__dirname + '/how_to', function(error) {
+          done(error)
+        })
+      })
+    })
+  })
+
+  it('create a node', function(done) {
     // The Robot Operating System is a graph of nodes. Each node is programmed
     // to perform a task. For example, a node may transmit sensor data from a
     // Kinect (publish a message) while another node listens for Kinect sensor
@@ -40,7 +81,7 @@ describe('How to use rosnodejs', function() {
     })
   })
 
-  it('to create a message', function() {
+  it('create a message', function() {
     // The message is one of the fundamental medium for nodes to communicate
     // with each other in ROS.
     //
@@ -85,7 +126,7 @@ describe('How to use rosnodejs', function() {
     message.get('md5sum').should.equal('992ce8a1687cec8c8bd883ec73ca41d1')
   })
 
-  it('to talk to other nodes', function(done) {
+  it('talk to other nodes', function(done) {
     // A node talks to other nodes by publishing messages for a topic. The nodes
     // interested in the messages subscribe to the same topic. A node that
     // publishes messages for a topic is known as a publisher for that topic. A
@@ -158,7 +199,7 @@ describe('How to use rosnodejs', function() {
     })
   })
 
-  it('to listen to other nodes', function(done) {
+  it('listen to other nodes', function(done) {
     // ROS uses a publish/subscribe method for nodes, where a node will publish
     // messages on a topic and other nodes can subscribe to that topic to
     // receive the messages. A node that subscribes to a topic is knowns as a
