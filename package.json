@@ -22,8 +22,8 @@
   , "backbone"    : "0.5.3"
   }
 , "devDependencies" : {
-    "mocha"  : "0.5.x"
-  , "should" : "0.3.x"
+    "mocha"  : "0.10.x"
+  , "should" : "0.5.x"
   , "rimraf" : "2.0.x"
   }
 , "engines" : {

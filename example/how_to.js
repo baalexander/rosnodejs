@@ -1,5 +1,6 @@
 var exec          = require('child_process').exec
   , fs            = require('fs')
+  , path          = require('path')
   , should        = require('should')
   , rimraf        = require('rimraf')
   , ros           = require('../lib/rosnode')
@@ -29,7 +30,7 @@ describe('How to use rosnodejs', function() {
 
       // The manifest.xml file is a specification file for the package,
       // describing compilation tools, dependencies, authors, and more.
-      path.exists(__dirname + '/how_to/manifest.xml', function (exists) {
+      path.exists('how_to/manifest.xml', function (exists) {
         exists.should.be.true
 
         // The JavaScript ROS nodes should go in a "lib" or "js" directory in
@@ -40,7 +41,7 @@ describe('How to use rosnodejs', function() {
         // `npm install rosnodejs`.
 
         // Clean up package. Rimraf is an rm -rf module for node.
-        rimraf(__dirname + '/how_to', function(error) {
+        rimraf('how_to', function(error) {
           done(error)
         })
       })
