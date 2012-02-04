@@ -18,8 +18,8 @@
 , "main" : "./lib/rosnode.js"
 , "dependencies" : {
     "portscanner" : "0.1.2"
-  , "xmlrpc"      : "0.9.2"
-  , "backbone"    : "0.5.3"
+  , "xmlrpc"      : "0.9.3"
+  , "backbone"    : "0.9.x"
   }
 , "devDependencies" : {
     "mocha"  : "0.10.x"

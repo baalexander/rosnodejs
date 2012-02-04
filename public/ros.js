@@ -92,8 +92,11 @@
 
     // Sets the node ID to its name.
     idAttribute: 'name'
+
     // Sets the REST end point for managing the node.
-  , urlRoot    : ros.baseUrl + '/nodes'
+  , urlRoot : function() {
+      return ros.baseUrl + '/nodes'
+    }
 
   , initialize: function(attributes, options) {
       if (!this.publishers) {
@@ -208,14 +211,16 @@
       protocol: 'TCPROS'
     }
 
+    // The REST end point for managing the publisher.
+  , urlRoot : function() {
+      return ros.baseUrl
+      + '/nodes/'
+      + this.get('nodeId')
+      + '/publishers'
+    }
+
   , initialize: function(attributes) {
       var that = this
-
-      // The REST end point for managing the publisher.
-      this.urlRoot = ros.baseUrl
-        + '/nodes/'
-        + this.get('nodeId')
-        + '/publishers'
 
       // Creates the message type from the uninitialized Message model.
       var Message = this.get('Message')
@@ -232,8 +237,8 @@
 
         // Opens up a web socket using socket.io to publish messages on
         if (!server) {
-          var namespacedTopic = '/' + topic
-          var socket = ros.io.connect(namespacedTopic)
+          var ioUrl = ros.baseUrl + '/' + topic
+          var socket = ros.io.connect(ioUrl)
           socket.on('connect', function() {
             that.socket = socket
           })
@@ -267,14 +272,16 @@
       protocol: 'TCPROS'
     }
 
+    // The REST end point for managing the subscriber.
+  , urlRoot : function() {
+      return ros.baseUrl
+      + '/nodes/'
+      + this.get('nodeId')
+      + '/publishers'
+    }
+
   , initialize: function(attributes) {
       var that = this
-
-      // The REST end point for managing the subscriber.
-      this.urlRoot = ros.baseUrl
-        + '/nodes/'
-        + this.get('nodeId')
-        + '/subscribers'
 
       // Creates the message type from the uninitialized Message model.
       var Message = this.get('Message')
@@ -292,8 +299,8 @@
         // Listens for messages published from the robot. Messages are received
         // over a web socket using socket.io.
         if (!server) {
-          var namespacedTopic = '/' + topic
-          var socket = ros.io.connect(namespacedTopic)
+          var ioUrl = ros.baseUrl + '/' + topic
+          var socket = ros.io.connect(ioUrl)
           socket.on('connect', function() {
             that.socket = socket
 
