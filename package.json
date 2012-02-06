@@ -1,4 +1,4 @@
-{ "name" : "rosnodejs gh-pages"
+{ "name" : "rosnodejs-gh-pages"
 , "description" : "The website for rosnodejs."
 , "version" : "0.0.1"
 , "dependencies" : {
