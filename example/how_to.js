@@ -9,7 +9,7 @@ var exec          = require('child_process').exec
 
 describe('How to use rosnodejs', function() {
 
-  it('create a package', function(done) {
+  it('to create a package', function(done) {
     // Software in ROS is organized in packages. A package can be a collection
     // of ROS nodes, data files, even third-party libraries. There are hundreds
     // of packages people have provided for ROS, ranging from object
@@ -48,7 +48,7 @@ describe('How to use rosnodejs', function() {
     })
   })
 
-  it('create a node', function(done) {
+  it('to create a node', function(done) {
     // The Robot Operating System is a graph of nodes. Each node is programmed
     // to perform a task. For example, a node may transmit sensor data from a
     // Kinect (publish a message) while another node listens for Kinect sensor
@@ -82,7 +82,7 @@ describe('How to use rosnodejs', function() {
     })
   })
 
-  it('create a message', function() {
+  it('to create a message', function() {
     // The message is one of the fundamental medium for nodes to communicate
     // with each other in ROS.
     //
@@ -127,7 +127,7 @@ describe('How to use rosnodejs', function() {
     message.get('md5sum').should.equal('992ce8a1687cec8c8bd883ec73ca41d1')
   })
 
-  it('talk to other nodes', function(done) {
+  it('to talk to other nodes', function(done) {
     // A node talks to other nodes by publishing messages for a topic. The nodes
     // interested in the messages subscribe to the same topic. A node that
     // publishes messages for a topic is known as a publisher for that topic. A
@@ -200,7 +200,7 @@ describe('How to use rosnodejs', function() {
     })
   })
 
-  it('listen to other nodes', function(done) {
+  it('to listen to other nodes', function(done) {
     // ROS uses a publish/subscribe method for nodes, where a node will publish
     // messages on a topic and other nodes can subscribe to that topic to
     // receive the messages. A node that subscribes to a topic is knowns as a
