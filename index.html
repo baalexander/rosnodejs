@@ -3,62 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="./js/bootstrap-dropdown.js"></script>
-  <script src="./js/bootstrap-scrollspy.js"></script>
+  <script src="./js/libs/bootstrap/bootstrap-dropdown.js"></script>
+  <script src="./js/libs/bootstrap/bootstrap-scrollspy.js"></script>
   <script src="./js/highlight.pack.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
   </script>
-  <link rel="stylesheet/less" href="less/bootstrap.less" media="all" />
-  <script src="js/less-1.1.4.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="./css/style.css" />
   <link rel="stylesheet" type="text/css" href="./css/dark.css" />
   <title>rosnodejs - Program robots with JavaScript</title>
 </head>
 
-<body>
+<body data-spy="scroll">
 <div class="container">
 
-<nav class="topbar" data-dropdown="dropdown" data-scrollspy="scrollspy">
-  <div class="topbar-inner">
+<nav class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="#home">rosnodejs</a>
       <ul class="nav">
         <li>
-          <a href="#robot_introduction"><img class="nav-icon"
-            src="images/robot-light-small.png"/>Intro to Robotics</a>
+          <a href="#robot_introduction">
+            <img class="nav-icon" src="images/robot-light-small.png"/>
+            Intro to Robotics
+          </a>
         </li>
         <li>
-          <a href="#rosnodejs_introduction"><img class="nav-icon"
-            src="images/js-light-small.png"/>About Rosnodejs</a>
+          <a href="#rosnodejs_introduction">
+            <img class="nav-icon" src="images/js-light-small.png"/>
+            About Rosnodejs
+          </a>
         </li>
-        <li class="dropdown" data-scrollspy="scrollspy">
-          <a href="#" class="dropdown-toggle"><img class="nav-icon"
-            src="images/wrench-light-small.png"/>How to</a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img class="nav-icon" src="images/wrench-light-small.png"/>
+            How To
+          </a>
           <ul class="dropdown-menu"> 
             <li>
-              <a href="#install">Install</a>
+              <a href="#install">
+                Install
+              </a>
             </li>
             <li>
-              <a href="#how-to-rosnodejs">Program your robot with JavaScript</a>
+              <a href="#how-to-rosnodejs">
+                Program your robot with JavaScript
+              </a>
             </li>
             <li>
-              <a href="#how-to-rosserverjs">Turn your robot into a web server</a>
-              </li>
-            <li>
-              <a href="#how-to-web-app">Create a web app to control your
-                robot</a>
+              <a href="#how-to-rosserverjs">
+                Turn your robot into a web server
+              </a>
             </li>
             <li>
-              <a href="#how-to-rosmsgjs">Generate ROS message files in
-                JavaScript</a>
+              <a href="#how-to-web-app">
+                Create a web app to control your robot
+              </a>
+            </li>
+            <li>
+              <a href="#how-to-rosmsgjs">
+                Generate ROS message files in JavaScript
+              </a>
             </li>
           </ul>
         </li> 
         <li>
-          <a href="https://github.com/baalexander/rosnodejs"><img
-            class="nav-icon" src="images/blacktocat-small.png"/>Source</a>
+          <a href="https://github.com/baalexander/rosnodejs">
+            <img class="nav-icon" src="images/blacktocat-small.png"/>
+            Source
+          </a>
         </li>
       </ul>
     </div>
@@ -68,7 +81,7 @@
 <article id="home">
   <div class="row show-grid">
     <p>
-      <img src="images/masthead.png" /> 
+      <img src="images/masthead.png" />
     </p>
   </div>
   <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
