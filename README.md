@@ -1,18 +1,12 @@
 ## To generate the website
 
-1. Install LESS
+1. Install LESS and download Bootstrap.
 
     ```bash
-    npm install .
+    make install
     ```
 
-2. Download Bootstrap
-
-    ```bash
-    git submodule update --init
-    ```
-
-3. Generate the CSS from LESS
+2. Generate the CSS from LESS.
 
     ```bash
     make gh-pages
