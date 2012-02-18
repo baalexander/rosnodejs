@@ -20,10 +20,30 @@ a, a:hover, a:visited {
 }
 
 footer {
-  border-top: 2px solid #df8615;
+  border-top: 2px solid @orange;
   padding: 30px 0;
-  background: #ddd;
+  background: @grayLighter;
   min-width: 940px;
+}
+
+.span4 {
+  height: 160px;
+  border-radius: 7px;
+  -moz-box-shadow: 0 0 12px #888;
+  -webkit-box-shadow: 0 0 12px#888;
+  box-shadow: 0 0 12px #888;  
+
+  .bigButton {
+  padding: 10px 20px;
+  }
+  
+  .btn {
+  color: @blue;
+  }
+}
+
+article {
+    padding-top: @navbarHeight + 10px;
 }
 
 /* Headers */
@@ -89,31 +109,12 @@ h1 .brand {
 
 
 /* Structure */
-/*article {
+/*  article {
     padding-top: 60px;
 }
-
 p {
     font-size: 18px;
     line-height: 21px;
 }
 
-footer {
-    border-top: 2px solid #df8615;
-}
-
-.footer {
-    padding: 30px 0;
-    background: #ddd;
-    min-width: 940px;
-}
-
-footer p {
-    font-size: 12px;
-}
-
-
-a, a:hover, a:visited {
-    text-decoration: none;
-}*/
-
+*/
