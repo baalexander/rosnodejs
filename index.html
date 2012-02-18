@@ -84,14 +84,14 @@
   </p>
   <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
   <p>
-    Rosnodejs is a node.js module that let's you use JavaScript to interact
+    Rosnodejs is a Node.js module that lets you use JavaScript to interact
     with the <a href="http://www.ros.org/wiki/ROS/Introduction">Robot
       Operating System</a>, an open-source robot framework used by many of the
     top universities and research programs around the world.
   </p>
   <p>
-    Perform a range of robotic tasks, from controlling the motors on an
-    Arduino to processing Kinect sensor data using JavaScript and node.js.
+    Perform a range of robotic tasks, from controlling the motors on an Arduino
+    to processing Kinect sensor data using JavaScript and Node.js.
   </p>
   <p>
     The goal is to make the field of robotics more accessible to the countless
@@ -151,6 +151,14 @@
   </p>
   <h3>How to get a robot</h3>
   <p>
+    A robot is not needed to play around with rosnodejs. You can follow the <a
+      href="#install">Installation</a> and <a hrefe="#how-to-rosnodejs">How
+      To</a> sections and start simulating robot commands on your computer.
+  </p>
+  <p>
+    However, the real fun comes when making a real robot do something.
+  </p>
+  <p>
     Many of the tutorials from <a
       href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
     or a <a href="https://www.google.com/search?q=how+to+build+a+robot"> Google
@@ -159,10 +167,10 @@
   </p>
   <p>
     Unfortunately, most of these robots are not powerful enough to run the
-    latest robot algorithms, like processing Kinect data to map the environment.
-    A computer is usually needed for these tasks.  This performance requirement
-    leaves a couple options: building a basic robot from one of the tutorials
-    and connecting a computer to it or buying a robot platform.
+    latest robot algorithms, like mapping a room using Kinect data.  A computer
+    is usually needed for these tasks.  This performance requirement leaves a
+    couple options: building a basic robot from one of the tutorials and
+    connecting a computer to it or buying a robot platform.
   </p>
   <p>
     Since the Robot Operating System (ROS) &mdash; discussed in the next section
@@ -200,19 +208,19 @@
     node publishes a message type containing image and depth information.
     Another node would listen for this message type and interpret the 3D data.
     The interpreting node could notice there's a wall coming up and publish a
-    direction message type saying move back.  Finally, there's a node &mdash;
-    perhaps running on an Arduino &mdash; subscribing to direction message
-    types.  The node receives the message with directions to move back and
-    rotates its motors backwards.
+    message type with directions to move back.  Finally, a node &mdash; perhaps
+    running on an Arduino &mdash; is subscribing to direction message types.
+    The node receives the message with directions to move back and rotates its
+    wheels accordingly.
   </p>
   <p>
-    The decoupling design has a couple distinct advantages.
+    The decoupled design between the nodes has a couple distinct advantages.
   </p>
   <p>
-    One advantage is that any part of the robot can be replaced. For example, a
-    Kinect sensor may be replaced with a newer sensor. As long as this sensor
-    publishes the same message type, none of the other nodes will notice a
-    difference.
+    One advantage is that any part of the robot can be replaced. For example,
+    the Kinect sensor may be replaced with a newer sensor. As long as this
+    sensor publishes the same message type, none of the other nodes will notice
+    a difference.
   </p>
   <p>
     Another important advantage of decoupling and open-source is that anyone can
@@ -268,7 +276,7 @@
     </li>
     <li>
       The rapidly growing Node.js ecosystem. Many libraries like Socket.IO have
-      strong first party support for Node.js.
+      strong first-party support for Node.js.
     </li>
     <li>
       Familiarity. Robots are hard enough; write code in what you know.
@@ -293,12 +301,13 @@
   </p>
   <p>
     <a href="https://github.com/baalexander/rosserverjs">rosserverjs</a> - Turns
-    your robot into a web server. Provides an Express server to build whatever
-    web app desired. Serves the necessary message definition files as well as
-    the cross platform rosnodejs library.
+    your robot into a web server. Serves the necessary message definition files
+    as well as the cross platform rosnodejs library. Uses <a
+      href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">CORS</a>
+    so the rest of the web app can be written in any web platform.
   </p>
   <p>
-    The <a href="#how-to-program">How To sections</a> provide code examples on using
+    The <a href="#how-to-rosnodejs">How To sections</a> provide code examples on using
     rosnodejs natively on the robot, generating JavaScript files for the message
     definitions, turning your robot into a web server, and running ROS code in
     the browser.
