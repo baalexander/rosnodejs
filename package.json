@@ -1,7 +1,7 @@
 { "name" : "rosnodejs"
 , "description" : "A JavaScript client library for ROS."
 , "keywords" : [ "ros", "rosnode", "rosnodejs", "robot", "robotics" ]
-, "version" : "0.0.1"
+, "version" : "0.0.2"
 , "preferGlobal" : false
 , "homepage" : "https://github.com/baalexander/rosnodejs"
 , "author" : "Brandon Alexander <baalexander@gmail.com> (https://github.com/baalexander)"
