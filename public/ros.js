@@ -277,7 +277,7 @@
       return ros.baseUrl
       + '/nodes/'
       + this.get('nodeId')
-      + '/publishers'
+      + '/subscribers'
     }
 
   , initialize: function(attributes) {
