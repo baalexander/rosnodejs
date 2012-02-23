@@ -307,7 +307,9 @@
             // When a  message is received over the web socket, emits an event
             // with the message data for others to handle (like the subscribe
             // function).
-            socket.on('message', function(message) {
+            socket.on('message', function(messageJSON) {
+              var Message = that.get('Message')
+              var message = new Message(messageJSON)
               that.trigger('message', message)
             })
           })
