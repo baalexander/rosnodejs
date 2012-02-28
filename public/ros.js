@@ -1,35 +1,19 @@
-// The core file for running JavaScript on the web or on a robot. It contains
-// the basic models for interfacing with the Robot Operating System, including
-// node, publisher, and subscriber.
-// 
-// When run in the browser, ros.js manages the nodes, publishers, and
-// subscribers the web page is interested in via REST calls to the robot. It
-// also sends and receives messages to the robot using web sockets.
+// The core file for running JavaScript on the web. It contains the basic models
+// for interfacing with the Robot Operating System, including node, publisher,
+// and subscriber.
 //
-// When run on the robot using Node.js, ros.js' functionality is extended to
-// interact with the Robot Operating System directly, using XML-RPC and ROS
-// specific protocols like TCPROS.
-
+// Ros.js manages the nodes, publishers, and subscribers the web page is
+// interested in via REST calls to the robot. It sends and receives messages to
+// the robot using web sockets.
 (function() {
 
 
   // Initial setup
   // -------------
 
-  // Creates a module compatible with Node.js and the web browser.
-  var root     = this
-    , server   = false
-    , ros      = null
-
-  if (typeof exports !== 'undefined') {
-    server   = true
-    ros      = exports
-    Backbone = require('backbone')
-  }
-  else {
-    ros = root.ros = {}
-    ros.io = root.io
-  }
+  var root = this
+  var ros  = root.ros = {}
+  ros.io = root.io
 
   // The base URL to send REST requests to. The default is root.
   ros.baseUrl = ''
@@ -43,25 +27,16 @@
   ros.Message = Backbone.Model.extend({
     idAttribute: 'type'
   , defaults: {
-      // The order of the fields, as listed in the message file definition.
-      'fieldOrder' : []
       // The message type, e.g. "std_msgs/String".
-    , 'type'       : ''
+    , 'type'   : ''
       // The MD5 sum of the message, as calculated by `rosmsg md5sum`.
-    , 'md5sum'     : ''
+    , 'md5sum' : ''
     }
   })
 
 
   // Node
   // ----
-
-  // Manages all nodes instantiated through this session. Mainly for updating or
-  // removing a node.
-  ros.Nodes = Backbone.Collection.extend({
-    model: ros.Node
-  })
-  ros.nodes = new ros.Nodes()
 
   // Creates a node and returns the created node in the callback or an error if
   // the node creation failed.
@@ -75,14 +50,19 @@
 
     // Makes a REST call to the server with the node attributes.
     node.save(null, {
-      // Adds the node to the list and returns the created node.
-      success: function(data) {
-        that.nodes.add(node)
-        callback(null, node)
+      success: function(model, response) {
+        callback(null, model)
       }
-      // Returns the error encountered when saving the node.
-    , error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown)
+    , error: function(model, response) {
+        var error = null
+        try {
+          var errorValues = JSON.parse(response.responseText)
+          error = new Error(errorValues.message);
+        }
+        catch (e) {
+          error = new Error('Failed to create Node.')
+        }
+        callback(error)
       }
     })
   }
@@ -97,23 +77,6 @@
   , urlRoot : function() {
       return ros.baseUrl + '/nodes'
     }
-
-  , initialize: function(attributes, options) {
-      if (!this.publishers) {
-        this.publishers = new this.Publishers()
-      }
-      if (!this.subscribers) {
-        this.subscribers = new this.Subscribers()
-      }
-    }
-
-  , Publishers: Backbone.Collection.extend({
-      model: ros.Publisher
-    })
-
-  , Subscribers : Backbone.Collection.extend({
-      model: ros.Subscriber
-    })
 
     // Creates a publisher for a given topic. Returns the publisher in the
     // callback after successfully registering it or an error if registering the
@@ -130,13 +93,9 @@
       // Makes a REST call to the robot with the publisher attributes.
       var publisher = new ros.Publisher(attributes)
       publisher.save(null, {
-        // On success, adds the publisher to the node's list and returns the
-        // publisher in the callback.
         success: function(model, response) {
-          that.publishers.add(publisher)
           callback(null, publisher)
         }
-        // Returns any error from registering the publisher.
       , error: function(model, response) {
           var error = null
           try {
@@ -149,11 +108,6 @@
           callback(error)
         }
       })
-    }
-
-  , removePublisher: function(publisher) {
-      this.publishers.remove(publisher)
-      publisher.destroy()
     }
 
     // Creates a subscriber for a given topic. Returns the subscriber in the
@@ -192,11 +146,6 @@
         }
       })
     }
-
-  , removeSubscriber: function(subscriber) {
-      this.subscribers.remove(subscriber)
-      subscriber.destroy()
-    }
   })
 
 
@@ -206,10 +155,7 @@
   // The publisher sends messages for a given topic.
   ros.Publisher = Backbone.Model.extend({
 
-    defaults: {
-      // The default ROS protocol for communicating with other nodes.
-      protocol: 'TCPROS'
-    }
+    idAttribute: 'topic'
 
     // The REST end point for managing the publisher.
   , urlRoot : function() {
@@ -222,41 +168,17 @@
   , initialize: function(attributes) {
       var that = this
 
-      // Creates the message type from the uninitialized Message model.
-      var Message = this.get('Message')
-      if (Message) {
-        var message     = new Message()
-          , messageType = message.get('type')
-        this.set({ messageType: messageType })
-      }
-
       var topic = this.get('topic')
-      if (topic) {
-        // Sets the publisher ID to the topic's name
-        this.id = topic
+        , ioUrl = ros.baseUrl + '/' + topic
 
-        // Opens up a web socket using socket.io to publish messages on
-        if (!server) {
-          var ioUrl = ros.baseUrl + '/' + topic
-          var socket = ros.io.connect(ioUrl)
-          socket.on('connect', function() {
-            that.socket = socket
-          })
-        }
-      }
-
+      this.socket = ros.io.connect(ioUrl)
+      this.socket.on('error', function(error) {
+        that.trigger('error', error)
+      })
     }
 
-    // Publishes a message to the robot using web sockets
-  , publish: function(message, callback) {
-      if (this.socket === undefined) {
-        var error = new Error('Socket not connected to server')
-        callback(error)
-      }
-      else {
-        this.socket.emit('message', message)
-        callback()
-      }
+  , publish: function(message) {
+      this.socket.emit('message', message)
     }
   })
 
@@ -267,10 +189,7 @@
   // The subscriber receives messages for a given topic.
   ros.Subscriber = Backbone.Model.extend({
 
-    defaults: {
-      // The default ROS protocol for communicating with other nodes.
-      protocol: 'TCPROS'
-    }
+    idAttribute: 'topic'
 
     // The REST end point for managing the subscriber.
   , urlRoot : function() {
@@ -283,47 +202,23 @@
   , initialize: function(attributes) {
       var that = this
 
-      // Creates the message type from the uninitialized Message model.
-      var Message = this.get('Message')
-      if (Message) {
-        var message     = new Message()
-          , messageType = message.get('type')
-        this.set({ messageType: messageType })
-      }
-
       var topic = this.get('topic')
-      if (topic) {
-        // Sets the subscriber ID to the topic's name.
-        this.id = topic
+        , ioUrl = ros.baseUrl + '/' + topic
 
-        // Listens for messages published from the robot. Messages are received
-        // over a web socket using socket.io.
-        if (!server) {
-          var ioUrl = ros.baseUrl + '/' + topic
-          var socket = ros.io.connect(ioUrl)
-          socket.on('connect', function() {
-            that.socket = socket
+      this.socket = ros.io.connect(ioUrl)
+      this.socket.on('error', function(error) {
+        that.trigger('error', error)
+      })
 
-            // When a  message is received over the web socket, emits an event
-            // with the message data for others to handle (like the subscribe
-            // function).
-            socket.on('message', function(messageJSON) {
-              var Message = that.get('Message')
-              var message = new Message(messageJSON)
-              that.trigger('message', message)
-            })
-          })
-        }
-      }
+      this.socket.on('message', function(message) {
+        var rosMessage = new ros.Message(message)
+        that.trigger('message', rosMessage)
+      })
+
     }
 
-    // When a message is received from the server, calls back with the message
-    // object. This can happen multiple times.
   , subscribe: function(callback) {
-      // Knows a message is received by listening for the event.
-      this.bind('message', function(message) {
-        callback(null, message)
-      })
+      this.on('message', callback)
     }
   })
 
