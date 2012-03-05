@@ -17,13 +17,13 @@
   }
 , "main" : "./lib/rosnode.js"
 , "dependencies" : {
-    "portscanner" : "0.1.2"
-  , "xmlrpc"      : "0.9.3"
+    "portscanner"   : "0.1.2"
+  , "xmlrpc"        : "0.9.3"
+  , "eventemitter2" : "0.4.x"
   }
 , "devDependencies" : {
     "mocha"  : "0.10.x"
   , "should" : "0.5.x"
-  , "rimraf" : "2.0.x"
   }
 , "engines" : {
     "node" : ">=0.6", "npm" : ">=1.0.0"
