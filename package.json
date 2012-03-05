@@ -1,6 +1,13 @@
-{ "name" : "rosnodejs"
+{
+  "name" : "rosnodejs"
 , "description" : "A JavaScript client library for ROS."
-, "keywords" : [ "ros", "rosnode", "rosnodejs", "robot", "robotics" ]
+, "keywords" : [
+    "ros"
+  , "rosnode"
+  , "rosnodejs"
+  , "robot"
+  , "robotics"
+  ]
 , "version" : "0.0.2"
 , "preferGlobal" : false
 , "homepage" : "https://github.com/baalexander/rosnodejs"
@@ -20,6 +27,8 @@
     "portscanner"   : "0.1.2"
   , "xmlrpc"        : "0.9.3"
   , "eventemitter2" : "0.4.x"
+  , "walker"        : "~1.0.3"
+  , "makeerror"     : "~1.0.8"
   }
 , "devDependencies" : {
     "mocha"  : "0.10.x"
@@ -28,9 +37,11 @@
 , "engines" : {
     "node" : ">=0.6", "npm" : ">=1.0.0"
   }
-, "licenses" : [ {
-    "type" : "MIT"
-  , "url" : "https://github.com/baalexander/rosnodejs/raw/master/LICENSE"
-  } ]
+, "licenses" : [
+    {
+      "type" : "MIT"
+    , "url" : "https://github.com/baalexander/rosnodejs/raw/master/LICENSE"
+    }
+  ]
 }
 
