@@ -12,7 +12,8 @@ describe('How to use rosnodejs', function() {
     var node = ros.node('talker');
     node.topic(topicParams, function(socket) {
       socket.publish();
-      done();
+
+      setTimeout(done, 1500);
     });
   });
 
