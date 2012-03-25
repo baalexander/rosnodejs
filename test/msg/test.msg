@@ -1,7 +1,7 @@
 # Hello
 
 bool auto_disable_bodies           # enable auto disabling of bodies, default false
-uint32 sor_pgs_iters               # inner iterations when uisng projected Gauss Seidel
+uint32 sor_pgs_iters               # inner iterations when using projected Gauss Seidel
 float64 sor_pgs_w                  # relaxation parameter when using projected Gauss Seidel, 1 = no relaxation
 float64 contact_surface_layer      # contact "dead-band" width
 float64 contact_max_correcting_vel # contact maximum correction velocity
