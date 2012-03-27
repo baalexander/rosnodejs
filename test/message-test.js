@@ -51,32 +51,15 @@ describe('Messages', function() {
     });
   });
 
-  describe('registry', function() {
-    it('should register a message defined in a local message file', function(done) {
-      messages.registerMessageFromFile('test', function(error, message) {
-        should.not.exist(error);
-        message.id.should.equal('test');
-        message.messageName.should.equal('test');
-        message.className.should.equal('Test');
-        message.properties[0].name.should.equal('auto_disable_bodies');
-        done();
-      });
-    });
-
-    it('should register a message defined in a package\'s message file', function(done) {
-      messages.registerMessageFromFile('Pose', 'turtlesim', function(error, message) {
-        message.id.should.equal('turtlesim/Pose');
-        message.messageName.should.equal('Pose');
-        message.className.should.equal('Pose');
-        message.properties[0].name.should.equal('x');
-        done();
-      });
-    });
-  });
-
   describe('creation', function() {
-    it('should initialize a message defined in a package', function(done) {
-      messages.createNewMessageFromFile('Pose', 'turtlesim', null, function(error, message) {
+    it('should get a message defined in a package', function(done) {
+      messages.getMessageFromPackage('turtlesim', 'Pose', function(error, Message) {
+        Message.id.should.equal('turtlesim/Pose');
+        Message.packageName.should.equal('turtlesim');
+        Message.messageName.should.equal('Pose');
+        Message.fields[1].name.should.equal('y');
+
+        var message = new Message();
         message.should.have.property('x');
         message.should.have.property('y');
         message.should.have.property('linearVelocity');
@@ -86,8 +69,21 @@ describe('Messages', function() {
       });
     });
 
-    it('should initialize a message containing constants', function(done) {
-      messages.createNewMessageFromFile('Constants', 'bond', null, function(error, message) {
+    it('should get a message defined in a local file', function(done) {
+      var filePath = path.join(__dirname, 'msg', 'test.msg');
+      messages.getMessageFromFile('test', filePath, function(error, Message) {
+        should.not.exist(error);
+        Message.id.should.equal('test');
+        Message.packageName.should.equal('');
+        Message.messageName.should.equal('test');
+        Message.fields[0].name.should.equal('auto_disable_bodies');
+        done();
+      });
+    });
+
+    it('should get a message containing constants', function(done) {
+      messages.getMessageFromPackage('bond', 'Constants', function(error, Message) {
+        var message = new Message();
         message.should.have.property('DEFAULT_CONNECT_TIMEOUT');
         message.DEFAULT_CONNECT_TIMEOUT.should.equal(10.0);
         message.DISABLE_HEARTBEAT_TIMEOUT_PARAM.should.equal('/bond_disable_heartbeat_timeout');
@@ -95,12 +91,13 @@ describe('Messages', function() {
       });
     });
 
-    it('should initialize a message with initial values', function(done) {
-      var values = {
-        y: 55
-      , linearVelocity: 3
-      }
-      messages.createNewMessageFromFile('Pose', 'turtlesim', values, function(error, message) {
+    it('should get a message and initialize with values', function(done) {
+      messages.getMessageFromPackage('turtlesim', 'Pose', function(error, Message) {
+        var values = {
+          y: 55
+        , linearVelocity: 3
+        }
+        var message = new Message(values);
         message.should.have.property('x');
         message.y.should.equal(55);
         message.linearVelocity.should.equal(3);
@@ -108,30 +105,36 @@ describe('Messages', function() {
       });
     });
 
-    it('should initialize a valid message defined in a local file', function(done) {
-      messages.createNewMessageFromFile('test', '', null,  function(error, message) {
+    it('should get a message defined in a local file that validates', function(done) {
+      var filePath = path.join(__dirname, 'msg', 'test.msg');
+      messages.getMessageFromFile('test', filePath, function(error, Message) {
+        var message = new Message();
         message.validate(message).should.be.true;
         message.validate(message, true).should.be.true;
         done();
       });
     });
 
-    it('should initialize a valid message with initial values', function(done) {
-      var values = {
-        contactMaxCorrectingVel : 'TESTVAL'
-      }
-      messages.createNewMessageFromFile('test', '', values, function(error, message) {
+    it('should get a message defined in a local file that validates with initial values', function(done) {
+      var filePath = path.join(__dirname, 'msg', 'test.msg');
+      messages.getMessageFromFile('test', filePath, function(error, Message) {
+        var values = {
+          contactMaxCorrectingVel : 'TESTVAL'
+        };
+        var message = new Message();
         message.validate(message).should.be.true;
         message.validate(message, true).should.be.true;
         done();
       });
     });
 
-    it('should initialize a valid message that fails strict mode with initial values', function(done) {
-      var values = {
-        newValues: 'TESTVAL'
-      }
-      messages.createNewMessageFromFile('test', '', values, function(error, message) {
+    it('should get a message defined in a local file that fails strict mode validation with initial values', function(done) {
+      var filePath = path.join(__dirname, 'msg', 'test.msg');
+      messages.getMessageFromFile('test', filePath, function(error, Message) {
+        var values = {
+          newValues: 'TESTVAL'
+        }
+        var message = new Message(values);
         message.validate(message).should.be.true;
         message.validate(message, false).should.be.true;
         message.validate(message, true).should.be.false;
