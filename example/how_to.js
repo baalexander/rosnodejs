@@ -4,15 +4,11 @@ var should = require('should')
 describe('How to use rosnodejs', function() {
 
   it('to publish messages', function(done) {
-    var topicParams = {
-      topic: 'hello_world'
-    , messageType: 'std_msgs/String'
-    };
-
     var node = ros.node('talker');
-    node.topic(topicParams, function(socket) {
-      socket.publish();
-
+    node.topics([
+      { topic: 'hello_world', messageType: 'std_msgs/String' }
+    ], function(helloWorld) {
+      helloWorld.publish();
       setTimeout(done, 1500);
     });
   });
