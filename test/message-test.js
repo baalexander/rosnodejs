@@ -52,6 +52,23 @@ describe('Messages', function() {
   });
 
   describe('creation', function() {
+    it('should get a message from the message type', function(done) {
+      messages.getMessage('turtlesim/Pose', function(error, Message) {
+        Message.id.should.equal('turtlesim/Pose');
+        Message.packageName.should.equal('turtlesim');
+        Message.messageName.should.equal('Pose');
+        Message.fields[1].name.should.equal('y');
+
+        var message = new Message();
+        message.should.have.property('x');
+        message.should.have.property('y');
+        message.should.have.property('linearVelocity');
+        message.should.have.property('angularVelocity');
+        message.should.not.have.property('angular_velocity');
+        done();
+      });
+    });
+
     it('should get a message defined in a package', function(done) {
       messages.getMessageFromPackage('turtlesim', 'Pose', function(error, Message) {
         Message.id.should.equal('turtlesim/Pose');

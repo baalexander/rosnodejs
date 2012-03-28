@@ -4,12 +4,17 @@ var should = require('should')
 describe('How to use rosnodejs', function() {
 
   it('to publish messages', function(done) {
-    var node = ros.node('talker');
-    node.topics([
-      { topic: 'hello_world', messageType: 'std_msgs/String' }
-    ], function(helloWorld) {
-      helloWorld.publish();
-      setTimeout(done, 1500);
+    ros.types([
+      'std_msgs/String'
+    ], function(String) {
+      var node = ros.node('talker');
+      node.topics([
+        { topic: 'hello_world', messageType: String }
+      ], function(helloWorld) {
+        var message = new String({ data: 'hello world!' });
+        helloWorld.publish(message);
+        setTimeout(done, 1500);
+      });
     });
   });
 
