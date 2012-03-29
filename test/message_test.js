@@ -24,28 +24,28 @@ describe('Messages', function() {
 
     it('should parse a valid message definition file', function(done) {
       var messagePath = path.join(__dirname, 'msg', 'test.msg');
-      messages.parseMessageFile(messagePath, function(error, properties, hash) {
+      messages.parseMessageFile(messagePath, function(error, fields, hash) {
         should.not.exist(error);
-        properties.length.should.equal(14);
+        fields.length.should.equal(14);
 
-        properties[0].should.be.a('object');
-        properties[0].type.should.equal('bool');
-        properties[0].name.should.equal('auto_disable_bodies');
+        fields[0].should.be.a('object');
+        fields[0].type.should.equal('bool');
+        fields[0].name.should.equal('auto_disable_bodies');
 
-        properties[7].type.should.equal('uint32');
-        properties[7].name.should.equal('max_contacts');
+        fields[7].type.should.equal('uint32');
+        fields[7].name.should.equal('max_contacts');
 
-        properties[11].type.should.equal('int32');
-        properties[11].name.should.equal('Y');
-        properties[11].value.should.equal('-123');
+        fields[11].type.should.equal('int32');
+        fields[11].name.should.equal('Y');
+        fields[11].value.should.equal('-123');
 
-        properties[12].type.should.equal('string');
-        properties[12].name.should.equal('FOO');
-        properties[12].value.should.equal('foo');
+        fields[12].type.should.equal('string');
+        fields[12].name.should.equal('FOO');
+        fields[12].value.should.equal('foo');
 
-        properties[13].type.should.equal('string');
-        properties[13].name.should.equal('EXAMPLE');
-        properties[13].value.should.equal('"#comments" are ignored, and leading and trailing whitespace removed');
+        fields[13].type.should.equal('string');
+        fields[13].name.should.equal('EXAMPLE');
+        fields[13].value.should.equal('"#comments" are ignored, and leading and trailing whitespace removed');
         done();
       });
     });
