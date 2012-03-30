@@ -24,16 +24,16 @@
   }
 , "main" : "./lib/rosnode.js"
 , "dependencies" : {
-    "portscanner"   : "0.1.2"
-  , "xmlrpc"        : "0.9.3"
+    "portscanner"   : "0.1.x"
+  , "xmlrpc"        : "1.0.x"
   , "eventemitter2" : "0.4.x"
   , "walker"        : "~1.0.3"
   , "makeerror"     : "~1.0.8"
-  , "MD5"     	    : "~0.0.0"
+  , "MD5"           : "~0.0.0"
   }
 , "devDependencies" : {
-    "mocha"  : "0.10.x"
-  , "should" : "0.5.x"
+    "mocha"  : "1.0.x"
+  , "should" : "0.6.x"
   }
 , "engines" : {
     "node" : ">=0.6", "npm" : ">=1.0.0"

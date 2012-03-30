@@ -38,7 +38,7 @@ describe('Messages', function() {
 
         fields[11].type.should.equal('int32');
         fields[11].name.should.equal('Y');
-        fields[11].value.should.equal('-123');
+        fields[11].value.should.equal(-123);
 
         fields[12].type.should.equal('string');
         fields[12].name.should.equal('FOO');
