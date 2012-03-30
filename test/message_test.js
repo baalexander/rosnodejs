@@ -6,6 +6,7 @@ var path     = require('path')
 describe('Messages', function() {
 
   describe('parsing', function() {
+
     it('should error on an unexisting file', function(done) {
       messages.parseMessageFile('UnexistingFile', function(error, properties, hash) {
         error.code.should.equal('ENOENT');
@@ -52,9 +53,10 @@ describe('Messages', function() {
   });
 
   describe('creation', function() {
+
     it('should get a message from the message type', function(done) {
       messages.getMessage('turtlesim/Pose', function(error, Message) {
-        Message.id.should.equal('turtlesim/Pose');
+        Message.messageType.should.equal('turtlesim/Pose');
         Message.packageName.should.equal('turtlesim');
         Message.messageName.should.equal('Pose');
         Message.fields[1].name.should.equal('y');
@@ -71,7 +73,7 @@ describe('Messages', function() {
 
     it('should get a message defined in a package', function(done) {
       messages.getMessageFromPackage('turtlesim', 'Pose', function(error, Message) {
-        Message.id.should.equal('turtlesim/Pose');
+        Message.messageType.should.equal('turtlesim/Pose');
         Message.packageName.should.equal('turtlesim');
         Message.messageName.should.equal('Pose');
         Message.fields[1].name.should.equal('y');
@@ -90,7 +92,7 @@ describe('Messages', function() {
       var filePath = path.join(__dirname, 'msg', 'test.msg');
       messages.getMessageFromFile('test', filePath, function(error, Message) {
         should.not.exist(error);
-        Message.id.should.equal('test');
+        Message.messageType.should.equal('test');
         Message.packageName.should.equal('');
         Message.messageName.should.equal('test');
         Message.fields[0].name.should.equal('auto_disable_bodies');
