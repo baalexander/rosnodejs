@@ -64,9 +64,9 @@ describe('Messages', function() {
         var message = new Message();
         message.should.have.property('x');
         message.should.have.property('y');
-        message.should.have.property('linearVelocity');
-        message.should.have.property('angularVelocity');
-        message.should.not.have.property('angular_velocity');
+        message.should.have.property('linear_velocity');
+        message.should.have.property('angular_velocity');
+        message.should.not.have.property('angularVelocity');
         done();
       });
     });
@@ -81,9 +81,9 @@ describe('Messages', function() {
         var message = new Message();
         message.should.have.property('x');
         message.should.have.property('y');
-        message.should.have.property('linearVelocity');
-        message.should.have.property('angularVelocity');
-        message.should.not.have.property('angular_velocity');
+        message.should.have.property('linear_velocity');
+        message.should.have.property('angular_velocity');
+        message.should.not.have.property('angularVelocity');
         done();
       });
     });
