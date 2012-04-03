@@ -148,5 +148,24 @@ describe('Fields', function() {
 
   });
 
+  describe('serializing', function() {
+
+    it('should serialize primitives', function() {
+      var int32Buffer = new Buffer(4);
+      fields.writePrimitiveToBuffer('int32', 7, int32Buffer, 0);
+      int32Buffer.readInt32LE(0).should.be.equal(7);
+
+      var byteBuffer = new Buffer(2);
+      fields.writePrimitiveToBuffer('byte', 3, byteBuffer, 1);
+      byteBuffer.readInt8(1).should.be.equal(3);
+
+      var stringBuffer = new Buffer(15);
+      fields.writePrimitiveToBuffer('string', 'howdy', stringBuffer, 2);
+      stringBuffer.readInt32LE(2).should.be.equal(5);
+      stringBuffer.toString('ascii', 6, 11).should.be.equal('howdy');
+    });
+
+  });
+
 });
 
