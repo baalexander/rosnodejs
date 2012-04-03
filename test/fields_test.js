@@ -100,13 +100,29 @@ describe('Fields', function() {
       var int32Array = [1, 2, 3];
       var int32ArrayLength = 4 + (int32Array.length * 4);
       fields.getArraySize('int32[]', int32Array).should.be.equal(int32ArrayLength);
+
+      messages.getMessage('std_msgs/MultiArrayDimension', function(error, Dimension) {
+        var d1 = new Dimension({ label: 'label1', size: 1, stride: 1 });
+        var d2 = new Dimension({ label: 'label2', size: 1, stride: 1 });
+        var dimensionArray= [d1, d2];
+        fields.getArraySize('std_msgs/MultiArrayDimension[]', dimensionArray).should.be.equal(40);
+      });
     });
 
     it('should get correct size for messages', function(done) {
       messages.getMessage('std_msgs/String', function(error, String) {
         var string = new String({ data: 'hello' });
         fields.getMessageSize(string).should.be.equal(4 + 5);
-        done();
+
+        messages.getMessage('geometry_msgs/Vector3', function(error, Vector3) {
+          messages.getMessage('geometry_msgs/Twist', function(error, Twist) {
+            var linear = new Vector3({ x: 1, y: 2, z: 3});
+            var angular = new Vector3({ x: 4, y: 5, z: 6});
+            var twist = new Twist({ linear: linear, angular: angular });
+            fields.getMessageSize(twist).should.be.equal(48);
+            done();
+          });
+        });
       });
     });
 
