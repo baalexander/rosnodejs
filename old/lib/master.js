@@ -11,12 +11,11 @@ var master = exports
 //  * callerUri   - The URI of the node.
 //  * topic       - The topic name.
 //  * messageType - The message type name.
-master.registerPublisher = function(publisher, callback) {
+master.registerPublisher = function(callerId, callerUri, topic, messageType, callback) {
   var masterUri   = environment.getRosMasterUri()
-    , callerId    = getGraphResourceName(publisher.callerId)
-    , topicName   = getGraphResourceName(publisher.topic)
-    , messageType = publisher.messageType.messageType
-    , params      = [callerId, topicName, messageType, publisher.callerUri]
+    , callerId    = getGraphResourceName(callerId)
+    , topicName   = getGraphResourceName(topic)
+    , params      = [callerId, topicName, messageType, callerUri]
     , client      = xmlrpc.createClient(masterUri)
 
   client.methodCall('registerPublisher', params, function(error, value) {
