@@ -30,6 +30,7 @@
   , "walker"        : "~1.0.3"
   , "makeerror"     : "~1.0.8"
   , "MD5"           : "~0.0.0"
+  , "async"         : "~0.1.18"
   }
 , "devDependencies" : {
     "mocha"  : "1.0.x"
