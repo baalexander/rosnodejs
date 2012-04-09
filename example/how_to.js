@@ -11,6 +11,7 @@ describe('How to use rosnodejs', function() {
       node.topics([
         { topic: 'hello_world', messageType: String }
       ], function(helloWorld) {
+        console.log(String);
         var message = new String({ data: 'hello world!' });
         helloWorld.publish(message);
         setTimeout(done, 1500);
