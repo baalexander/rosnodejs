@@ -110,6 +110,7 @@ describe('Fields', function() {
     });
 
     it('should get correct size for messages', function(done) {
+      this.timeout(5000);
       messages.getMessage('std_msgs/String', function(error, String) {
         var string = new String({ data: 'hello' });
         fields.getMessageSize(string).should.be.equal(4 + 5);
