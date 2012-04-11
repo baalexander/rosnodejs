@@ -72,6 +72,17 @@ describe('Messages', function() {
       });
     });
 
+    it('should get a message with message fields from the message type', function(done) {
+      messages.getMessage('geometry_msgs/Twist', function(error, Message) {
+        Message.messageType.should.equal('geometry_msgs/Twist');
+        Message.packageName.should.equal('geometry_msgs');
+        Message.messageName.should.equal('Twist');
+        Message.fields[1].name.should.equal('angular');
+        Message.fields[1].messageType.messageType.should.equal('geometry_msgs/Vector3');
+        done();
+      });
+    });
+
     it('should get a message defined in a package', function(done) {
       messages.getMessageFromPackage('turtlesim', 'Pose', function(error, Message) {
         Message.messageType.should.equal('turtlesim/Pose');
