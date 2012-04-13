@@ -11,7 +11,7 @@ describe('How to use rosnodejs', function() {
   //     node.topics([
   //       { topic: 'hello_world', messageType: String }
   //     ], function(helloWorld) {
-  //       var message = new String({ data: 'hello world!' });
+  //       var message = new String({ data: 'howdy' });
   //       helloWorld.publish(message);
   //       setTimeout(done, 1500);
   //     });
@@ -27,9 +27,9 @@ describe('How to use rosnodejs', function() {
         { topic: 'hello_world', messageType: String }
       ], function(helloWorld) {
         helloWorld.subscribe(function(message) {
-          console.log(message);
+          message.data.should.equal('howdy');
+          done()
         });
-        setTimeout(done, 15000);
       });
     });
   });
