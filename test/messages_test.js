@@ -28,7 +28,21 @@ describe('Messages', function() {
       var messagePath = path.join(__dirname, 'msg', 'test.msg');
       messages.parseMessageFile(messagePath, null, function(error, details) {
         should.not.exist(error);
-        details.fields.length.should.equal(14);
+
+        details.constants.length.should.equal(6);
+        details.fields.length.should.equal(8);
+
+        details.constants[3].type.should.equal('int32');
+        details.constants[3].name.should.equal('Y');
+        details.constants[3].value.should.equal(-123);
+
+        details.constants[4].type.should.equal('string');
+        details.constants[4].name.should.equal('FOO');
+        details.constants[4].value.should.equal('foo');
+
+        details.constants[5].type.should.equal('string');
+        details.constants[5].name.should.equal('EXAMPLE');
+        details.constants[5].value.should.equal('"#comments" are ignored, and leading and trailing whitespace removed');
 
         details.fields[0].should.be.a('object');
         details.fields[0].type.should.equal('bool');
@@ -37,17 +51,6 @@ describe('Messages', function() {
         details.fields[7].type.should.equal('uint32');
         details.fields[7].name.should.equal('max_contacts');
 
-        details.fields[11].type.should.equal('int32');
-        details.fields[11].name.should.equal('Y');
-        details.fields[11].value.should.equal(-123);
-
-        details.fields[12].type.should.equal('string');
-        details.fields[12].name.should.equal('FOO');
-        details.fields[12].value.should.equal('foo');
-
-        details.fields[13].type.should.equal('string');
-        details.fields[13].name.should.equal('EXAMPLE');
-        details.fields[13].value.should.equal('"#comments" are ignored, and leading and trailing whitespace removed');
         done();
       });
     });
