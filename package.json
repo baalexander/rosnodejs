@@ -8,7 +8,7 @@
   , "robot"
   , "robotics"
   ]
-, "version" : "0.1.0"
+, "version" : "0.1.1"
 , "preferGlobal" : false
 , "homepage" : "https://github.com/baalexander/rosnodejs"
 , "author" : "Brandon Alexander <baalexander@gmail.com> (https://github.com/baalexander)"
@@ -22,7 +22,7 @@
 , "directories" : {
     "lib" : "./lib"
   }
-, "main" : "./lib/rosnode.js"
+, "main" : "./lib/ros"
 , "dependencies" : {
     "portscanner"   : "0.1.x"
   , "xmlrpc"        : "1.0.x"
