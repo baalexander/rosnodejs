@@ -8,7 +8,7 @@
   , "robot"
   , "robotics"
   ]
-, "version" : "0.0.2"
+, "version" : "0.1.0"
 , "preferGlobal" : false
 , "homepage" : "https://github.com/baalexander/rosnodejs"
 , "author" : "Brandon Alexander <baalexander@gmail.com> (https://github.com/baalexander)"
