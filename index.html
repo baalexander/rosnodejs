@@ -20,16 +20,16 @@
 <nav class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#home">rosnodejs</a>
+      <a class="brand" href="#overview">rosnodejs</a>
       <ul class="nav">
         <li>
-          <a href="#robot_introduction">
+          <a href="#about_ros">
             <img class="nav-icon" src="images/robot-light-small.png"/>
-            Intro to Robotics
+            About ROS
           </a>
         </li>
         <li>
-          <a href="#rosnodejs_introduction">
+          <a href="#about-rosnodejs">
             <img class="nav-icon" src="images/js-light-small.png"/>
             About Rosnodejs
           </a>
@@ -46,23 +46,13 @@
               </a>
             </li>
             <li>
-              <a href="#how-to-rosnodejs">
-                Program your robot with JavaScript
+              <a href="#publish-a-message">
+                Publish a message
               </a>
             </li>
             <li>
-              <a href="#how-to-rosserverjs">
-                Turn your robot into a web server
-              </a>
-            </li>
-            <li>
-              <a href="#how-to-web-app">
-                Create a web app to control your robot
-              </a>
-            </li>
-            <li>
-              <a href="#how-to-rosmsgjs">
-                Generate ROS message files in JavaScript
+              <a href="#subscribe-to-a-message">
+                Subscribe to a message
               </a>
             </li>
           </ul>
@@ -78,10 +68,12 @@
   </div>
 </nav>
 
-<article id="home">
-  <p>
-    <img src="images/masthead.png" />
-  </p>
+<article id="slidedeck">
+  <script async class="speakerdeck-embed" data-id="4f8b5197b204f6001f0031aa"
+    data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+</article>
+
+<article id="overview">
   <h1 class="brand">rosnodejs <small>Programming robots with JavaScript</small></h1>
   <p>
     Rosnodejs is a Node.js module that lets you use JavaScript to interact
@@ -97,121 +89,23 @@
     The goal is to make the field of robotics more accessible to the countless
     intelligent web developers out there.
   </p>
-  <h2>Where to go from here?</h2>
-  <div class="row">
-    <div class="span4">
-      <div class="bigButton">
-        <h3>Learn about robots</h3>
-        <p>
-          Read a quick introduction on how to get a robot as well as what's
-          involved in programming robots today.
-        </p>
-        <p>
-          <a class="btn" href="#robot_introduction">View details »</a>
-        </p>
-      </div>
-    </div>
-    <div class="span4">
-      <div class="bigButton">
-        <h3>Learn about rosnodejs</h3>
-        <p>
-          If you understand ROS already, read how rosnodejs fits into the
-          picture.
-        </p>
-        <p>
-          <a class="btn" href="#rosnodejs_introduction">View details »</a>
-        </p>
-      </div>
-    </div>
-    <div class="span4">
-      <div class="bigButton">
-        <h3>Get to know rosnodejs</h3>
-        <p>
-          Learn how to install rosnodejs and see code examples on creating a rosnodejs project, turning your robot
-          into a web server, and creating a telepresence web app.
-        </p>
-        <p>
-          <a class="btn" href="#install">View details »</a>
-        </p>
-      </div>
-    </div>
-  </div>
 </article>
 
-<article id="robot_introduction">
-  <h1>Introduction to Robotics</h1>
-  <p>
-    Getting involved in robots can be intimidating. But if you're sick of the 2D
-    world of web development and want to make something tangible, this is the
-    place to start.
-  </p>
-  <p>
-    There are two things you'll probably want to know when starting in robotics:
-    How to get a robot and how to program it.
-  </p>
-  <h3>How to get a robot</h3>
-  <p>
-    A robot is not needed to play around with rosnodejs. You can follow the <a
-      href="#install">Installation</a> and <a hrefe="#how-to-rosnodejs">How
-      To</a> sections and start simulating robot commands on your computer.
-  </p>
-  <p>
-    However, the real fun comes when making a real robot do something.
-  </p>
-  <p>
-    Many of the tutorials from <a
-      href="http://www.instructables.com/pages/search/search.jsp?q=build+a+robot">Instructables</a>
-    or a <a href="https://www.google.com/search?q=how+to+build+a+robot"> Google
-      search</a> provide excellent step-by-step instructions on creating a basic
-    moving robot that can do something simple, like avoid a wall.
-  </p>
-  <p>
-    Unfortunately, most of these robots are not powerful enough to run the
-    latest robot algorithms, like mapping a room using Kinect data.  A computer
-    is usually needed for these tasks.  This performance requirement leaves a
-    couple options: building a basic robot from one of the tutorials and
-    connecting a computer to it or buying a robot platform.
-  </p>
-  <p>
-    Since the Robot Operating System (ROS) &mdash; discussed in the next section
-    &mdash; supports <a
-      href="http://www.ros.org/wiki/rosserial_arduino">interfacing with the
-      Arduino</a>, a cheaper <a href="http://arduino.cc">Arduino
-      microcontroller</a> robot could be connected to a computer and offload the
-    computing to the ROS platform.
-  </p>
-  <p>
-    For those not interested in mucking around with circuits and hardware, the
-    <a href="http://www.turtlebot.com/">TurtleBot</a> makes for a complete robot
-    platform ready to program. It's basically a Roomba, Kinect, and computer
-    nicely packaged together. The advantage of using a standardized robot
-    platform is the community support. For example, rosnodejs has been tested on
-    the TurtleBot platform.
-  </p>
-  <p>
-    The key decision you need to make is build or buy a robot. Just remember
-    that if your goal is to run something like ROS and rosnodejs, you'll need a
-    computer for the robot.
-  </p>
-  <h3>How to program it</h3>
+<article id="about-ros">
+  <h1>About ROS</h1>
   <p>
     One of the top frameworks to program robots with today is the <a
-      href="http://ros.org">Robot Operating System</a> (ROS). The beauty of ROS
-    lies in its decoupled architecture. Everything is a node and nodes
-    communicate by publishing and subscribing to messages.
+      href="http://ros.org">Robot Operating System</a> (ROS). ROS can run on a variety of robots, from
+    a <a href="http://www.turtlebot.com/">TurtleBot</a> to a <a
+      href="http://www.willowgarage.com/pages/pr2/overview">PR2</a> to an
+    Arduino connected to a computer.
   </p>
   <p>
-    An example should clarify:
+    The beauty of ROS lies in its decoupled architecture. Everything
+    is a node and nodes communicate by publishing and subscribing to messages.
   </p>
   <p>
-    Let's say there's a node dedicated to processing Kinect sensor data.  The
-    node publishes a message type containing image and depth information.
-    Another node would listen for this message type and interpret the 3D data.
-    The interpreting node could notice there's a wall coming up and publish a
-    message type with directions to move back.  Finally, a node &mdash; perhaps
-    running on an Arduino &mdash; is subscribing to direction message types.
-    The node receives the message with directions to move back and rotates its
-    wheels accordingly.
+    <embed src="images/ros-diagram.svg" type="image/svg+xml" />
   </p>
   <p>
     The decoupled design between the nodes has a couple distinct advantages.
@@ -227,33 +121,27 @@
     contribute a node or a package of nodes. A team at one company may actively
     be working on nodes related to the Kinect while another team at a university
     is creating a stack for the Arduino.  There's hundreds of packages in the
-    ROS ecosystem that will perform many robotic operations for you. And most of
-    these packages are open-source for you to contribute back to.
+    ROS ecosystem that will perform many robotic operations for you.
   </p>
   <p>
-    Now, how to get started?
-  </p>
-  <p>
-    The <a href="http://ros.org">documentation on ros.org</a> is actually quite
-    extensive, up-to-date, and usually written with few assumptions of prior
-    experience.
+    How to get started with ROS?
   </p>
   <p>
     The <a href="http://www.ros.org/wiki/ROS/Tutorials">Beginner Level
-      Tutorials</a> are an exceptional source, walking you through everything
+      Tutorials</a> on ros.org are an exceptional source, walking you through everything
     from installing ROS to making your first package and node.  These tutorials
     are the best way to get started.
   </p>
   <p>
     If you follow the tutorials, you'll notice the code samples are in Python or
-    C++. That's because there's a ROS client library for Python and a client
+    C++. That's because there's a ROS client library for Python and a ROS client
     library for C++. A client library is a set of libraries for a language that
     enables use of that language to interact with ROS.  Rosnodejs is a client
     library for JavaScript.
   </p>
 </article>
 
-<article id="rosnodejs_introduction">
+<article id="about-rosnodejs">
   <h1>About rosnodejs</h1>
   <p>
     Rosnodejs is a JavaScript <a
@@ -283,30 +171,6 @@
     </li>
   </ul>
   <p>
-    The big reason to use rosnodejs, however, is when using the web browser.
-    While rosnodejs runs natively on the robot using Node.js, all the core ROS
-    constructs like Node, Publisher, and Subscriber can run natively in the
-    browser. Yep, being cross platform means you can write your ROS code to run
-    in the browser just as easily as running natively on the robot itself. No
-    plug-ins required.
-  </p>
-  <h3>Related projects</h3>
-  <p>
-    A couple of projects are available for different uses of rosnodejs.
-  </p>
-  <p>
-    <a href="https://github.com/baalexander/rosmsgjs">rosmsgjs</a> - Generates a
-    file representing all the message definitions for a package.  These message
-    types extend Backbone.js models for easier integration in web apps.
-  </p>
-  <p>
-    <a href="https://github.com/baalexander/rosserverjs">rosserverjs</a> - Turns
-    your robot into a web server. Serves the necessary message definition files
-    as well as the cross platform rosnodejs library. Uses <a
-      href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">CORS</a>
-    so the rest of the web app can be written in any web platform.
-  </p>
-  <p>
     The <a href="#how-to-rosnodejs">How To sections</a> provide code examples on using
     rosnodejs natively on the robot, generating JavaScript files for the message
     definitions, turning your robot into a web server, and running ROS code in
@@ -317,7 +181,7 @@
 <article id="install">
   <h1>How to install</h1>
   <p>
-    Before rosnodejs can be installed, node.js and ROS need to be set
+    Before rosnodejs can be installed, Node.js and ROS need to be set
     up on the machine first.
   </p>
   <ul>
@@ -336,404 +200,62 @@
       package</a>) and install rosnodejs with <code>npm install
       rosnodejs</code> in that directory.
   </p>
-  <p>
-    ROS nodes can then be created as node.js modules, using <code>var ros =
-      require('rosnodejs')</code>.
-  </p>
 </article>
 
 <article id="how-to-rosnodejs">
     <section class="suite">
       <h1>How to use rosnodejs</h1>
       <dl>
-        <dt>to create a package</dt>
+        <dt id="publish-a-message">to publish messages</dt>
         <dd><pre><code>
-// Software in ROS is organized in packages. A package can be a collection
-// of ROS nodes, data files, even third-party libraries. There are hundreds
-// of packages people have provided for ROS, ranging from object
-// recognition to localization.
-//
-// After installing ROS, creating a new rosnodejs project is similar to
-// creating any new ROS package. ROS provides the `roscreate-pkg` command
-// to begin.
-//
-// For more information:
-//  * Create a package - http://www.ros.org/wiki/ROS/Tutorials/CreatingPackage
-//  * List of packages - http://www.ros.org/browse/list.php
+ros.types([
+  'std_msgs/String'
+], function(String) {
+  var node = ros.node('talker');
+  node.topics([
+    { topic: 'publish_example', messageType: String }
+  ], function(publishExample) {
+    // Uses the ROS command line tool rostopic to echo messages published
+    // over the 'publish_example' topic.
+    var subscribeCommand = 'rostopic'
+      + ' echo'
+      + ' /publish_example';
+    var child = exec(subscribeCommand, function(error, stdout, stderr) {
+      should.not.exist(error);
+    });
 
-// Create a ROS package named &quot;how_to&quot;.
-var createPackage = 'roscreate-pkg how_to'
-var child = exec(createPackage, function(error, stdout, stderr) {
-  should.not.exist(error)
-
-  // The manifest.xml file is a specification file for the package,
-  // describing compilation tools, dependencies, authors, and more.
-  path.exists('how_to/manifest.xml', function (exists) {
-    exists.should.be.true
-
-    // The JavaScript ROS nodes should go in a &quot;lib&quot; or &quot;js&quot; directory in
-    // the package. For example, ./how_to/js/listener.js could contain a
-    // ROS node named listener.
-
-    // Rosnodejs can be included like any NPM module with:
-    // `npm install rosnodejs`.
-
-    // Clean up package. Rimraf is an rm -rf module for node.
-    rimraf('how_to', function(error) {
-      done(error)
-    })
-  })
-})</code></pre></dd>
-        <dt>to create a node</dt>
+    var message = new String({ data: 'howdy' });
+    publishExample.publish(message);
+    setTimeout(done, 1500);
+  });
+});</code></pre></dd>
+        <dt id="subscribe-to-a-message">to subscribe to messages</dt>
         <dd><pre><code>
-// The Robot Operating System is a graph of nodes. Each node is programmed
-// to perform a task. For example, a node may transmit sensor data from a
-// Kinect (publish a message) while another node listens for Kinect sensor
-// data (subscribes to the messages) and processes that data.
-//
-// Almost all actions performed with rosnodejs will begin by creating a ROS
-// node. These nodes can later be customized to publish or subscribe to
-// messages over topics and then do something interesting with the data.
-//
-// For more information:
-//  * http://www.ros.org/wiki/ROS/Tutorials/UnderstandingNodes
+ros.types([
+  'std_msgs/String'
+], function(String) {
+  var node = ros.node('listener');
+  node.topics([
+    { topic: 'subscribe_example', messageType: String }
+  ], function(subscribeExample) {
+    subscribeExample.subscribe(function(message) {
+      message.data.should.equal('howdy');
+      done();
+    });
 
-// Create a node named 'talker' and registers it with ROS Master. ROS Master
-// is the central authority for keeping track of all the nodes in the graph
-// and helps connect the other nodes so they can talk to each other.
-ros.createNode({ name: 'talker' }, function(error, node) {
-  // On successfully registering the node, the node object is returned.
-  node.should.be.an.instanceof(ros.Node)
-
-  // Node attributes can be retrieved with get().
-  node.get('name').should.equal('talker')
-
-  // A node contains a collection of publishers and subscribers. A publisher
-  // sends messages for a topic. A subscriber listens to messages for a
-  // given topic. The 'talking to' and 'listening to other node' examples go
-  // into more detail about publishers and subscribers.
-  node.publishers.length.should.equal(0)
-  node.subscribers.length.should.equal(0)
-
-  done(error)
-})</code></pre></dd>
-        <dt>to create a message</dt>
-        <dd><pre><code>
-// The message is one of the fundamental medium for nodes to communicate
-// with each other in ROS.
-//
-// A message is derived from a message type, a defined set of data types the
-// message will contain. The message type to message relation can be
-// considered similar to the class to object relation.
-//
-// A ROS package will usually define a set of message types. For example,
-// the std_msgs package defines message types for a set of basic data types,
-// like std_msgs/String and std_msgs/Int32.
-//
-// To make things easier, rosnodejs provides a JavaScript model for
-// representing message objects. Rosnodejs handles serializing and
-// deserializing these messages for communicating with other nodes.
-//
-// The rosmsgjs project creates JavaScript files containing all the message
-// types for a given package.
-//
-// For more information:
-//  * http://www.ros.org/wiki/msg
-//  * https://github.com/baalexander/rosmsgjs
-
-// Std_msgs is a JavaScript module containing JavaScript objects for all the
-// message types in the std_msgs package. This module was generated from the
-// rosmsgjs project.
-var message = new std_msgs.String()
-
-// All messages extend the Message object.
-message.should.be.an.instanceof(ros.Message)
-
-// A message's attributes are accessed with set() and get(). The attribute
-// names correspond to the field names from the message type definition.
-message.set({ data: 'A robot may not injure a human being.' })
-message.get('data').should.equal('A robot may not injure a human being.')
-
-// All messages have the 'type' property and 'md5sum' property to identify
-// the message type.
-// The type property is the message type.
-message.get('type').should.equal('std_msgs/String')
-// The MD5 sum is the hash of the message fields to verify with other nodes
-// that this is the correction version of the message type.
-message.get('md5sum').should.equal('992ce8a1687cec8c8bd883ec73ca41d1')</code></pre></dd>
-        <dt>to talk to other nodes</dt>
-        <dd><pre><code>
-// A node talks to other nodes by publishing messages for a topic. The nodes
-// interested in the messages subscribe to the same topic. A node that
-// publishes messages for a topic is known as a publisher for that topic. A
-// node can be a publisher for one or many topics.
-//
-// In rosnodejs, a node creates a publisher for each topic it wants to
-// publish on.
-//
-// Behind the scenes, a node declares itself as a publisher for a topic by
-// registering itself as a publisher for the topic with ROS Master. ROS
-// Master keeps track of what topic every node is publishing or subscribing
-// to and helps them communicate with one another.
-
-// The 'keyboard' node will be the node publishing messages.
-ros.createNode({ name: 'keyboard' }, function(error, node) {
-
-  // This node will tell a robot to move forward by publishing the
-  // directions.
-  //
-  // A publisher requires two pieces of information to register itself with
-  // ROS Master:
-  //  * The topic the messages will be published for (a string value)
-  //  * And the message type of the messages being published.
-  var publisherParams = {
-    // 'cmd_vel' is a common topic used for giving directions to a robot. A
-    // publisher for the 'cmd_vel' topic could be a keyboard node, listening
-    // to arrow key events and converting those to movement directions.
-    topic:   'cmd_vel'
-    // A common message type for movement directions is geometry_msgs/Twist.
-    // The message type contains the information for linear directions and
-    // turns.
-  , Message: geometry_msgs.Twist
-  }
-
-  // The node registers itself as a publisher for the 'cmd_vel' topic,
-  // saying it will publish messages of the geometry_msgs/Twist type.
-  node.createPublisher(publisherParams, function(error, publisher) {
-
-    // On successfully registering the publisher with ROS Master, the
-    // publisher object is returned.
-    publisher.should.be.an.instanceof(ros.Publisher)
-
-    // The movement direction being published tells the robot to move
-    // forward with a speed of 1.
-    //
-    // Geometry_msgs/Twist has two fields, linear and angular, which happen
-    // to be messages themselves of type geometry_msgs/Vector3.
-    var message = new geometry_msgs.Twist()
-    message.set({
-      linear: {
-        x: 1.0
-      , y: 0.0
-      , z: 0.0
-      }
-    , angular: {
-        x: 0.0
-      , y: 0.0
-      , z: 0.0
-      }
-    })
-
-    // Publishes the message. This will broadcast the movement directions to
-    // whatever nodes are subscribing to the 'cmd_vel' topic. The beauty of
-    // ROS is that the publisher node deciding which direction the robot
-    // should move is decoupled from the node that actually moves the robot.
-    publisher.publish(message, function(error) {
-      done(error)
-    })
-  })
-})</code></pre></dd>
-        <dt>to listen to other nodes</dt>
-        <dd><pre><code>
-// ROS uses a publish/subscribe method for nodes, where a node will publish
-// messages on a topic and other nodes can subscribe to that topic to
-// receive the messages. A node that subscribes to a topic is knowns as a
-// subscriber.
-//
-// One big advantage of the publish/subscribe method for ROS nodes is the
-// subscriber nodes do not need to care where the messages originated. For
-// example, a node may subscribe to the sensor_msgs/Range message type of
-// topic 'distance_data' to determine if the robot is approaching a wall.
-// The node publishing messages to the 'distance_data' topic could be using
-// an IR sensor or an ultrasound sensor, but the subscribing node does not
-// care, it just needs the distance.
-//
-// In rosnodejs, a node creates a subscriber for each topic it wants to
-// listen to.
-
-// The 'motor' node will be subscribing to movement direction messages.
-// While the messages will be generic directions, the 'motor' node will
-// interpret the directions and decide how to move the robots motors.
-ros.createNode({ name: 'motor' }, function(error, node) {
-
-  // A subscriber requires two pieces of information to register itself with
-  // ROS Master:
-  //  * The topic the subscriber is interested in (a string value).
-  //  * And the message type of the messages being subscribed to.
-  var subscriberParams = {
-    // 'cmd_vel' is a common topic used for giving directions to a robot.
-    topic:   'cmd_vel'
-    // A common message type for movement directions is geometry_msgs/Twist.
-  , Message: geometry_msgs.Twist
-  }
-
-  // The node registers itself as a subscriber for the 'cmd_vel' topic,
-  // letting ROS master and other nodes know it is interested in messages of
-  // the geometry_msgs/Twist type.
-  node.createSubscriber(subscriberParams, function(error, subscriber) {
-
-    // When messages are published for the 'cmd_vel' topic, the callback for
-    // subscribe() will be called with the message object. This callback
-    // will be called every time a message is published.
-    subscriber.subscribe(function(error, message) {
-
-      message.get('type').should.equal('geometry_msgs/Twist')
-
-      // The geometry_msgs/Twist message type has two fields that are
-      // message types too: linear and angular.
-      // The linear field contains linear movement directions for the robot.
-      var linear = message.get('linear')
-      linear.get('type').should.equal('geometry_msgs/Vector3')
-      // A value of 1.0 for linear's x implies the robot should move forward
-      // at a speed of 1.
-      linear.get('x').should.equal(1.0)
-      linear.get('y').should.equal(0.0)
-      linear.get('z').should.equal(0.0)
-
-      // The angular field contains rotational movement directions for the
-      // robot.
-      var angular = message.get('angular')
-      angular.get('type').should.equal('geometry_msgs/Vector3')
-      angular.get('x').should.equal(0.0)
-      angular.get('y').should.equal(0.0)
-      angular.get('z').should.equal(0.0)
-
-      // Now that a message is received, it is up to the node on what
-      // actions to take based on the message data. This 'motor' node could
-      // read the message's linear.x value of 1.0 and decide to make the
-      // robot move forward.
-      //
-      // More concretely, if an Arduino was controlling the motors, the
-      // Arduino could be connected to the computer running ROS listening
-      // for serial commands.  This 'motor' node could then output whatever
-      // command the Arduino was expecting to move forward.
-
-      done(error)
-    })
-  })
-
-  // ROS comes with several command-line tools like rosmsg and rostopic.
-  // Rostopic can be used to debug messages by publishing or subscribing to
-  // topics. Rostopic is used here to publish a geometry_msgs/Twist message
-  // over the topic 'cmd_vel' in order to test the subscribing node.
-  var publishCommand = 'rostopic'
-    + ' pub'
-    + ' /cmd_vel'
-    + ' geometry_msgs/Twist'
-    + &quot; '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'&quot;
-  var child = exec(publishCommand, function(error, stdout, stderr) {
-    should.not.exist(error)
-  })
-})</code></pre></dd>
+    // Uses rostopic to publish a message on the subscribed to topic.
+    var publishCommand = 'rostopic'
+      + ' pub'
+      + ' /subscribe_example'
+      + ' std_msgs/String'
+      + ' howdy';
+    var child = exec(publishCommand, function(error, stdout, stderr) {
+      should.not.exist(error);
+    });
+  });
+});</code></pre></dd>
       </dl>
     </section>
-</article>
-
-<article id="how-to-rosserverjs">
-    <section class="suite">
-      <h1>How to use rosserverjs</h1>
-      <dl>
-        <dt>to start a server</dt>
-        <dd><pre><code>
-// Rosserverjs exposes rosnodejs functionality to the web. It provides the
-// necessary JavaScript files, REST endpoints, and web socket connections
-// for the web apps to control the robot.
-//
-// See https://github.com/baalexander/rosserverjs-web-app for a complete
-// example of a web app using rosserverjs.
-
-// Starting a basic robot server that serves the core files and sets up URLs
-// for REST calls is simply a matter of specifying the port to listen to.
-rosserver.listen(3000)</code></pre></dd>
-        <dt>to securely support web apps</dt>
-        <dd><pre><code>
-// Rosserverjs is meant to be used in conjunction with another web
-// framework. For example, the web app could be built using Ruby on Rails on
-// a dedicated web server while interacting with the robot via client-side
-// JavaScript calls.
-//
-// Cross-Origin Resource Sharing (CORS) is used by rosserverjs to allow
-// other domains to access the robot.
-
-// By default, rosserverjs is configured to allow any domain to access it.
-rosserver.allowedDomains.should.equal('*')
-
-// For security, rosserverjs can be configured to only allow specified
-// domains.
-rosserver.allowedDomains = 'http://localhost:8000'</code></pre></dd>
-        <dt>to use message definitions</dt>
-        <dd><pre><code>
-// Generated JavaScript message files are used by rosserverjs and rosnodejs
-// for sharing messages with ROS. Whatever messages are going to be used by
-// the web app need to be listed in the package hash.
-//
-// The rosmsgjs project creates JavaScript files containing all the message
-// types for a given package.
-
-// The std_msgs module contains all the message definitions for the ROS
-// std_msgs package. It was generated using rosmsgjs.
-var std_msgs = require('./std_msgs')
-rosserver.packages = {
-  'std_msgs' : std_msgs
-}
-
-rosserver.packages.should.have.property('std_msgs')</code></pre></dd>
-      </dl>
-    </section>
-  <section class="suite">
-</article>
-
-<article id="how-to-web-app">
-    <section class="suite">
-      <h1>How to create a web app to control your robot</h1>
-      <p>
-        A <a href="https://github.com/baalexander/rosserverjs-web-app">complete
-          example project</a> using rosnodejs and rosserverjs is available on
-        GitHub. You don't even need a robot to try it out. Simply install ROS
-        and install the NPM packages and you can simulate controlling a robot
-        through the browser.
-      </p>
-    </section>
-</article>
-
-<article id="how-to-rosmsgjs">
-    <section class="suite">
-      <h1>How to use rosmsgjs</h1>
-      <dl>
-        <dt>to generate JavaScript models for message types</dt>
-        <dd><pre><code>
-// A message type in ROS defines a set of fields a message will contain.
-//
-// A ROS package will usually define a collection of message types. For
-// example, the std_msgs package defines message types for a set of basic
-// data types, like std_msgs/String and std_msgs/Int32.
-//
-// To make it easier to use message types in JavaScript, rosmsgjs can
-// generate JavaScript models for representing each message type.
-
-// The `rosmsg generate` command will generate a JavaScript file containing
-// objects for all the message types in the std_msgs package.
-var rosmsgjsBin = '&quot;' + __dirname + '/../bin/rosmsgjs&quot;'
-var generateCommand = rosmsgjsBin + ' generate std_msgs'
-
-// Execute the rosmsgjs command to generate the file. Generating a file can
-// take a little while, so the allocated time for the test is extended.
-this.timeout(30000)
-var child = exec(generateCommand, function(error, stdout, stderr) {
-  should.not.exist(error)
-
-  // The file generated defaults to the package name with a .js extension.
-  // An alternative file name can be provided with the `--output` option.
-  path.existsSync('./std_msgs.js').should.be.true
-
-  // Remove the generated file from testing.
-  fs.unlinkSync('./std_msgs.js')
-
-  done(error)
-})</code></pre></dd>
-      </dl>
-    </section>
-
 </article>
 
 </div>
