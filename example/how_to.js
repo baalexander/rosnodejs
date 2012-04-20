@@ -10,23 +10,26 @@ describe('How to use rosnodejs', function() {
     ros.types([
       'std_msgs/String'
     ], function(String) {
-      var node = ros.node('talker');
-      node.topics([
-        { topic: 'publish_example', messageType: String }
-      ], function(publishExample) {
-        // Uses the ROS command line tool rostopic to echo messages published
-        // over the 'publish_example' topic.
-        var subscribeCommand = 'rostopic'
-          + ' echo'
-          + ' /publish_example';
-        var child = exec(subscribeCommand, function(error, stdout, stderr) {
-          should.not.exist(error);
-        });
-
-        var message = new String({ data: 'howdy' });
-        publishExample.publish(message);
-        setTimeout(done, 1500);
+      // Uses the ROS command line tool rostopic to echo messages published
+      // over the 'publish_example' topic.
+      var subscribecommand = 'rostopic'
+        + ' echo'
+        + ' /publish_example';
+      var child = exec(subscribecommand, function(error, stdout, stderr) {
+        should.not.exist(error);
       });
+
+      // Creates the topic 'publish_example'
+      var publishExample = new ros.topic({
+        node        : 'talker'
+      , topic       : 'publish_example'
+      , messageType : String
+      });
+
+      // Sends a std_msgs/String message over the 'publish_example' topic.
+      var message = new String({ data: 'howdy' });
+      publishExample.publish(message);
+      setTimeout(done, 1500);
     });
   });
 
@@ -36,24 +39,27 @@ describe('How to use rosnodejs', function() {
     ros.types([
       'std_msgs/String'
     ], function(String) {
-      var node = ros.node('listener');
-      node.topics([
-        { topic: 'subscribe_example', messageType: String }
-      ], function(subscribeExample) {
-        subscribeExample.subscribe(function(message) {
-          message.data.should.equal('howdy');
-          done();
-        });
+      // Creates the topic 'subscribe_example'
+      var subscribeExample = new ros.topic({
+        node        : 'listener'
+      , topic       : 'subscribe_example'
+      , messageType : String
+      });
 
-        // Uses rostopic to publish a message on the subscribed to topic.
-        var publishCommand = 'rostopic'
-          + ' pub'
-          + ' /subscribe_example'
-          + ' std_msgs/String'
-          + ' howdy';
-        var child = exec(publishCommand, function(error, stdout, stderr) {
-          should.not.exist(error);
-        });
+      // Subscribes to the 'subscribe_example' topic
+      subscribeExample.subscribe(function(message) {
+        message.data.should.equal('howdy');
+        done();
+      });
+
+      // Uses rostopic to publish a message on the subscribed to topic.
+      var publishCommand = 'rostopic'
+        + ' pub'
+        + ' /subscribe_example'
+        + ' std_msgs/String'
+        + ' howdy';
+      var child = exec(publishCommand, function(error, stdout, stderr) {
+        should.not.exist(error);
       });
     });
   });
