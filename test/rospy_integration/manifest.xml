@@ -1,0 +1,11 @@
+<package>
+  <description brief="rospy_integration">
+     Integration testing between rosnodejs and rospy.
+  </description>
+  <author>baalexander</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+</package>
+
