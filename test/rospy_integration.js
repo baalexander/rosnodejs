@@ -51,7 +51,7 @@ describe('Rospy', function() {
       'std_msgs/String'
     ], function(String) {
 
-      var message = new String({ data: 'howdy' });
+      var message = new String({ data: 'message published by rosnodejs' });
 
       // Runs rospy subscriber node
       var runCommand =  ROS_PACKAGE_PATH + ' rosrun rospy_integration subscriber.py';
@@ -62,16 +62,16 @@ describe('Rospy', function() {
         }
         else {
           // Retrieves the file outputted by the rospy subscriber
-          var outputFile = path.join(ROSPY_INTEGRATION_PATH, 'rospy_subscriber_output.json');
-          fs.readFile(outputFile, function (error, json) {
+          var outputFilePath = path.join(ROSPY_INTEGRATION_PATH, 'rospy_subscriber_output.json');
+          fs.readFile(outputFilePath, function (error, json) {
             if (error) {
               done(error);
             }
             else {
               var outputValues = JSON.parse(json);
-              outputValues.data.should.equal('howdy');
+              outputValues.data.should.equal(message.data);
 
-              fs.unlink(outputFile, function (error) {
+              fs.unlink(outputFilePath, function (error) {
                 publisher.unpublish();
               });
             }
@@ -79,6 +79,7 @@ describe('Rospy', function() {
         }
       });
 
+      // Publish the message
       var publisher = new ros.topic({
         node        : 'rosnodejs_publisher'
       , topic       : 'rospy_integration_subscribe'
@@ -89,7 +90,34 @@ describe('Rospy', function() {
 
       publisher.publish(message);
     });
+  });
 
+  it('should publish to a rosnodejs subscriber', function(done) {
+    this.timeout(5000);
+
+    ros.types([
+      'std_msgs/String'
+    ], function(String) {
+
+      // Subscribe to the message
+      var subscriber = new ros.topic({
+        node        : 'rosnodejs_subscriber'
+      , topic       : 'rospy_integration_publish'
+      , messageType : String
+      });
+
+      subscriber.on('unregistered_subscriber', done);
+
+      subscriber.subscribe(function(message) {
+        message.data.should.equal('message published by rospy');
+        subscriber.unsubscribe();
+      });
+
+      // Runs rospy publisher node
+      var runCommand =  ROS_PACKAGE_PATH + ' rosrun rospy_integration publisher.py';
+      var child = exec(runCommand, function(error, stdout, stderr) {
+      });
+    });
   });
 
 });
