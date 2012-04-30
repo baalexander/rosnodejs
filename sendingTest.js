@@ -5,7 +5,7 @@ ros.types([
           'std_msgs/String'
 ], function(String) {
   var topic = new ros.topic(
-    { topic: 'hello_world', messageType: String ,node:'talker'}
+    { topic: 'hello_world', messageType: String ,node:'talker', mode:'publish'}
   ); 
 
   function pub(publishExample) {
