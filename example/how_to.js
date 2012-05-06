@@ -38,7 +38,7 @@ describe('How to use rosnodejs', function() {
 
       // Unregister as a publisher for test clean up
       setTimeout(function() {
-        publisher.unpublish();
+        publisher.unregisterPublisher();
       }, 1000);
     });
   });
@@ -64,7 +64,7 @@ describe('How to use rosnodejs', function() {
         message.data.should.equal('howdy');
 
         // Unregister as a subscriber for test cleanup
-        subscriber.unsubscribe();
+        subscriber.unregisterSubscriber();
       });
 
       // Uses rostopic to publish a message on the subscribed to topic.

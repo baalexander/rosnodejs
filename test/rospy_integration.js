@@ -72,7 +72,7 @@ describe('Rospy', function() {
               outputValues.data.should.equal(message.data);
 
               fs.unlink(outputFilePath, function (error) {
-                publisher.unpublish();
+                publisher.unregisterPublisher();
               });
             }
           });
@@ -110,7 +110,7 @@ describe('Rospy', function() {
 
       subscriber.subscribe(function(message) {
         message.data.should.equal('message published by rospy');
-        subscriber.unsubscribe();
+        subscriber.unregisterSubscriber();
       });
 
       // Runs rospy publisher node
