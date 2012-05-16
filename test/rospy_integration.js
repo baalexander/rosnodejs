@@ -11,7 +11,7 @@ var ROSPY_INTEGRATION_PATH = path.join(__dirname, 'rospy_integration');
 describe('Rospy', function() {
 
   before(function(done) {
-    this.timeout(5000);
+    this.timeout(10000);
 
     // Builds the rospy_integration package
     var buildCommand = [
