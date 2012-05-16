@@ -59,6 +59,7 @@ describe('Messages', function() {
   describe('creation', function() {
 
     it('should get a message from the message type', function(done) {
+      this.timeout(5000);
       messages.getMessage('turtlesim/Pose', function(error, Message) {
         Message.messageType.should.equal('turtlesim/Pose');
         Message.packageName.should.equal('turtlesim');

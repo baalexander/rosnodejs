@@ -38,48 +38,48 @@ describe('How to use rosnodejs', function() {
 
       // Unregister as a publisher for test clean up
       setTimeout(function() {
-        publisher.unpublish();
+        publisher.unregisterPublisher();
       }, 1000);
     });
   });
 
-  it('to subscribe to messages', function(done) {
-    this.timeout(5000);
+  // it('to subscribe to messages', function(done) {
+  //   this.timeout(5000);
 
-    ros.types([
-      'std_msgs/String'
-    ], function(String) {
+  //   ros.types([
+  //     'std_msgs/String'
+  //   ], function(String) {
 
-      // Creates the topic 'subscribe_example'
-      var subscriber = new ros.topic({
-        node        : 'listener'
-      , topic       : 'subscribe_example'
-      , messageType : String
-      });
+  //     // Creates the topic 'subscribe_example'
+  //     var subscriber = new ros.topic({
+  //       node        : 'listener'
+  //     , topic       : 'subscribe_example'
+  //     , messageType : String
+  //     });
 
-      subscriber.on('unregistered_subscriber', done);
+  //     subscriber.on('unregistered_subscriber', done);
 
-      // Subscribes to the 'subscribe_example' topic
-      subscriber.subscribe(function(message) {
-        message.data.should.equal('howdy');
+  //     // Subscribes to the 'subscribe_example' topic
+  //     subscriber.subscribe(function(message) {
+  //       message.data.should.equal('howdy');
 
-        // Unregister as a subscriber for test cleanup
-        subscriber.unsubscribe();
-      });
+  //       // Unregister as a subscriber for test cleanup
+  //       subscriber.unregisterSubscriber();
+  //     });
 
-      // Uses rostopic to publish a message on the subscribed to topic.
-      var publishCommand = 'rostopic'
-        + ' pub'
-        + ' /subscribe_example'
-        + ' std_msgs/String'
-        + ' howdy'
-        + ' --once'
-        ;
-      var child = exec(publishCommand, function(error, stdout, stderr) {
-        should.not.exist(error);
-      });
-    });
-  });
+  //     // Uses rostopic to publish a message on the subscribed to topic.
+  //     var publishCommand = 'rostopic'
+  //       + ' pub'
+  //       + ' /subscribe_example'
+  //       + ' std_msgs/String'
+  //       + ' howdy'
+  //       + ' --once'
+  //       ;
+  //     var child = exec(publishCommand, function(error, stdout, stderr) {
+  //       should.not.exist(error);
+  //     });
+  //   });
+  // });
 
 });
 

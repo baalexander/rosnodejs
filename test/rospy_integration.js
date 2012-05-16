@@ -11,7 +11,7 @@ var ROSPY_INTEGRATION_PATH = path.join(__dirname, 'rospy_integration');
 describe('Rospy', function() {
 
   before(function(done) {
-    this.timeout(5000);
+    this.timeout(10000);
 
     // Builds the rospy_integration package
     var buildCommand = [
@@ -72,7 +72,7 @@ describe('Rospy', function() {
               outputValues.data.should.equal(message.data);
 
               fs.unlink(outputFilePath, function (error) {
-                publisher.unpublish();
+                publisher.unregisterPublisher();
               });
             }
           });
@@ -110,7 +110,7 @@ describe('Rospy', function() {
 
       subscriber.subscribe(function(message) {
         message.data.should.equal('message published by rospy');
-        subscriber.unsubscribe();
+        subscriber.unregisterSubscriber();
       });
 
       // Runs rospy publisher node
